@@ -15,10 +15,12 @@ func Login(email string, password string, w http.ResponseWriter, r *http.Request
 		SessionData.Error = "Wrong password."
 		http.Redirect(w, r, "/login", http.StatusSeeOther)
 	} else {
-		// set up l'id + le username depuis la bdd
+		SessionData.Id = getId(GetDB(), email)
+		SessionData.Username = getUsername(GetDB(), email)
 		SessionData.Email = email
 		SessionData.IsLogged = true
 		SessionData.Error = ""
+		fmt.Println("Logged in : ", SessionData)
 		template.Must(template.ParseFiles("static/play.html")).Execute(w, SessionData)
 	}
 }
@@ -34,20 +36,19 @@ func Register(username string, email string, password string, passwordCheck stri
 		SessionData.Error = "Email already exists."
 		http.Redirect(w, r, "/register", http.StatusSeeOther)
 	} else {
-		// set up l'id depuis la bdd
+		SessionData.Id = getId(GetDB(), email)
 		SessionData.Username = username
 		SessionData.Email = email
 		SessionData.IsLogged = true
 		SessionData.Error = ""
+		fmt.Println("Registered : ", SessionData)
+
 		CreateUser(GetDB(), username, password, email)
-		fmt.Println("Registered: ", SessionData)
 		template.Must(template.ParseFiles("static/play.html")).Execute(w, SessionData)
 	}
 }
 
 func Logout(w http.ResponseWriter, r *http.Request) {
-	fmt.Println("About to logout")
-	fmt.Println(SessionData)
 
 	// change is_logged to 0 in database
 	query := `
@@ -57,11 +58,13 @@ func Logout(w http.ResponseWriter, r *http.Request) {
 		panic(err)
 	}
 
+	fmt.Print("Confirmed logout : ", SessionData, " -> ")
 	SessionData.Id = 0
 	SessionData.Username = ""
 	SessionData.Email = ""
 	SessionData.IsLogged = false
 	SessionData.Error = ""
+	fmt.Println(SessionData)
 	http.Redirect(w, r, "/", http.StatusSeeOther)
 
 }

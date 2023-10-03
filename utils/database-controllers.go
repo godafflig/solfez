@@ -4,6 +4,7 @@ import (
 	"database/sql"
 	"fmt"
 	"log"
+	"strconv"
 )
 
 // rajouter le hash des mdp avant d'enregistrer dans bdd
@@ -57,4 +58,44 @@ func emailExists(db *sql.DB, email string) bool {
 		return true
 	}
 	return false
+}
+
+func getId(db *sql.DB, email string) int {
+	query := `
+	SELECT user_id FROM users WHERE email = ?`
+	rows, err := db.Query(query, email)
+	if err != nil {
+		fmt.Println(err)
+	}
+	defer rows.Close()
+	var id string
+	for rows.Next() {
+		err := rows.Scan(&id)
+		if err != nil {
+			fmt.Println(err)
+		}
+	}
+
+	idInt, err := strconv.Atoi(id)
+	if err != nil {
+		fmt.Println(err)
+	}
+	return idInt
+}
+func getUsername(db *sql.DB, email string) string {
+	query := `
+	SELECT username FROM users WHERE email = ?`
+	rows, err := db.Query(query, email)
+	if err != nil {
+		fmt.Println(err)
+	}
+	defer rows.Close()
+	var username string
+	for rows.Next() {
+		err := rows.Scan(&username)
+		if err != nil {
+			fmt.Println(err)
+		}
+	}
+	return username
 }
