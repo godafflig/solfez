@@ -29,6 +29,9 @@ func Register(username string, email string, password string, passwordCheck stri
 	if password != passwordCheck {
 		SessionData.Error = "Passwords don't match."
 		http.Redirect(w, r, "/register", http.StatusSeeOther)
+		// } else if !isStrongPassword(password) {
+		// 	SessionData.Error = "Password must be at least 8 characters long and contain at least 1 digit, 1 symbol and 1 uppercase letter."
+		// 	http.Redirect(w, r, "/register", http.StatusSeeOther)
 	} else if usernameExists(GetDB(), username) {
 		SessionData.Error = "Username already exists."
 		http.Redirect(w, r, "/register", http.StatusSeeOther)
@@ -42,7 +45,6 @@ func Register(username string, email string, password string, passwordCheck stri
 		SessionData.IsLogged = true
 		SessionData.Error = ""
 		fmt.Println("Registered : ", SessionData)
-
 		CreateUser(GetDB(), username, password, email)
 		template.Must(template.ParseFiles("static/play.html")).Execute(w, SessionData)
 	}
@@ -67,4 +69,36 @@ func Logout(w http.ResponseWriter, r *http.Request) {
 	fmt.Println(SessionData)
 	http.Redirect(w, r, "/", http.StatusSeeOther)
 
+}
+
+func isStrongPassword(password string) bool {
+	const (
+		minLength    = 8
+		minDigits    = 1
+		minSymbols   = 1
+		minUppercase = 1
+	)
+
+	if len(password) < minLength {
+		return false
+	}
+
+	var minDigitsCount, minSymbolsCount, minUppercaseCount int
+	for _, c := range password {
+		switch {
+		case '0' <= c && c <= '9':
+			minDigitsCount++
+		case 'a' <= c && c <= 'z':
+		case 'A' <= c && c <= 'Z':
+			minUppercaseCount++
+		default:
+			minSymbolsCount++
+		}
+	}
+
+	if minDigitsCount < minDigits || minSymbolsCount < minSymbols || minUppercaseCount < minUppercase {
+		return false
+	}
+
+	return true
 }
