@@ -19,6 +19,7 @@ func main() {
 
 	// TEST
 	//fmt.Println(utils.CheckIfUserExist(utils.GetDB(), "nono@gmail.com", "0000"))
+	utils.CreateUser(utils.GetDB(), "test", "1111", "test@test.fr")
 
 	// loading port & url from .env file
 	err := godotenv.Load()
