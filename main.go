@@ -17,9 +17,6 @@ func main() {
 	utils.CreateScoreTableLevel2(utils.GetDB())
 	utils.CreateScoreTableLevel3(utils.GetDB())
 
-	// TEST
-	//fmt.Println(utils.CheckIfUserExist(utils.GetDB(), "nono@gmail.com", "0000"))
-
 	// loading port & url from .env file
 	err := godotenv.Load()
 	if err != nil {
@@ -50,6 +47,19 @@ func Routing(w http.ResponseWriter, r *http.Request) {
 
 	case "/":
 		template.Must(template.ParseFiles("static/index.html")).Execute(w, utils.SessionData)
+	case "/login":
+		if r.Method == "GET" {
+			template.Must(template.ParseFiles("static/login.html")).Execute(w, utils.SessionData)
+		} else if r.Method == "POST" {
+			r.ParseForm()
+			utils.Login(r.FormValue("email"), r.FormValue("password"), w, r)
+		}
+	case "/register":
+		if r.Method == "GET" {
+			template.Must(template.ParseFiles("static/register.html")).Execute(w, utils.SessionData)
+		} else if r.Method == "POST" {
+			r.ParseForm()
+			utils.Register(r.FormValue("username"), r.FormValue("email"), r.FormValue("password"), r.FormValue("password-check"), w, r)
+		}
 	}
-
 }
