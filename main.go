@@ -11,6 +11,15 @@ import (
 )
 
 func main() {
+	// creating database if not exist
+	utils.CreateUserTable(utils.GetDB())
+	utils.CreateScoreTableLevel1(utils.GetDB())
+	utils.CreateScoreTableLevel2(utils.GetDB())
+	utils.CreateScoreTableLevel3(utils.GetDB())
+
+	// TEST
+	//fmt.Println(utils.CheckIfUserExist(utils.GetDB(), "nono@gmail.com", "0000"))
+
 	// loading port & url from .env file
 	err := godotenv.Load()
 	if err != nil {
@@ -33,6 +42,7 @@ func main() {
 	if err != nil {
 		log.Fatal(err)
 	}
+
 }
 
 func Routing(w http.ResponseWriter, r *http.Request) {
