@@ -30,11 +30,12 @@ func GetDB() *sql.DB {
 func CreateUserTable(db *sql.DB) {
 	query := `
 	CREATE TABLE IF NOT EXISTS users (
-		id INTEGER PRIMARY KEY AUTOINCREMENT, 
+		user_id INTEGER PRIMARY KEY AUTOINCREMENT, 
 		username TEXT NOT NULL UNIQUE,
 		password TEXT NOT NULL, 
 		email TEXT NOT NULL UNIQUE, 
-		created_at DATETIME DEFAULT CURRENT_TIMESTAMP, 
+		created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+		is_logged INTEGER DEFAULT 0 NOT NULL,
 		scoreLevel1 INTEGER DEFAULT 0 NOT NULL,
 		scoreLevel2 INTEGER DEFAULT 0 NOT NULL,
 		scoreLevel3 INTEGER DEFAULT 0 NOT NULL
@@ -45,35 +46,13 @@ func CreateUserTable(db *sql.DB) {
 	}
 }
 
-func CreateScoreTableLevel1(db *sql.DB) {
+func CreateScoreTable(db *sql.DB) {
 	query := `
-	CREATE TABLE IF NOT EXISTS scoreLevel1 (
-		id INTEGER PRIMARY KEY AUTOINCREMENT, 
-		scoreLevel1 INTEGER DEFAULT 0 NOT NULL
-		);`
-	_, err := db.Exec(query)
-	if err != nil {
-		log.Fatal(err)
-	}
-}
-
-func CreateScoreTableLevel2(db *sql.DB) {
-	query := `
-	CREATE TABLE IF NOT EXISTS scoreLevel2 (
-		id INTEGER PRIMARY KEY AUTOINCREMENT, 
-		scoreLevel2 INTEGER DEFAULT 0 NOT NULL
-		);`
-	_, err := db.Exec(query)
-	if err != nil {
-		log.Fatal(err)
-	}
-}
-
-func CreateScoreTableLevel3(db *sql.DB) {
-	query := `
-	CREATE TABLE IF NOT EXISTS scoreLevel3 (
-		id INTEGER PRIMARY KEY AUTOINCREMENT, 
-		scoreLevel3 INTEGER DEFAULT 0 NOT NULL
+	CREATE TABLE IF NOT EXISTS scores (
+		user_id INTEGER NOT NULL, 
+		score INTEGER DEFAULT 0 NOT NULL,
+		FOREIGN KEY (user_id) REFERENCES users(user_id),
+		FOREIGN KEY (score) REFERENCES users(score)
 		);`
 	_, err := db.Exec(query)
 	if err != nil {
