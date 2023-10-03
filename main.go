@@ -66,7 +66,5 @@ func Routing(w http.ResponseWriter, r *http.Request) {
 		template.Must(template.ParseFiles("static/profile.html")).Execute(w, utils.SessionData)
 	case "/logout":
 		utils.Logout(w, r)
-	case "/ok":
-		template.Must(template.ParseFiles("static/ok.html")).Execute(w, utils.SessionData)
 	}
 }

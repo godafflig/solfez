@@ -36,9 +36,7 @@ func CreateUserTable(db *sql.DB) {
 		email TEXT NOT NULL UNIQUE, 
 		created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
 		is_logged INTEGER DEFAULT 0 NOT NULL,
-		scoreLevel1 INTEGER DEFAULT 0 NOT NULL,
-		scoreLevel2 INTEGER DEFAULT 0 NOT NULL,
-		scoreLevel3 INTEGER DEFAULT 0 NOT NULL
+		score INTEGER DEFAULT 0 NOT NULL
 		);`
 	_, err := db.Exec(query)
 	if err != nil {

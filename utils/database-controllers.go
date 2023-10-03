@@ -99,3 +99,26 @@ func getUsername(db *sql.DB, email string) string {
 	}
 	return username
 }
+
+func getScore(db *sql.DB, email string) int {
+	query := `
+	SELECT score FROM users WHERE email = ?`
+	rows, err := db.Query(query, email)
+	if err != nil {
+		fmt.Println(err)
+	}
+	defer rows.Close()
+	var score string
+	for rows.Next() {
+		err := rows.Scan(&score)
+		if err != nil {
+			fmt.Println(err)
+		}
+	}
+
+	scoreInt, err := strconv.Atoi(score)
+	if err != nil {
+		fmt.Println(err)
+	}
+	return scoreInt
+}

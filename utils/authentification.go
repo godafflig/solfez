@@ -19,6 +19,7 @@ func Login(email string, password string, w http.ResponseWriter, r *http.Request
 		SessionData.Username = getUsername(GetDB(), email)
 		SessionData.Email = email
 		SessionData.IsLogged = true
+		SessionData.Score = getScore(GetDB(), email)
 		SessionData.Error = ""
 		fmt.Println("Logged in : ", SessionData)
 		template.Must(template.ParseFiles("static/play.html")).Execute(w, SessionData)
@@ -39,13 +40,13 @@ func Register(username string, email string, password string, passwordCheck stri
 		SessionData.Error = "Email already exists."
 		http.Redirect(w, r, "/register", http.StatusSeeOther)
 	} else {
+		CreateUser(GetDB(), username, password, email)
 		SessionData.Id = getId(GetDB(), email)
 		SessionData.Username = username
 		SessionData.Email = email
 		SessionData.IsLogged = true
 		SessionData.Error = ""
 		fmt.Println("Registered : ", SessionData)
-		CreateUser(GetDB(), username, password, email)
 		template.Must(template.ParseFiles("static/play.html")).Execute(w, SessionData)
 	}
 }

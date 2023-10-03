@@ -5,6 +5,7 @@ type Session struct {
 	Username string
 	Email    string
 	IsLogged bool
+	Score    int
 	Error    string
 }
 
