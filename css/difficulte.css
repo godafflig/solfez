@@ -1,0 +1,82 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-size: 14px;
+    margin: 0; /* Réinitialiser la marge par défaut du body */
+}
+
+.container {
+    width: 100%;
+    height: 100vh; /* Utilise toute la hauteur de l'écran */
+    background: rgba(255, 255, 255, 1);
+    opacity: 1;
+    position: relative;
+    overflow: hidden;
+}
+
+.background {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(rgba(112, 126, 146, 1), rgba(39, 35, 67, 0.11));
+    opacity: 1;
+    position: absolute;
+    top: 0;
+    left: 0;
+    overflow: hidden;
+}
+
+.bouton{
+    background-color: #E3F6F5;
+    width: 377px;
+    height: 95px;
+    position: absolute;
+    left: 50%;
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    border-radius: 100px;
+    padding: 0 20px;    
+    text-align: center;
+    color: #272343;
+    font-size: 70px;
+}
+
+.centrer{
+    position: absolute;
+    top : 160px;
+    text-align: center;
+    width: 100%;
+}
+
+
+.explication-difficulte {
+    display: flex;
+    justify-content: space-between;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 20px;
+}
+
+.text-container {
+    flex: 1;
+    max-width: 230px;
+    height: 230px;
+    background-color: #E3F6F5;
+    padding-left: 10px;
+    padding-right: 10px;
+    border-radius: 20px;
+    margin-right: 100px;
+    margin-left: 100px;
+    text-align: center;
+}
+
+h3 {
+    font-size: 25px;
+}
+p {
+    font-size: 17px;
+    margin-top: -5px;
+}
