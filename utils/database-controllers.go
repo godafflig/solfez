@@ -25,6 +25,15 @@ func CreateUser(db *sql.DB, username string, password string, email string) {
 	}
 }
 
+func DeleteUser(db *sql.DB, email string) {
+	query := `
+	DELETE FROM users WHERE email = ?`
+	_, err := db.Exec(query, email)
+	if err != nil {
+		log.Fatal(err)
+	}
+}
+
 // vérifier que hash mot de passe = hash mdp bdd
 func userExists(db *sql.DB, email string, password string) bool {
 	query := `

@@ -74,12 +74,14 @@ func Routing(w http.ResponseWriter, r *http.Request) {
 		utils.Logout(w, r)
 	case "/lost":
 		template.Must(template.ParseFiles("static/lost.html")).Execute(w, utils.SessionData)
-
 	case "/classement":
 		template.Must(template.ParseFiles("static/classement.html")).Execute(w, utils.SessionData)
 	case "/accueil":
 		template.Must(template.ParseFiles("static/Accueil.html")).Execute(w, utils.SessionData)
 	case "/difficulte":
 		template.Must(template.ParseFiles("static/difficulte.html")).Execute(w, utils.SessionData)
+	case "/delete-account":
+		utils.DeleteUser(utils.GetDB(), utils.SessionData.Email)
+		template.Must(template.ParseFiles("static/index.html")).Execute(w, utils.SessionData)
 	}
 }

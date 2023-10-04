@@ -40,6 +40,7 @@ func QuestionQCM() {
 func CheckAnswer(answer string, w http.ResponseWriter, r *http.Request) bool {
 	if answer == SessionData.GameData.CorrectAnswer {
 		SessionData.Score += 1
+		saveHighestScore(SessionData.Score)
 		updateScore(GetDB(), SessionData.Email, SessionData.Score)
 		SessionData.GameData.Questions = []string{}
 		SessionData.GameData.CorrectAnswer = ""
