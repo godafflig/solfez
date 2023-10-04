@@ -69,6 +69,8 @@ func Logout(w http.ResponseWriter, r *http.Request) {
 	SessionData.Email = ""
 	SessionData.IsLogged = false
 	SessionData.Error = ""
+	SessionData.GameData.Questions = []string{}
+	SessionData.GameData.CorrectAnswer = ""
 	http.Redirect(w, r, "/", http.StatusSeeOther)
 
 }
