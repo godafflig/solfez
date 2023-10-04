@@ -23,6 +23,12 @@ func CreateUser(db *sql.DB, username string, password string, email string) {
 	if err != nil {
 		log.Fatal(err)
 	}
+
+	id := getId(db, email)
+	fmt.Println("id : ", id)
+	getId(db, email)
+	return
+
 }
 
 // vérifier que hash mot de passe = hash mdp bdd

@@ -25,13 +25,35 @@ func Login(email string, password string, w http.ResponseWriter, r *http.Request
 	}
 }
 
+// func Register(username string, email string, password string, passwordCheck string, w http.ResponseWriter, r *http.Request) {
+// 	if password != passwordCheck {
+// 		SessionData.Error = "Passwords don't match."
+// 		http.Redirect(w, r, "/register", http.StatusSeeOther)
+// 		// } else if !isStrongPassword(password) {
+// 		// 	SessionData.Error = "Password must be at least 8 characters long and contain at least 1 digit, 1 symbol and 1 uppercase letter."
+// 		// 	http.Redirect(w, r, "/register", http.StatusSeeOther)
+// 	} else if usernameExists(GetDB(), username) {
+// 		SessionData.Error = "Username already exists."
+// 		http.Redirect(w, r, "/register", http.StatusSeeOther)
+// 	} else if emailExists(GetDB(), email) {
+// 		SessionData.Error = "Email already exists."
+// 		http.Redirect(w, r, "/register", http.StatusSeeOther)
+// 	} else {
+// 		SessionData.Id = getId(GetDB(), email)
+// 		SessionData.Username = username
+// 		SessionData.Email = email
+// 		SessionData.IsLogged = true
+// 		SessionData.Error = ""
+// 		fmt.Println("Registered : ", SessionData)
+// 		CreateUser(GetDB(), username, password, email)
+// 		template.Must(template.ParseFiles("static/play.html")).Execute(w, SessionData)
+// 	}
+// }
+
 func Register(username string, email string, password string, passwordCheck string, w http.ResponseWriter, r *http.Request) {
 	if password != passwordCheck {
 		SessionData.Error = "Passwords don't match."
 		http.Redirect(w, r, "/register", http.StatusSeeOther)
-		// } else if !isStrongPassword(password) {
-		// 	SessionData.Error = "Password must be at least 8 characters long and contain at least 1 digit, 1 symbol and 1 uppercase letter."
-		// 	http.Redirect(w, r, "/register", http.StatusSeeOther)
 	} else if usernameExists(GetDB(), username) {
 		SessionData.Error = "Username already exists."
 		http.Redirect(w, r, "/register", http.StatusSeeOther)
@@ -39,19 +61,38 @@ func Register(username string, email string, password string, passwordCheck stri
 		SessionData.Error = "Email already exists."
 		http.Redirect(w, r, "/register", http.StatusSeeOther)
 	} else {
-		SessionData.Id = getId(GetDB(), email)
-		SessionData.Username = username
-		SessionData.Email = email
-		SessionData.IsLogged = true
-		SessionData.Error = ""
-		fmt.Println("Registered : ", SessionData)
-		CreateUser(GetDB(), username, password, email)
-		template.Must(template.ParseFiles("static/play.html")).Execute(w, SessionData)
+		// Générez un jeton de confirmation d'e-mail
+		token, err := GenerateEmailVerificationToken()
+		if err != nil {
+			// Gérer les erreurs de génération de jeton
+			fmt.Println(err)
+			// Redirigez l'utilisateur vers une page d'erreur si nécessaire
+			http.Redirect(w, r, "/error-page", http.StatusSeeOther)
+			return
+		}
+
+		// Enregistrez l'utilisateur dans la base de données et obtenez son identifiant
+
+		// Envoyez un e-mail de confirmation à l'utilisateur
+		err = SendEmailConfirmation(email, token)
+		if err != nil {
+			// Gérer les erreurs d'envoi d'e-mail
+			fmt.Println(err)
+			// Redirigez l'utilisateur vers une page d'erreur si nécessaire
+			http.Redirect(w, r, "/error-page", http.StatusSeeOther)
+			return
+		}
+
+		SaveEmailemailVerificationCache(token)
+
 	}
+
+	// Redirigez l'utilisateur vers une page de confirmation ou une page de réussite
+	http.Redirect(w, r, "../static/login", http.StatusSeeOther)
+
 }
 
 func Logout(w http.ResponseWriter, r *http.Request) {
-
 	// change is_logged to 0 in database
 	query := `
 	UPDATE users SET is_logged = ? WHERE email = ?`
