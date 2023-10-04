@@ -23,6 +23,8 @@ func Login(email string, password string, w http.ResponseWriter, r *http.Request
 		SessionData.Error = ""
 		SessionData.ProfilePic = GetProfilePicFromDb()
 		fmt.Println("Logged in : ", SessionData)
+
+		StartGame(w, r)
 		template.Must(template.ParseFiles("static/play.html")).Execute(w, SessionData)
 	}
 }
@@ -49,6 +51,8 @@ func Register(username string, email string, password string, passwordCheck stri
 		SessionData.Error = ""
 		SessionData.ProfilePic = GetProfilePicFromDb()
 		fmt.Println("Registered : ", SessionData)
+
+		StartGame(w, r)
 		template.Must(template.ParseFiles("static/play.html")).Execute(w, SessionData)
 	}
 }

@@ -2,21 +2,19 @@ package utils
 
 import (
 	"math/rand"
+	"net/http"
 	"time"
 )
 
-// struct Game struct {
-// 	Questions []string
-// 	CorrectAnswer string
-// }
-//var gameData Game
-
 var pianoKeys = []string{"do", "do#/réb", "ré", "ré#/mib", "mi", "fa", "fa#/solb", "sol", "sol#/lab", "la", "la#/sib", "si"}
 
+func StartGame(w http.ResponseWriter, r *http.Request) {
+	SessionData.GameData.CurrentLevel = 1
+	QuestionQCM()
+}
 func QuestionQCM() {
-	var answers []string
-	var randomIndex []int
 
+	var randomIndex []int
 	rand.Seed(time.Now().UnixNano())
 
 	// Generate 3 random piano keys
@@ -30,17 +28,31 @@ func QuestionQCM() {
 		}
 	}
 
-	for i := 0; i < len(randomIndex); i++ {
-		answers = append(answers, pianoKeys[randomIndex[i]])
+	for i := 0; i < 3; i++ {
+		SessionData.GameData.Questions = append(SessionData.GameData.Questions, pianoKeys[randomIndex[i]])
 	}
 
-	// Choices
-	//fmt.Println(answers)
-
 	// Correct answer
-	//correctAnswer := rand.Intn(3)
-	//fmt.Println(answers[correctAnswer])
+	indexCorrectAnswer := rand.Intn(3)
+	SessionData.GameData.CorrectAnswer = SessionData.GameData.Questions[indexCorrectAnswer]
+}
 
+func CheckAnswer(answer string, w http.ResponseWriter, r *http.Request) bool {
+	if answer == SessionData.GameData.CorrectAnswer {
+		SessionData.Score += 1
+		updateScore(GetDB(), SessionData.Email, SessionData.Score)
+		SessionData.GameData.Questions = []string{}
+		SessionData.GameData.CorrectAnswer = ""
+		StartGame(w, r)
+		return true
+	} else {
+		updateScore(GetDB(), SessionData.Email, SessionData.Score)
+		SessionData.GameData.Questions = []string{}
+		SessionData.GameData.CorrectAnswer = ""
+		StartGame(w, r)
+		http.Redirect(w, r, "/lost", http.StatusSeeOther)
+		return false
+	}
 }
 
 func contains(arr []int, val int) bool {

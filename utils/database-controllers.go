@@ -122,3 +122,12 @@ func getScore(db *sql.DB, email string) int {
 	}
 	return scoreInt
 }
+
+func updateScore(db *sql.DB, email string, score int) {
+	query := `
+	UPDATE users SET score = ? WHERE email = ?`
+	_, err := db.Exec(query, score, email)
+	if err != nil {
+		fmt.Println(err)
+	}
+}

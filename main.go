@@ -63,8 +63,14 @@ func Routing(w http.ResponseWriter, r *http.Request) {
 			utils.Register(r.FormValue("username"), r.FormValue("email"), r.FormValue("password"), r.FormValue("password-check"), w, r)
 		}
 	case "/play":
-		template.Must(template.ParseFiles("static/play.html")).Execute(w, utils.SessionData)
-
+		if r.Method == "GET" {
+			utils.StartGame(w, r)
+			template.Must(template.ParseFiles("static/play.html")).Execute(w, utils.SessionData)
+		} else if r.Method == "POST" {
+			r.ParseForm()
+			utils.CheckAnswer(r.FormValue("answer"), w, r)
+			template.Must(template.ParseFiles("static/play.html")).Execute(w, utils.SessionData)
+		}
 	case "/profile":
 		if r.Method == "GET" {
 			template.Must(template.ParseFiles("static/profile.html")).Execute(w, utils.SessionData)
@@ -73,9 +79,8 @@ func Routing(w http.ResponseWriter, r *http.Request) {
 		}
 	case "/logout":
 		utils.Logout(w, r)
-	case "/static/assets/C6.mp3":
-		http.ServeFile(w, r, "/static/assets/C6.mp3")
-
+	case "/lost":
+		template.Must(template.ParseFiles("static/lost.html")).Execute(w, utils.SessionData)
 	}
 }
 

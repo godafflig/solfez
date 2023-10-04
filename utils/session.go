@@ -8,6 +8,15 @@ type Session struct {
 	Score      int
 	Error      string
 	ProfilePic string
+	GameData   Game
+}
+
+type Game struct {
+	Questions     []string
+	CorrectAnswer string
+	CurrentLevel  int
 }
 
 var SessionData Session
+
+var GameData Game
