@@ -86,6 +86,12 @@ p {
     text-align: center;
 }
 
+.bouton:hover{
+    background-color: #272343;
+    color: white;
+    cursor: default;
+}
+
 @media screen and (max-width: 1000px) {
     .text-container {
         margin: 0;

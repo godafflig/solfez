@@ -169,6 +169,12 @@ body {
     text-align: center;
 }
 
+.boutonJouer:hover{
+    background-color: #272343;
+    color: white;
+    cursor: default;
+}
+
 @media screen and (max-width: 1000px) {
     .circle {
         display: none;
