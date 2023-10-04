@@ -9,15 +9,28 @@
   <link rel="stylesheet" href="../static/css/login.css" />
 </head>
 
-<body>
-  <div class="container">
-    <form class="formulaire" action="/login" method="POST">
-      <input class="input" type="email" name="email" placeholder="Entrer email..." required />
-      <input class="input" type="password" name="password" placeholder="Mot de passe..." required />
-      <button class="btnconnexion" type="submit">Connexion</button>
-      <span class="error">{{.Error}}</span>
-    </form>
-  </div>
-</body>
-
+  <body>
+    <div class="container">
+      <form class="formulaire" action="/login" method="POST">
+        <input
+          class="input"
+          type="email"
+          name="email"
+          placeholder="Entrer email..."
+          required
+        />
+        <input
+          class="input"
+          type="password"
+          name="password"
+          placeholder="Mot de passe..."
+          required
+        />
+        <button class="btnconnexion" type="submit" href="/Accueil">
+          Connexion
+        </button>
+        <span class="error">{{.Error}}</span>
+      </form>
+    </div>
+  </body>
 </html>

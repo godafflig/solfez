@@ -44,13 +44,10 @@ func Routing(w http.ResponseWriter, r *http.Request) {
 	switch r.URL.Path {
 
 	case "/":
-		if r.Method == "GET" {
-			template.Must(template.ParseFiles("static/index.html")).Execute(w, utils.SessionData)
-		} else if r.Method == "POST" {
-			r.ParseForm()
-			utils.Register(r.FormValue("username"), r.FormValue("email"), r.FormValue("password"), r.FormValue("password-check"), w, r)
-		}
-
+		template.Must(template.ParseFiles("static/index.html")).Execute(w, utils.SessionData)
+	case "/register":
+		r.ParseForm()
+		utils.Register(r.FormValue("username"), r.FormValue("email"), r.FormValue("password"), r.FormValue("password-check"), w, r)
 	case "/login":
 		if r.Method == "GET" {
 			template.Must(template.ParseFiles("static/login.html")).Execute(w, utils.SessionData)
@@ -58,14 +55,14 @@ func Routing(w http.ResponseWriter, r *http.Request) {
 			r.ParseForm()
 			utils.Login(r.FormValue("email"), r.FormValue("password"), w, r)
 		}
-	case "/play":
+	case "/niveau-facile":
 		if r.Method == "GET" {
 			utils.StartGame(w, r)
-			template.Must(template.ParseFiles("static/play.html")).Execute(w, utils.SessionData)
+			template.Must(template.ParseFiles("static/niveau-facile.html")).Execute(w, utils.SessionData)
 		} else if r.Method == "POST" {
 			r.ParseForm()
 			utils.CheckAnswer(r.FormValue("answer"), w, r)
-			template.Must(template.ParseFiles("static/play.html")).Execute(w, utils.SessionData)
+			template.Must(template.ParseFiles("static/niveau-facile.html")).Execute(w, utils.SessionData)
 		}
 	case "/profile":
 		if r.Method == "GET" {
