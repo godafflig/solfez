@@ -10,6 +10,30 @@
 
   <body>
     Page pour jouer au jeu
+    <div>Username : {{.Username}}</div>
+    <div>Score : {{.Score}}</div></br>
+    <div>Niveau actuel : {{.GameData.CurrentLevel}}</div>
+    <br>
+
+    <audio controls>
+      <source src="/static/assets/C6.mp3" type="audio/mpeg" />
+      Votre navigateur ne prend pas en charge l'élément audio.
+    </audio>
+
+    <form action="/play" method="POST">
+
+      Question :<br> {{range .GameData.Questions}}
+      <label>
+        <input type="radio" name="answer" value="{{.}}" required>
+        {{.}}
+      </label><br>
+      {{end}}
+    
+      <input type="submit" value="Valider la réponse">
+    </form>
+  </br>
+    <div>Bonne réponse : {{.GameData.CorrectAnswer}}</div>
+
     <form action="/profile">
       <button type="submit">Go to page profil</button>
     </form>

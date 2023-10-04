@@ -1,7 +1,6 @@
 package utils
 
 import (
-	"fmt"
 	"html/template"
 	"net/http"
 )
@@ -19,8 +18,11 @@ func Login(email string, password string, w http.ResponseWriter, r *http.Request
 		SessionData.Username = getUsername(GetDB(), email)
 		SessionData.Email = email
 		SessionData.IsLogged = true
+		SessionData.Score = getScore(GetDB(), email)
 		SessionData.Error = ""
-		fmt.Println("Logged in : ", SessionData)
+		SessionData.ProfilePic = GetProfilePicFromDb()
+
+		StartGame(w, r)
 		template.Must(template.ParseFiles("static/play.html")).Execute(w, SessionData)
 	}
 }
@@ -39,13 +41,15 @@ func Register(username string, email string, password string, passwordCheck stri
 		SessionData.Error = "Email already exists."
 		http.Redirect(w, r, "/register", http.StatusSeeOther)
 	} else {
+		CreateUser(GetDB(), username, password, email)
 		SessionData.Id = getId(GetDB(), email)
 		SessionData.Username = username
 		SessionData.Email = email
 		SessionData.IsLogged = true
 		SessionData.Error = ""
-		fmt.Println("Registered : ", SessionData)
-		CreateUser(GetDB(), username, password, email)
+		SessionData.ProfilePic = GetProfilePicFromDb()
+
+		StartGame(w, r)
 		template.Must(template.ParseFiles("static/play.html")).Execute(w, SessionData)
 	}
 }
@@ -60,13 +64,13 @@ func Logout(w http.ResponseWriter, r *http.Request) {
 		panic(err)
 	}
 
-	fmt.Print("Confirmed logout : ", SessionData, " -> ")
 	SessionData.Id = 0
 	SessionData.Username = ""
 	SessionData.Email = ""
 	SessionData.IsLogged = false
 	SessionData.Error = ""
-	fmt.Println(SessionData)
+	SessionData.GameData.Questions = []string{}
+	SessionData.GameData.CorrectAnswer = ""
 	http.Redirect(w, r, "/", http.StatusSeeOther)
 
 }
