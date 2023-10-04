@@ -1,7 +1,6 @@
 package utils
 
 import (
-	"fmt"
 	"html/template"
 	"net/http"
 )
@@ -22,7 +21,6 @@ func Login(email string, password string, w http.ResponseWriter, r *http.Request
 		SessionData.Score = getScore(GetDB(), email)
 		SessionData.Error = ""
 		SessionData.ProfilePic = GetProfilePicFromDb()
-		fmt.Println("Logged in : ", SessionData)
 
 		StartGame(w, r)
 		template.Must(template.ParseFiles("static/play.html")).Execute(w, SessionData)
@@ -50,7 +48,6 @@ func Register(username string, email string, password string, passwordCheck stri
 		SessionData.IsLogged = true
 		SessionData.Error = ""
 		SessionData.ProfilePic = GetProfilePicFromDb()
-		fmt.Println("Registered : ", SessionData)
 
 		StartGame(w, r)
 		template.Must(template.ParseFiles("static/play.html")).Execute(w, SessionData)
@@ -67,13 +64,11 @@ func Logout(w http.ResponseWriter, r *http.Request) {
 		panic(err)
 	}
 
-	fmt.Print("Confirmed logout : ", SessionData, " -> ")
 	SessionData.Id = 0
 	SessionData.Username = ""
 	SessionData.Email = ""
 	SessionData.IsLogged = false
 	SessionData.Error = ""
-	fmt.Println(SessionData)
 	http.Redirect(w, r, "/", http.StatusSeeOther)
 
 }
