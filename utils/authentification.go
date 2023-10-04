@@ -23,23 +23,23 @@ func Login(email string, password string, w http.ResponseWriter, r *http.Request
 		SessionData.ProfilePic = GetProfilePicFromDb()
 
 		StartGame(w, r)
-		template.Must(template.ParseFiles("static/play.html")).Execute(w, SessionData)
+		template.Must(template.ParseFiles("static/Accueil.html")).Execute(w, SessionData)
 	}
 }
 
 func Register(username string, email string, password string, passwordCheck string, w http.ResponseWriter, r *http.Request) {
 	if password != passwordCheck {
 		SessionData.Error = "Passwords don't match."
-		http.Redirect(w, r, "/register", http.StatusSeeOther)
+		http.Redirect(w, r, "/", http.StatusSeeOther)
 		// } else if !isStrongPassword(password) {
 		// 	SessionData.Error = "Password must be at least 8 characters long and contain at least 1 digit, 1 symbol and 1 uppercase letter."
-		// 	http.Redirect(w, r, "/register", http.StatusSeeOther)
+		// 	http.Redirect(w, r, "/", http.StatusSeeOther)
 	} else if usernameExists(GetDB(), username) {
 		SessionData.Error = "Username already exists."
-		http.Redirect(w, r, "/register", http.StatusSeeOther)
+		http.Redirect(w, r, "/", http.StatusSeeOther)
 	} else if emailExists(GetDB(), email) {
 		SessionData.Error = "Email already exists."
-		http.Redirect(w, r, "/register", http.StatusSeeOther)
+		http.Redirect(w, r, "/", http.StatusSeeOther)
 	} else {
 		CreateUser(GetDB(), username, password, email)
 		SessionData.Id = getId(GetDB(), email)
@@ -50,7 +50,7 @@ func Register(username string, email string, password string, passwordCheck stri
 		SessionData.ProfilePic = GetProfilePicFromDb()
 
 		StartGame(w, r)
-		template.Must(template.ParseFiles("static/play.html")).Execute(w, SessionData)
+		template.Must(template.ParseFiles("static/Accueil.html")).Execute(w, SessionData)
 	}
 }
 
