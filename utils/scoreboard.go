@@ -1,9 +1,20 @@
 package utils
 
-import "fmt"
+import (
+	"fmt"
+	"sort"
+	"strconv"
+)
 
 type Scoreboard struct {
+	UserId int
+	Username string
+	Score  int
 }
+
+var ScoreboardData Scoreboard
+
+var Classement []Scoreboard
 
 func saveHighestScore(newScore int) {
 	db := GetDB()
@@ -17,16 +28,56 @@ func saveHighestScore(newScore int) {
 	}
 	defer rows.Close()
 
-	//comparer le score dans la bdd user et le score dans l'autre bdd
-	// enregister le highest
+	var oldScoreString string
+	for rows.Next() {
+		err := rows.Scan(&oldScoreString)
+		if err != nil {
+			fmt.Println(err)
+		}
+	}
 
+	oldScore, err := strconv.Atoi(oldScoreString)
+	if err != nil {
+		fmt.Println(err)
+	}
 
+	if newScore > oldScore {
+		query := `
+		UPDATE scores SET score = ? WHERE user_id = ?`
+		_, err := db.Exec(query, newScore, SessionData.Id)
+		if err != nil {
+			fmt.Println(err)
+		}
+	}
 }
 
-func classement() {
-	// mettre dans un tableau qui sera dans une struct dans l'ordre
-	scores := []int{5, 4, 6, 6, 55, 1}
-	for i := 0; i < len(scores); i++ {
-		fmt.Println(scores[i])
+func SortClassement() {
+
+	db := GetDB()
+
+	// get all scores, usernames & id
+	query := `SELECT user_id, user_name, score FROM scores`
+	rows, err := db.Query(query)
+	if err != nil {
+		fmt.Println(err)
 	}
+	defer rows.Close()
+
+	var scores []Scoreboard
+
+	for rows.Next() {
+		var userID, scoreValue int
+		var username string
+		if err := rows.Scan(&userID, &username, &scoreValue); err != nil {
+			fmt.Println(err)
+			continue
+		}
+		scores = append(scores, Scoreboard{UserId: userID, Username: username, Score: scoreValue})
+	}
+
+	sort.Slice(scores, func(i, j int) bool {
+		return scores[i].Score > scores[j].Score
+	})
+	Classement = scores
+	fmt.Println(Classement)
 }

@@ -41,6 +41,7 @@ func Register(username string, email string, password string, passwordCheck stri
 	} else {
 		CreateUser(GetDB(), username, password, email)
 		SessionData.Id = getId(GetDB(), email)
+		CreateScore(GetDB(), username, SessionData.Id)
 		SessionData.Username = username
 		SessionData.Email = email
 		SessionData.IsLogged = true
@@ -67,6 +68,7 @@ func Logout(w http.ResponseWriter, r *http.Request) {
 	SessionData.Error = ""
 	SessionData.GameData.Questions = []string{}
 	SessionData.GameData.CorrectAnswer = ""
+	SessionData.Score = 0
 	http.Redirect(w, r, "/", http.StatusSeeOther)
 
 }
