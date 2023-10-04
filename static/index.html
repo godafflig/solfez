@@ -9,34 +9,24 @@
   <link href="../static/css/register.css" rel="stylesheet" />
 </head>
 
-  <body>
-    <form action="/register" method="POST">
-      <input
-        type="text"
-        name="username"
-        placeholder="Enter username..."
-        required
-      />
+<body>
+  <div class="container">
+    <form class="formulaire" action="/register" method="POST">
+      <input class="input" type="text" name="username" placeholder="    Pseudo" required />
 
-      <input type="email" name="email" placeholder="Enter email..." />
-      <input
-        type="password"
-        name="password"
-        placeholder="Enter password..."
-        required
-      />
+      <input class="input" type="email" name="email" placeholder="    Email" />
+      <input class="input" type="password" name="password" placeholder="    Entrer mot de passe" required />
 
-      <input
-        type="password"
-        name="password-check"
-        placeholder="Enter password again..."
-        required
-      />
-
-      <input type="submit" value="Créer mon compte" />
-      <span class="error">{{.Error}}</span>
-
-      <a href="/login">Aller sur la page login</a>
+      <input class="input" type="password" name="password-check" placeholder="    Confirmer votre mot de passe"
+        required />
+      <div class="content1">
+        <input class="btnconnexion1" type="submit" value="Créer mon compte" />
+        <span class="error">{{.Error}}</span>
+        <div class="login">
+          <p>vous avez deja un compte</p>
+          <button class="btnconnexion"><a href="/login">Aller sur la page login</a></button>
+        </div>
+      </div>
     </form>
   </div>
 </body>

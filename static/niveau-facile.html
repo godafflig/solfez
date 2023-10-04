@@ -1,41 +1,52 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Play</title>
-    <link rel="stylesheet" href="./static/style.css" />
-  </head>
 
-  <body>
-    Page pour jouer au jeu
-    <div>Username : {{.Username}}</div>
-    <div>Score : {{.Score}}</div></br>
-    <div>Niveau actuel : {{.GameData.CurrentLevel}}</div>
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>niveaux-facile</title>
+  <link rel="stylesheet" href="../static/css/nivfacile.css" />
+</head>
+
+<body>
+  <div class="bdy">
+    <div class="container-info-jeu">
+      <div class="username">Username : {{.Username}}</div>
+      <div class="score">Score : {{.Score}}</div></br>
+      <div class="niveau-facile">Niveau actuel : {{.GameData.CurrentLevel}}</div>
+      <!-- <div class="vie"><img src="../static/images/" alt=""></div>  classe vie pour plus tard -->
+    </div>
     <br>
 
-    <audio controls>
+    <audio controls loop autoplay>
       <source src="/static/assets/C6.mp3" type="audio/mpeg" />
       Votre navigateur ne prend pas en charge l'élément audio.
     </audio>
+    <!-- <div class="piano">
+
+                                            div qui servira a inserer le piano
+
+    </div>  -->
 
     <form action="/niveau-facile" method="POST">
 
       Question :<br> {{range .GameData.Questions}}
       <label>
-        <input type="radio" name="answer" value="{{.}}" required>
+        <input class="input-note" type="radio" name="answer" value="{{.}}" required>
         {{.}}
       </label><br>
       {{end}}
-    
+
       <input type="submit" value="Valider la réponse">
     </form>
-  </br>
+    </br>
     <div>Bonne réponse : {{.GameData.CorrectAnswer}}</div>
 
     <form action="/profile">
       <button type="submit">Go to page profil</button>
     </form>
-  </body>
+  </div>
+</body>
+
 </html>
