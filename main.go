@@ -45,6 +45,9 @@ func Routing(w http.ResponseWriter, r *http.Request) {
 
 	case "/":
 		template.Must(template.ParseFiles("static/index.html")).Execute(w, utils.SessionData)
+		//ServeMP3(w, r)
+		//http.HandleFunc("/static/assets/C6.mp3", ServeMP3)
+
 	case "/login":
 		if r.Method == "GET" {
 			template.Must(template.ParseFiles("static/login.html")).Execute(w, utils.SessionData)
@@ -63,8 +66,35 @@ func Routing(w http.ResponseWriter, r *http.Request) {
 		template.Must(template.ParseFiles("static/play.html")).Execute(w, utils.SessionData)
 
 	case "/profile":
-		template.Must(template.ParseFiles("static/profile.html")).Execute(w, utils.SessionData)
+		if r.Method == "GET" {
+			template.Must(template.ParseFiles("static/profile.html")).Execute(w, utils.SessionData)
+		} else if r.Method == "POST" {
+			utils.HandleUpload(w, r)
+		}
 	case "/logout":
 		utils.Logout(w, r)
+	case "/static/assets/C6.mp3":
+		http.ServeFile(w, r, "/static/assets/C6.mp3")
+
 	}
+}
+
+func ServeMP3(w http.ResponseWriter, r *http.Request) {
+	mp3FilePath := "./static/assets/C6.mp3"
+
+	mp3File, err := os.Open(mp3FilePath)
+	if err != nil {
+		http.Error(w, "Fichier MP3 non trouvé", http.StatusNotFound)
+		return
+	}
+	defer mp3File.Close()
+
+	fileInfo, err := mp3File.Stat()
+	if err != nil {
+		http.Error(w, "Impossible d'obtenir la taille du fichier MP3", http.StatusInternalServerError)
+		return
+	}
+	w.Header().Set("Content-Type", "audio/mpeg")
+
+	http.ServeContent(w, r, mp3FilePath, fileInfo.ModTime(), mp3File)
 }
