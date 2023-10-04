@@ -11,6 +11,10 @@ import (
 )
 
 func main() {
+	// creating database if not exist
+	utils.CreateUserTable(utils.GetDB())
+	utils.CreateScoreTable(utils.GetDB())
+
 	// loading port & url from .env file
 	err := godotenv.Load()
 	if err != nil {
@@ -33,6 +37,7 @@ func main() {
 	if err != nil {
 		log.Fatal(err)
 	}
+
 }
 
 func Routing(w http.ResponseWriter, r *http.Request) {
@@ -40,6 +45,28 @@ func Routing(w http.ResponseWriter, r *http.Request) {
 
 	case "/":
 		template.Must(template.ParseFiles("static/index.html")).Execute(w, utils.SessionData)
-	}
+	case "/login":
+		if r.Method == "GET" {
+			template.Must(template.ParseFiles("static/login.html")).Execute(w, utils.SessionData)
+		} else if r.Method == "POST" {
+			r.ParseForm()
+			utils.Login(r.FormValue("email"), r.FormValue("password"), w, r)
+		}
+	case "/register":
+		if r.Method == "GET" {
+			template.Must(template.ParseFiles("static/register.html")).Execute(w, utils.SessionData)
+		} else if r.Method == "POST" {
+			r.ParseForm()
+			utils.Register(r.FormValue("username"), r.FormValue("email"), r.FormValue("password"), r.FormValue("password-check"), w, r)
+		}
+	case "/play":
+		template.Must(template.ParseFiles("static/play.html")).Execute(w, utils.SessionData)
 
+	case "/profile":
+		template.Must(template.ParseFiles("static/profile.html")).Execute(w, utils.SessionData)
+	case "/logout":
+		utils.Logout(w, r)
+	case "/ok":
+		template.Must(template.ParseFiles("static/ok.html")).Execute(w, utils.SessionData)
+	}
 }

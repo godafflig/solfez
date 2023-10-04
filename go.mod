@@ -16,3 +16,10 @@ require (
 	golang.org/x/mobile v0.0.0-20190415191353-3e0bab5405d6 // indirect
 	golang.org/x/sys v0.0.0-20190626150813-e07cf5db2756 // indirect
 )
+module utils
+
+go 1.19
+
+require github.com/joho/godotenv v1.5.1
+
+require github.com/mattn/go-sqlite3 v1.14.17 // indirect
