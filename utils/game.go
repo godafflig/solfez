@@ -18,9 +18,9 @@ func StartGame(w http.ResponseWriter, r *http.Request) {
 	SessionData.GameData.CorrectAnswer = ""
 	SessionData.GameData.CurrentLevel = 1
 	InitializePathNotes()
-	QuestionQCM()
+	QuestionQCM(w, r)
 }
-func QuestionQCM() {
+func QuestionQCM(w http.ResponseWriter, r *http.Request) {
 
 	var randomIndexNotes []int
 	var randomIndexOctaves []int
@@ -52,6 +52,15 @@ func QuestionQCM() {
 	SessionData.GameData.CorrectNote = Octave[randomIndexOctaves[indexCorrectAnswer]] + pianoKeys[randomIndexNotes[indexCorrectAnswer]]
 	fmt.Println(SessionData.GameData.CorrectNote)
 	SessionData.GameData.CorrectAnswer = SessionData.GameData.Questions[indexCorrectAnswer]
+	html := fmt.Sprintf(`
+
+                <div id="Elnote" value="%s"></div>
+
+        `, SessionData.GameData.CorrectNote)
+
+	// Write the HTML response
+	w.Header().Set("Content-Type", "text/html")
+	fmt.Fprint(w, html)
 }
 
 func CheckAnswer(answer string, w http.ResponseWriter, r *http.Request) bool {
