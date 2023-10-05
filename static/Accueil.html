@@ -1,31 +1,46 @@
+{{define "base"}}
 <!DOCTYPE html>
 <html>
+  <head>
+    <link
+      href="https://fonts.googleapis.com/css?family=Inter&display=swap"
+      rel="stylesheet"
+    />
+    <link href="../static/css/main.css" rel="stylesheet" />
+    <link href="../static/css/navbar.css" rel="stylesheet" />
 
-<head>
-  <link href="https://fonts.googleapis.com/css?family=Inter&display=swap" rel="stylesheet" />
-  <link href="../static/css/main.css" rel="stylesheet" />
-  <title>Page d'accueil</title>
-</head>
+    <title>Page d'accueil</title>
+  </head>
 
+  <body>
+    {{template "navbar" .}}
+    <div class="container">
+      <div class="background"></div>
+      <img
+        src="../static/images/angle.png"
+        alt="Image d'angle"
+        class="coin-haut-gauche"
+      />
 
-<body>
-  <script id="replace_with_navbar" src="./js/nav.js"></script>
-  <div class="container">
-    <div class="background"></div>
-    <img src="../static/images/angle.png" alt="Image d'angle" class="coin-haut-gauche" />
-
-    <div class="presentation">
-      <span class="title">BIENVENUE SUR SOLF’EZ</span><br />
-      <span class="description">Solfe'ez est une application web à destination des utilisateurs qui
-        désirent apprendre ou améliorer leur niveau de solfège. Différents
-        niveaux de difficultés sont proposés où les utilisateurs devront
-        deviner la ou les note(s) de musiques qui seront jouées.</span>
+      <div class="presentation">
+        <span class="title">BIENVENUE SUR SOLF’EZ</span><br />
+        <span class="description"
+          >Solfe'ez est une application web à destination des utilisateurs qui
+          désirent apprendre ou améliorer leur niveau de solfège. Différents
+          niveaux de difficultés sont proposés où les utilisateurs devront
+          deviner la ou les note(s) de musiques qui seront jouées.</span
+        >
+      </div>
+      <a href="/difficulte"
+        ><button class="boutonJouer" type="button" value="Jouer">Jouer</button>
+      </a>
+      <div class="circle"></div>
+      <img
+        src="../static/images/angle.png"
+        alt="Image d'angle"
+        class="coin-bas-droit"
+      />
     </div>
-    <a href="/difficulte"><button class="boutonJouer" type="button" value="Jouer">Jouer</button>
-    </a>
-    <div class="circle"></div>
-    <img src="../static/images/angle.png" alt="Image d'angle" class="coin-bas-droit" />
-  </div>
-</body>
-
+  </body>
 </html>
+{{end}}

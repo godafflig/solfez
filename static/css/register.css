@@ -1,3 +1,14 @@
+@font-face {
+    font-family: 'RobotoMono';
+    src: url('../fonts/RobotoMono-Regular.ttf') format('ttf');
+    /* Ajoutez d'autres formats si nécessaire */
+    font-weight: normal;
+    font-style: normal;
+}
+* {
+    font-family: RobotoMono;
+}
+
 html,
 body {
     height: 100%;
@@ -71,5 +82,28 @@ P {
     align-content: space-around;
     flex-wrap: nowrap;
     align-items: flex-end;
+}
 
+.btnconnexion1 {
+    font-size: 15px;
+}
+.btnconnexion {
+    font-size: 15px;
+}
+.btnconnexion1:hover{
+    background-color: #272343;
+    color: white;
+    cursor: default;
+}
+.btnconnexion:hover{
+    background-color: #272343;
+    color: white;
+    cursor: default;
+}
+.input{
+    padding-left: 30px;
+}
+a {
+    text-decoration: inherit; /* Réutilise la décoration du texte héritée */
+    color: inherit; /* Réutilise la couleur héritée */
 }

@@ -1,16 +1,17 @@
+{{define "base"}}
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>niveaux-facile</title>
-    <link rel="stylesheet" href="../static/css/nivfacile.css">
-</head>
+    <link rel="stylesheet" href="../static/css/nivfacile.css" />
+    <link href="../static/css/navbar.css" rel="stylesheet" />
+  </head>
 
-<body>
-    <script id="replace_with_navbar" src="./js/nav.js"></script>
+  <body>
+    {{template "navbar" .}}
 
     <div class="bdy">
         <div class="container-info-jeu">
@@ -24,13 +25,38 @@
                 <h3>Niveau actuel : </h3>{{.GameData.CurrentLevel}}
             </div>
             <!--<br />Nombre de vies
+      <div class="container-info-jeu">
+        <div class="username">
+          <h3>Username :</h3>
+          {{.Username}}
+        </div>
+        <div class="score">
+          <h3>Score :</h3>
+          {{.Score}}
+        </div>
+        <div class="niveau-facile">
+          <h3>Niveau actuel :</h3>
+          {{.GameData.CurrentLevel}}
+        </div>
+        <!--<br />Nombre de vies
           restantes : {{.GameData.LifeLeft}}-->
             <!-- <div class="vie"><img src="../static/images/" alt=""></div> classe vie pour plus tard -->
         </div>
-        <br>
+        <div class="score">
+          <h3>Score :</h3>
+          {{.Score}}
+        </div>
+        <div class="niveau-facile">
+          <h3>Niveau actuel :</h3>
+          {{.GameData.CurrentLevel}}
+        </div>
+        <!--<br />Nombre de vies
+          restantes : {{.GameData.LifeLeft}}-->
+        <!-- <div class="vie"><img src="../static/images/" alt=""></div> classe vie pour plus tard -->
+      </div>
+      <br />
 
-
-        <!-- <div class="piano">
+      <!-- <div class="piano">
             div qui servira a inserer le piano
         </div>
          -->
@@ -67,21 +93,70 @@
                     </div>
                 </div>
                 <audio id="audio-element" src="/static/assets/C6.mp3" type="audio/mpeg"></audio>
-            </div>
-
+      <div class="submit-buttons">
+        <div class="titre">
+          <h2>Quelle note a été joué :</h2>
         </div>
-        <br><span class="error">{{.Error}} {{.GameData.PreviousCorrectAnswer}}</span>
-        <br>
-        <div>Bonne réponse : {{.GameData.CorrectAnswer}}</div>
-
-        <form action="/profile">
-            <button type="submit">Go to page profil</button>
+        <br />
+        <form class="question" action="/niveau-facile" method="POST">
+          <br />
+          {{range .GameData.Questions}}
+          <div class="choix">
+            <label>
+              <button class="btn-note">
+                <input
+                  class="input-note"
+                  type="radio"
+                  name="answer"
+                  id="{{.}}"
+                  value="{{.}}"
+                  required
+                />
+                {{.}}
+              </button>
+            </label>
+          </div>
+          {{end}}
+          <!-- mettre dasn le formulaire si jamais la question ne passe pas a la suivante -->
+          <div style="text-align: center">
+            <input id="valider-btn" type="submit" value=" " />
+          </div>
         </form>
+        <div id="audio-container">
+          <div id="audio-controls">
+            <div class="playsbtn">
+              <button id="play-button" class="control-button">
+                <img src="../static/images/replay.png" alt="Replay" />
+              </button>
+              <button id="pause-button" class="control-button">
+                <img
+                  src="../static/images/video-pause-button.png"
+                  alt="Replay"
+                />
+              </button>
+            </div>
+          </div>
+          <audio
+            id="audio-element"
+            src="/static/assets/C6.mp3"
+            type="audio/mpeg"
+          ></audio>
+        </div>
+      </div>
+      <br /><span class="error"
+        >{{.Error}} {{.GameData.PreviousCorrectAnswer}}</span
+      >
+      <br />
+      <div>Bonne réponse : {{.GameData.CorrectAnswer}}</div>
 
-        <a href="/difficulte">Changer de difficulté</a>
-        <a href="/classement">Voir le classement</a>
+      <form action="/profile">
+        <button type="submit">Go to page profil</button>
+      </form>
+
+      <a href="/difficulte">Changer de difficulté</a>
+      <a href="/classement">Voir le classement</a>
     </div>
     <script src="../static/audio.js"></script>
-</body>
-
+  </body>
 </html>
+{{end}}

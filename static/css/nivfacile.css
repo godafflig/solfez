@@ -1,5 +1,15 @@
-html,
-body {
+@font-face {
+    font-family: 'RobotoMono';
+    src: url('../fonts/RobotoMono-Regular.ttf') format('ttf');
+    /* Ajoutez d'autres formats si nécessaire */
+    font-weight: normal;
+    font-style: normal;
+}
+* {
+    font-family: RobotoMono;
+}
+
+html, body {
     margin: 0;
     padding: 0;
 }

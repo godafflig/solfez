@@ -1,3 +1,4 @@
+{{define "base"}}
 <!DOCTYPE html>
 <html lang="en">
 
@@ -7,16 +8,24 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Profile</title>
   <link rel="stylesheet" href="./static/style.css" />
+  <link href="../static/css/navbar.css" rel="stylesheet" />
 </head>
 
 <body>
-  <script id="replace_with_navbar" src="./js/nav.js"></script>
+  {{template "navbar" .}}
 
   Page profil de {{.Username}} :
+  <br>
   <img src="{{.ProfilePic}}" alt="" style="max-height: 250px" />
 
+  <!-- <div>Inscrit depuis : </div></br> -->
   <div>Score : {{.Score}}</div></br>
+  <!-- <div>Nombre de parties jouées : </div>
+  <div>Nombre de parties gagnées : </div>
+  <div>Nombre de parties perdues : </div>
+  <div>Temps passés à s'entraîner : </div> -->
 
+<br>
   Changer de photo de profil :
   <form action="/profile" method="POST" enctype="multipart/form-data">
     <input type="file" name="profile_picture" required />
@@ -25,6 +34,44 @@
   <a href="/logout"><button type="submit">Logout</button></a>
   <br>
 
+  Changer de mot de passe :
+  <form class="formulaire" action="/update" method="POST">
+    <input
+      class="input"
+      type="password"
+      name="oldpassword"
+      placeholder="Entrer old password..."
+      required
+    />
+    <input
+      class="input"
+      type="password"
+      name="newpassword"
+      placeholder="Nouveau mot de passe..."
+      required
+    />
+    <input
+      class="input"
+      type="password"
+      name="newpwdconfirm"
+      placeholder="Nouveau mot de passe encore..."
+      required
+    />
+    <div class="content1">
+      
+      <div class="login">
+        <button class="btnconnexion">
+          <a href="/update">Confirmer</a>
+        </button>
+      </div>
+    </div>
+  </form>
+
+ <br>
+
+  <span class="error">{{.Error}}</span>
+<a href="/logout"><button type="submit">Logout</button></a>
+
   <form action="/delete-account" onSubmit="if(!confirm('Are you sure ?')){return false;}"><button
       type="submit">Supprimer mon compte</button>
   </form>
@@ -32,3 +79,4 @@
 </body>
 
 </html>
+{{end}}
