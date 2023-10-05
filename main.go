@@ -14,7 +14,7 @@ func main() {
 	// creating database if not exist
 	utils.CreateUserTable(utils.GetDB())
 	utils.CreateScoreTable(utils.GetDB())
-
+	utils.SessionData = utils.Session{}
 	utils.SortClassement()
 
 	// loading port & url from .env file
