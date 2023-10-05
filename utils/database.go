@@ -39,7 +39,10 @@ func CreateUserTable(db *sql.DB) {
 		created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
 		is_logged INTEGER DEFAULT 0 NOT NULL,
 		score INTEGER DEFAULT 0 NOT NULL,
-		profile_picture TEXT DEFAULT "https://visitemaroc.ca/wp-content/uploads/2021/06/profile-placeholder.png"
+		profile_picture TEXT DEFAULT "https://visitemaroc.ca/wp-content/uploads/2021/06/profile-placeholder.png",
+		wins INTEGER DEFAULT 0 NOT NULL,
+		loses INTEGER DEFAULT 0 NOT NULL,
+		total_games INTEGER DEFAULT 0 NOT NULL
 		);`
 	_, err := db.Exec(query)
 	if err != nil {
