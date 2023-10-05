@@ -36,17 +36,21 @@ html, body {
     border: 0px solid;
     
 }
+#validate-btn:hover{
+    background-color: green;
+}
 .playsbtn{
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-top: 120px;
+    margin-top: 50px;
 }
 
 .container-info-jeu {
     display: flex;
     align-items: flex-start;
     justify-content: space-evenly;
+    padding: 50px;
 }
 .container-info-jeu h3{
     font-size: large;
@@ -76,8 +80,7 @@ img {
     align-items: center; /* Centrer horizontalement */
     text-align: center; /* Centrer le texte */
     justify-content: space-evenly;
-    margin-top: 200px;
-  
+    
 }
 audio {
     width: 100%;
