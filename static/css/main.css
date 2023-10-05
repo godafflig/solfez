@@ -1,5 +1,15 @@
+@font-face {
+    font-family: 'RobotoMono';
+    src: url('../fonts/RobotoMono-Regular.ttf') format('ttf');
+    /* Ajoutez d'autres formats si nécessaire */
+    font-weight: normal;
+    font-style: normal;
+}
+
+
 * {
     box-sizing: border-box;
+    font-family: RobotoMono;
 }
 
 body {
@@ -51,7 +61,7 @@ body {
     width: 779px;
     color: rgba(255, 255, 255, 1);
     margin: 0;
-    font-family: Inter;
+    font-family: RobotoMono;
     font-weight: Regular;
     font-size: 64px;
     opacity: 1;

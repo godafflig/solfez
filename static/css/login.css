@@ -1,3 +1,14 @@
+@font-face {
+    font-family: 'RobotoMono';
+    src: url('../fonts/RobotoMono-Regular.ttf') format('ttf');
+    /* Ajoutez d'autres formats si nécessaire */
+    font-weight: normal;
+    font-style: normal;
+}
+* {
+    font-family: RobotoMono;
+}
+
 html,
 body {
     height: 100%;
@@ -43,7 +54,6 @@ body {
 .login {
     width: 140px;
     color: rgba(0, 0, 0, 1);
-    font-family: Inter;
     font-weight: Regular;
     font-size: 20px; /* Réduisez la taille du texte pour éviter le débordement */
     opacity: 1;
