@@ -7,9 +7,9 @@ import (
 )
 
 type Scoreboard struct {
-	UserId int
+	UserId   int
 	Username string
-	Score  int
+	Score    int
 }
 
 var ScoreboardData Scoreboard
@@ -79,5 +79,5 @@ func SortClassement() {
 		return scores[i].Score > scores[j].Score
 	})
 	Classement = scores
-	fmt.Println(Classement)
+	fmt.Println("Classement: ", Classement)
 }
