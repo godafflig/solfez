@@ -8,6 +8,7 @@ import (
 	_ "github.com/mattn/go-sqlite3"
 )
 
+// get the database
 func GetDB() *sql.DB {
 	var db *sql.DB
 
@@ -27,6 +28,7 @@ func GetDB() *sql.DB {
 	return db
 }
 
+// create the 'users' table if it doesn't exist in the database
 func CreateUserTable(db *sql.DB) {
 	query := `
 	CREATE TABLE IF NOT EXISTS users (
@@ -45,6 +47,7 @@ func CreateUserTable(db *sql.DB) {
 	}
 }
 
+// create the 'scores' table if it doesn't exist in the database
 func CreateScoreTable(db *sql.DB) {
 	query := `
 	CREATE TABLE IF NOT EXISTS scores (

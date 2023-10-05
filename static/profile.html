@@ -1,29 +1,34 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Profile</title>
-    <link rel="stylesheet" href="./static/style.css" />
-  </head>
 
-  <body>
-    Page profil de {{.Username}} :
-    <img src="{{.ProfilePic}}" alt="" style="max-height: 250px" />
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Profile</title>
+  <link rel="stylesheet" href="./static/style.css" />
+</head>
 
-    <div>Score : {{.Score}}</div></br>
+<body>
+  <script id="replace_with_navbar" src="./js/nav.js"></script>
 
-Changer de photo de profil :
-    <form action="/profile" method="POST" enctype="multipart/form-data">
-      <input type="file" name="profile_picture" required />
-      <input type="submit" value="Upload" />
-    </form></br>
-    <a href="/logout"><button type="submit">Logout</button></a>
-<br>
+  Page profil de {{.Username}} :
+  <img src="{{.ProfilePic}}" alt="" style="max-height: 250px" />
 
-    <form action="/delete-account" onSubmit="if(!confirm('Are you sure ?')){return false;}"><button type="submit">Supprimer mon compte</button>
-    </form>
+  <div>Score : {{.Score}}</div></br>
 
-  </body>
+  Changer de photo de profil :
+  <form action="/profile" method="POST" enctype="multipart/form-data">
+    <input type="file" name="profile_picture" required />
+    <input type="submit" value="Upload" />
+  </form></br>
+  <a href="/logout"><button type="submit">Logout</button></a>
+  <br>
+
+  <form action="/delete-account" onSubmit="if(!confirm('Are you sure ?')){return false;}"><button
+      type="submit">Supprimer mon compte</button>
+  </form>
+
+</body>
+
 </html>

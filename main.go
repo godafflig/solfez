@@ -14,7 +14,6 @@ func main() {
 	// creating database if not exist
 	utils.CreateUserTable(utils.GetDB())
 	utils.CreateScoreTable(utils.GetDB())
-	utils.SessionData = utils.Session{}
 	utils.SortClassement()
 
 	// loading port & url from .env file
@@ -59,12 +58,30 @@ func Routing(w http.ResponseWriter, r *http.Request) {
 		}
 	case "/niveau-facile":
 		if r.Method == "GET" {
-			 utils.StartGame(w, r)
+			utils.StartGame(w, r, 1)
 			template.Must(template.ParseFiles("static/niveau-facile.html")).Execute(w, utils.SessionData)
 		} else if r.Method == "POST" {
 			r.ParseForm()
 			utils.CheckAnswer(r.FormValue("answer"), w, r)
-			template.Must(template.ParseFiles("static/niveau-facile.html")).Execute(w, utils.SessionData)
+			template.Must(template.ParseFiles("static/niveau-facile.html" )).Execute(w, utils.SessionData)
+		}
+	case "/niveau-moyen":
+		if r.Method == "GET" {
+			utils.StartGame(w, r, 2)
+			template.Must(template.ParseFiles("static/niveau-moyen.html")).Execute(w, utils.SessionData)
+		} else if r.Method == "POST" {
+			r.ParseForm()
+			utils.CheckAnswer(r.FormValue("answer"), w, r)
+			template.Must(template.ParseFiles("static/niveau-moyen.html")).Execute(w, utils.SessionData)
+		}
+	case "/niveau-difficile":
+		if r.Method == "GET" {
+			utils.StartGame(w, r, 2)
+			template.Must(template.ParseFiles("static/niveau-difficile.html")).Execute(w, utils.SessionData)
+		} else if r.Method == "POST" {
+			r.ParseForm()
+			utils.CheckAnswer(r.FormValue("answer"), w, r)
+			template.Must(template.ParseFiles("static/niveau-difficile.html")).Execute(w, utils.SessionData)
 		}
 	case "/profile":
 		if r.Method == "GET" {
@@ -77,6 +94,7 @@ func Routing(w http.ResponseWriter, r *http.Request) {
 	case "/lost":
 		template.Must(template.ParseFiles("static/lost.html")).Execute(w, utils.SessionData)
 	case "/classement":
+		utils.SortClassement()
 		template.Must(template.ParseFiles("static/classement.html")).Execute(w, utils.ScoreboardData)
 	case "/accueil":
 		template.Must(template.ParseFiles("static/Accueil.html")).Execute(w, utils.SessionData)
