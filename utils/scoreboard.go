@@ -7,14 +7,16 @@ import (
 )
 
 type Scoreboard struct {
-	UserId   int
-	Username string
-	Score    int
+	UserId     int
+	Username   string
+	Score      int
+	Rank       int
+	Classement []Scoreboard
 }
 
 var ScoreboardData Scoreboard
 
-var Classement []Scoreboard
+//var Classement []Scoreboard
 
 func saveHighestScore(newScore int) {
 	db := GetDB()
@@ -78,6 +80,12 @@ func SortClassement() {
 	sort.Slice(scores, func(i, j int) bool {
 		return scores[i].Score > scores[j].Score
 	})
-	Classement = scores
-	fmt.Println("Classement: ", Classement)
+	ScoreboardData.Classement = scores
+
+	// add the rank to the struct
+	rank := 1
+	for i := 0; i < len(ScoreboardData.Classement); i++ {
+		ScoreboardData.Classement[i].Rank = rank
+		rank++
+	}
 }
