@@ -97,15 +97,10 @@ tr.interligne td {
 @media screen and (max-width: 1000px) {
     .classement {
         width: 90%;
-        height: 60%;
-        bottom: 0;
-        margin-bottom: 5px;
+        max-height: 60%;
     }
     .titre1 {
         width: 90%;
-    }
-    .container {
-        justify-content: end;
     }
     .trophee-sportif{
         bottom: 0;
@@ -128,6 +123,7 @@ tr.interligne td {
     .trophee-sportif{
         flex: 1;
         position: inherit;
+
     }
     .tabl-classement{
         visibility: hidden;
