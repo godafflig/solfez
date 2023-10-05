@@ -1,17 +1,19 @@
-html, body {
+html,
+body {
     margin: 0;
     padding: 0;
 }
 
 .bdy {
     width: 100%;
-    height: 100vh;
+    height: 100%;
     background: linear-gradient(rgba(112, 126, 146, 1), rgba(39, 35, 67, 0.11));
+    
 }
-.audio-contianer{
-   
-}
-.question{
+
+.audio-contianer {}
+
+.question {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -20,9 +22,47 @@ html, body {
     border: 2px solid black;
     border-radius: 50px 50px 50px 50px;
     padding: 50px;
-    
+
 }
-#valider-btn{
+
+@media (max-width: 400px) {
+
+    .question {
+        width: 250px;
+        padding: 0;
+        justify-content: center;
+        flex-direction: column;
+
+    }
+    .btn-note{
+        width: 50px;
+        height: 50px;
+        padding: 5px 10px;
+    }
+}
+
+@media (max-width: 800px) {
+
+    .question {
+        margin: 150px 0 0 0 ;
+        width: 200px;
+        padding: 0;
+        justify-content: center;
+        flex-direction: column;
+    }
+    .btn-note{
+        width: 50px;
+        height: 50px;
+        padding: 5px 10px;
+    }
+    .choix{
+        width: 300px;
+    }
+
+
+}
+
+#valider-btn {
     width: 100px;
     height: 100px;
     border-radius: 0px 50px 50px 0px;
@@ -34,13 +74,15 @@ html, body {
     text-align: center;
     background-color: transparent;
     border: 0px solid;
-    
+
 }
-#valider-btn:hover{
-  background-color: green;
+
+#valider-btn:hover {
+    background-color: green;
     border-radius: 100%;
 }
-.playsbtn{
+
+.playsbtn {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -53,7 +95,8 @@ html, body {
     justify-content: space-evenly;
     padding: 50px;
 }
-.container-info-jeu h3{
+
+.container-info-jeu h3 {
     font-size: large;
     color: white;
 }
@@ -77,40 +120,63 @@ img {
 
 .submit-buttons {
     display: flex;
-    flex-direction: column; /* Aligner verticalement */
-    align-items: center; /* Centrer horizontalement */
-    text-align: center; /* Centrer le texte */
+    flex-direction: column;
+    /* Aligner verticalement */
+    align-items: center;
+    /* Centrer horizontalement */
+    text-align: center;
+    /* Centrer le texte */
     justify-content: space-evenly;
-    
+
 }
+
 audio {
     width: 100%;
 }
+
 .selected {
-    background-color: green; /* Couleur de fond du bouton coché */
+    background-color: green;
+    /* Couleur de fond du bouton coché */
     border: 1px solid black;
     border-radius: 50px;
-    padding: 5px 10px; 
+    padding: 5px 10px;
     width: 300px;
     height: 100px;
     color: white;
-    
+
 }
 
 .btn-note {
     background-color: #272343;
     border: 1px solid black;
     border-radius: 50px;
-    padding: 5px 10px; 
+    padding: 5px 10px;
     width: 300px;
     height: 100px;
     font-size: 22pxs;
     color: white;
-    
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
 }
-.btn-note:hover{
+
+.btn-note:hover {
     background-color: green;
 }
+
+.titre {
+    background-color: #E3F6F5;
+    width: 487px;
+    height: 59px;
+    border-radius: 100px;
+    padding: 20px;
+    text-align: center;
+    color: #272343;
+    font-size: 25px;
+    display: inline-table;
+}
+
 /* Cela affichera les boutons radio côte à côte horizontalement, avec un espace entre eux. Vous pouvez ajuster les marges et les espaces à l'intérieur du bouton selon vos préférences. */
 
 
@@ -122,5 +188,6 @@ audio {
 /* Ajout de cette ligne pour corriger le positionnement des boutons de réponse */
 .choix {
     display: inline-block;
-    margin-right: 0px; /* Espace entre les boutons, ajustez selon vos besoins */
+    margin-right: 0px;
+    /* Espace entre les boutons, ajustez selon vos besoins */
 }
