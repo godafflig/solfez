@@ -11,6 +11,8 @@ var pianoKeys = []string{"do", "do#/réb", "ré", "ré#/mib", "mi", "fa", "fa#/s
 func StartGame(w http.ResponseWriter, r *http.Request) {
 	SessionData.GameData.Questions = []string{}
 	SessionData.GameData.CorrectAnswer = ""
+	SessionData.GameData.Questions = []string{}
+    SessionData.GameData.CorrectAnswer = ""
 	SessionData.GameData.CurrentLevel = 1
 	QuestionQCM()
 }

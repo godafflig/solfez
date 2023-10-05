@@ -21,6 +21,8 @@ func Login(email string, password string, w http.ResponseWriter, r *http.Request
 		SessionData.Score = getScore(GetDB(), email)
 		SessionData.Error = ""
 		SessionData.ProfilePic = GetProfilePicFromDb()
+
+		
 		template.Must(template.ParseFiles("static/Accueil.html")).Execute(w, SessionData)
 	}
 }
@@ -47,6 +49,8 @@ func Register(username string, email string, password string, passwordCheck stri
 		SessionData.IsLogged = true
 		SessionData.Error = ""
 		SessionData.ProfilePic = GetProfilePicFromDb()
+
+		StartGame(w, r)
 		template.Must(template.ParseFiles("static/Accueil.html")).Execute(w, SessionData)
 	}
 }
