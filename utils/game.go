@@ -1,19 +1,21 @@
 package utils
 
 import (
+	"fmt"
 	"math/rand"
 	"net/http"
 	"time"
 )
 
 var pianoKeys = []string{"C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"}
+var pianoKeysDisplay = []string{"Do", "Do#", "Ré", "Ré#", "Mi", "Fa", "Fa#", "Sol", "Sol#", "La", "La#", "Si"}
 var Octave = []string{"4", "5"}
 
 func StartGame(w http.ResponseWriter, r *http.Request) {
 	SessionData.GameData.Questions = []string{}
 	SessionData.GameData.CorrectAnswer = ""
 	SessionData.GameData.Questions = []string{}
-    SessionData.GameData.CorrectAnswer = ""
+	SessionData.GameData.CorrectAnswer = ""
 	SessionData.GameData.CurrentLevel = 1
 	InitializePathNotes()
 	QuestionQCM()
@@ -28,7 +30,7 @@ func QuestionQCM() {
 	for j := 0; j < 3; j++ {
 
 		for len(randomIndexNotes) <= 2 {
-			n := rand.Intn(len(pianoKeys))
+			n := rand.Intn(len(pianoKeysDisplay))
 			if !contains(randomIndexNotes, n) {
 				randomIndexNotes = append(randomIndexNotes, n)
 			}
@@ -42,11 +44,13 @@ func QuestionQCM() {
 	}
 
 	for i := 0; i < 3; i++ {
-		SessionData.GameData.Questions = append(SessionData.GameData.Questions, pianoKeys[randomIndexNotes[i]]+Octave[randomIndexOctaves[i]]+"eme")
+		SessionData.GameData.Questions = append(SessionData.GameData.Questions, pianoKeysDisplay[randomIndexNotes[i]]+Octave[randomIndexOctaves[i]]+"eme")
 	}
 
 	// Correct answer
 	indexCorrectAnswer := rand.Intn(3)
+	SessionData.GameData.CorrectNote = Octave[randomIndexOctaves[indexCorrectAnswer]] + pianoKeys[randomIndexNotes[indexCorrectAnswer]]
+	fmt.Println(SessionData.GameData.CorrectNote)
 	SessionData.GameData.CorrectAnswer = SessionData.GameData.Questions[indexCorrectAnswer]
 }
 

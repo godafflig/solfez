@@ -14,6 +14,35 @@ html, body {
     justify-content: space-evenly;
 }
 
+#piano{
+    display: flex;
+    justify-content: center;
+}
+
+#ImgPiano{
+    display: flex;
+    height: 200px;
+    width: 70vw;
+}
+.NoteDefault{
+display: flex;
+height: 200px;
+width: 2.93vw;
+bottom: 4px;
+}
+
+.NoteDieseDefault{
+    display: flex;
+    height: 120px;
+    width: 2.93vw;
+    bottom: 4px;
+    }
+#ContainerPiano{
+    position: relative;
+    height: 0px;
+    width: 0px;
+    left: 0.18vw;
+}
 .input-note {
     width: 30px;
     height: 30px;
@@ -31,8 +60,8 @@ html, body {
     cursor: pointer;
 }
 
-img {
-    width: 100px;
+#Replay{
+    height: 100px;
 }
 
 .submit-buttons {
@@ -60,3 +89,151 @@ audio {
     background-color: red;
     display: inline-block;
 }
+#4C{
+    display: flex;
+    position:relative;
+    background-color: red;
+    z-index: 1;
+}
+#4CT{
+    display: flex;
+    position:relative;
+    background-color: red;
+    height: 100px;
+    z-index: 1;
+}
+#4D{
+    display: flex;
+    position:relative;
+    background-color: red;
+    z-index: 1;
+}
+#4DT{
+    display: flex;
+    position:relative;
+    background-color: red;
+    height: 100px;
+    z-index: 1;
+}
+#4E{
+    display: flex;
+    position:relative;
+    background-color: red;
+    z-index: 1;
+}
+#4F{
+    display: flex;
+    position:relative;
+    background-color: red;
+    z-index: 1;
+}
+#4FT{
+    display: flex;
+    position:relative;
+    background-color: red;
+    z-index: 1;
+}
+#4G{
+    display: flex;
+    position:relative;
+    background-color: red;
+    z-index: 1;
+}
+#4GT{
+    display: flex;
+    position:relative;
+    background-color: red;
+    z-index: 1;
+}
+#4A{
+    display: flex;
+    position:relative;
+    background-color: red;
+    z-index: 1;
+}
+#4AT{
+    display: flex;
+    position:relative;
+    background-color: red;
+    z-index: 1;
+}
+#4B{
+    display: flex;
+    position:relative;
+    background-color: red;
+    z-index: 1;
+}
+
+#5C{
+    display: flex;
+    position:relative;
+    background-color: red;
+    z-index: 1;
+}
+#5CT{
+    display: flex;
+    position:relative;
+    background-color: red;
+    z-index: 1;
+}
+#5D{
+    display: flex;
+    position:relative;
+    background-color: red;
+    z-index: 1;
+}
+#5DT{
+    display: flex;
+    position:relative;
+    background-color: red;
+    z-index: 1;
+}
+#5E{
+    display: flex;
+    position:relative;
+    background-color: red;
+    z-index: 1;
+}
+#5F{
+    display: flex;
+    position:relative;
+    background-color: red;
+    z-index: 1;
+}
+#5FT{
+    display: flex;
+    position:relative;
+    background-color: red;
+    z-index: 1;
+}
+#5G{
+    display: flex;
+    position:relative;
+    background-color: red;
+    z-index: 1;
+}
+#5GT{
+    display: flex;
+    position:relative;
+    background-color: red;
+    z-index: 1;
+}
+#5A{
+    display: flex;
+    position:relative;
+    background-color: red;
+    z-index: 1;
+}
+#5AT{
+    display: flex;
+    position:relative;
+    background-color: red;
+    z-index: 1;
+}
+#5B{
+    display: flex;
+    position:relative;
+    background-color: red;
+    z-index: 1;
+}
+
