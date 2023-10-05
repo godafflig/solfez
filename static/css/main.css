@@ -1,0 +1,170 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-size: 14px;
+    margin: 0; /* Réinitialiser la marge par défaut du body */
+}
+
+.container {
+    width: 100%;
+    height: 100vh; /* Utilise toute la hauteur de l'écran */
+    background: rgba(255, 255, 255, 1);
+    opacity: 1;
+    position: relative;
+    overflow: hidden;
+}
+
+.background {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(rgba(112, 126, 146, 1), rgba(39, 35, 67, 0.11));
+    opacity: 1;
+    position: absolute;
+    top: 0;
+    left: 0;
+    overflow: hidden;
+}
+
+.header {
+    width: 831px;
+    color: rgba(255, 255, 255, 1);
+    position: absolute;
+    top: 101px;
+    left: 142px;
+    font-family: Inter;
+    font-weight: Regular;
+    font-size: 12px;
+    opacity: 1;
+    text-align: left;
+}
+
+.presentation{
+    position: absolute;
+    top : 250px;
+    text-align: center;
+    width: 100%;
+}
+
+.title {
+    width: 779px;
+    color: rgba(255, 255, 255, 1);
+    margin: 0;
+    font-family: Inter;
+    font-weight: Regular;
+    font-size: 64px;
+    opacity: 1;
+}
+
+.description {
+    position: absolute;
+    display: block;
+    width: 594px;
+    color: rgba(255, 255, 255, 1);
+    font-family: Inter;
+    font-weight: Regular;
+    font-size: 20px;
+    opacity: 1;
+    top: 135px;
+    left: 50%;
+    -ms-transform: translate(-50%, -50%);
+     transform: translate(-50%, -50%);
+}
+
+.circle {
+    width: 205px;
+    height: 211px;
+    background: url("../static/images/musicAcceuil.png");
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+    opacity: 1;
+    position: absolute;
+    top: 70%;
+    left: 40px;
+    border-radius: 50%;
+    overflow: hidden;
+}
+
+.coin-haut-gauche {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 420px;
+    height: 330px;
+    transform: rotate(180deg);
+}
+
+.coin-bas-droit {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 406px;
+    height: 236;
+}
+
+.menu {
+    width: 100%;
+    height: 113px;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+    opacity: 1;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    overflow: hidden;
+}
+
+.boutonJouer{
+    width: 377px;
+    height: 95px;
+    position: absolute;
+    top: 76%;
+    left: 50%;
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    border-radius: 100px;
+    padding: 0 20px;    
+    text-align: center;
+    background-color: #E3F6F5;
+    color: #272343;
+    font-size: 70px;
+}
+
+.bottom-circle {
+    width: 377px;
+    height: 95px;
+    background: rgba(227, 246, 245, 1);
+    opacity: 1;
+    position: absolute;
+    top: 8px;
+    left: 13px;
+    border: 1px solid rgba(0, 0, 0, 1);
+    border-radius: 100px;
+    overflow: hidden;
+}
+
+.bottom-rect {
+    width: 289px;
+    height: 67px;
+    background: rgba(39, 35, 67, 1);
+    opacity: 1;
+    position: absolute;
+    top: 22px;
+    left: 57px;
+}
+
+.login {
+    width: 140px;
+    color: rgba(0, 0, 0, 1);
+    position: absolute;
+    top: 258px;
+    left: 728px;
+    font-family: Inter;
+    font-weight: Regular;
+    font-size: 32px;
+    opacity: 1;
+    text-align: center;
+}

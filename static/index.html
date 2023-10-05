@@ -1,15 +1,41 @@
 <!DOCTYPE html>
-<html>
-<head>
-    <script src="script.js"></script>
-    <title>HTML with External JavaScript</title>
-</head>
-<body>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Register</title>
+    <link rel="stylesheet" href="./static/style.css" />
+  </head>
 
-<h1>Hello, World!</h1>
+  <body>
+    <form action="/register" method="POST">
+      <input
+        type="text"
+        name="username"
+        placeholder="Enter username..."
+        required
+      />
 
-<p>This is a basic HTML document with an external JavaScript file.</p>
+      <input type="email" name="email" placeholder="Enter email..." />
+      <input
+        type="password"
+        name="password"
+        placeholder="Enter password..."
+        required
+      />
 
-<button id="myButton">Click me</button>
-</body>
+      <input
+        type="password"
+        name="password-check"
+        placeholder="Enter password again..."
+        required
+      />
+
+      <input type="submit" value="Créer mon compte" />
+      <span class="error">{{.Error}}</span>
+
+      <a href="/login">Aller sur la page login</a>
+    </form>
+  </body>
 </html>

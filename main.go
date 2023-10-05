@@ -45,6 +45,9 @@ func Routing(w http.ResponseWriter, r *http.Request) {
 
 	case "/":
 		template.Must(template.ParseFiles("static/index.html")).Execute(w, utils.SessionData)
+	case "/register":
+		r.ParseForm()
+		utils.Register(r.FormValue("username"), r.FormValue("email"), r.FormValue("password"), r.FormValue("password-check"), w, r)
 	case "/login":
 		if r.Method == "GET" {
 			template.Must(template.ParseFiles("static/login.html")).Execute(w, utils.SessionData)
@@ -52,21 +55,31 @@ func Routing(w http.ResponseWriter, r *http.Request) {
 			r.ParseForm()
 			utils.Login(r.FormValue("email"), r.FormValue("password"), w, r)
 		}
-	case "/register":
+	case "/niveau-facile":
 		if r.Method == "GET" {
-			template.Must(template.ParseFiles("static/register.html")).Execute(w, utils.SessionData)
+			utils.StartGame(w, r)
+			template.Must(template.ParseFiles("static/niveau-facile.html")).Execute(w, utils.SessionData)
 		} else if r.Method == "POST" {
 			r.ParseForm()
-			utils.Register(r.FormValue("username"), r.FormValue("email"), r.FormValue("password"), r.FormValue("password-check"), w, r)
+			utils.CheckAnswer(r.FormValue("answer"), w, r)
+			template.Must(template.ParseFiles("static/niveau-facile.html")).Execute(w, utils.SessionData)
 		}
-	case "/play":
-		template.Must(template.ParseFiles("static/play.html")).Execute(w, utils.SessionData)
-
 	case "/profile":
-		template.Must(template.ParseFiles("static/profile.html")).Execute(w, utils.SessionData)
+		if r.Method == "GET" {
+			template.Must(template.ParseFiles("static/profile.html")).Execute(w, utils.SessionData)
+		} else if r.Method == "POST" {
+			utils.HandleUpload(w, r)
+		}
 	case "/logout":
 		utils.Logout(w, r)
-	case "/ok":
-		template.Must(template.ParseFiles("static/ok.html")).Execute(w, utils.SessionData)
+	case "/lost":
+		template.Must(template.ParseFiles("static/lost.html")).Execute(w, utils.SessionData)
+
+	case "/classement":
+		template.Must(template.ParseFiles("static/classement.html")).Execute(w, utils.SessionData)
+	case "/accueil":
+		template.Must(template.ParseFiles("static/Accueil.html")).Execute(w, utils.SessionData)
+	case "/difficulte":
+		template.Must(template.ParseFiles("static/difficulte.html")).Execute(w, utils.SessionData)
 	}
 }

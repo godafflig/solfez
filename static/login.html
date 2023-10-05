@@ -5,20 +5,31 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Login</title>
-    <link rel="stylesheet" href="./static/style.css" />
+    <link rel="stylesheet" href="../static/css/login.css" />
   </head>
 
   <body>
-    <form action="/login" method="POST">
-      <input type="email" name="email" placeholder="Enter email..." required />
-      <input
-        type="password"
-        name="password"
-        placeholder="Enter password..."
-        required
-      />
-      <button type="submit">Login</button>
-      <span class="error">{{.Error}}</span>
-    </form>
+    <div class="container">
+      <form class="formulaire" action="/login" method="POST">
+        <input
+          class="input"
+          type="email"
+          name="email"
+          placeholder="Entrer email..."
+          required
+        />
+        <input
+          class="input"
+          type="password"
+          name="password"
+          placeholder="Mot de passe..."
+          required
+        />
+        <button class="btnconnexion" type="submit" href="/Accueil">
+          Connexion
+        </button>
+        <span class="error">{{.Error}}</span>
+      </form>
+    </div>
   </body>
 </html>

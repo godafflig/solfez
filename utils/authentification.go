@@ -1,7 +1,6 @@
 package utils
 
 import (
-	"fmt"
 	"html/template"
 	"net/http"
 )
@@ -19,34 +18,39 @@ func Login(email string, password string, w http.ResponseWriter, r *http.Request
 		SessionData.Username = getUsername(GetDB(), email)
 		SessionData.Email = email
 		SessionData.IsLogged = true
+		SessionData.Score = getScore(GetDB(), email)
 		SessionData.Error = ""
-		fmt.Println("Logged in : ", SessionData)
-		template.Must(template.ParseFiles("static/play.html")).Execute(w, SessionData)
+		SessionData.ProfilePic = GetProfilePicFromDb()
+
+		StartGame(w, r)
+		template.Must(template.ParseFiles("static/Accueil.html")).Execute(w, SessionData)
 	}
 }
 
 func Register(username string, email string, password string, passwordCheck string, w http.ResponseWriter, r *http.Request) {
 	if password != passwordCheck {
 		SessionData.Error = "Passwords don't match."
-		http.Redirect(w, r, "/register", http.StatusSeeOther)
+		http.Redirect(w, r, "/", http.StatusSeeOther)
 		// } else if !isStrongPassword(password) {
 		// 	SessionData.Error = "Password must be at least 8 characters long and contain at least 1 digit, 1 symbol and 1 uppercase letter."
-		// 	http.Redirect(w, r, "/register", http.StatusSeeOther)
+		// 	http.Redirect(w, r, "/", http.StatusSeeOther)
 	} else if usernameExists(GetDB(), username) {
 		SessionData.Error = "Username already exists."
-		http.Redirect(w, r, "/register", http.StatusSeeOther)
+		http.Redirect(w, r, "/", http.StatusSeeOther)
 	} else if emailExists(GetDB(), email) {
 		SessionData.Error = "Email already exists."
-		http.Redirect(w, r, "/register", http.StatusSeeOther)
+		http.Redirect(w, r, "/", http.StatusSeeOther)
 	} else {
+		CreateUser(GetDB(), username, password, email)
 		SessionData.Id = getId(GetDB(), email)
 		SessionData.Username = username
 		SessionData.Email = email
 		SessionData.IsLogged = true
 		SessionData.Error = ""
-		fmt.Println("Registered : ", SessionData)
-		CreateUser(GetDB(), username, password, email)
-		template.Must(template.ParseFiles("static/play.html")).Execute(w, SessionData)
+		SessionData.ProfilePic = GetProfilePicFromDb()
+
+		StartGame(w, r)
+		template.Must(template.ParseFiles("static/Accueil.html")).Execute(w, SessionData)
 	}
 }
 
@@ -60,13 +64,13 @@ func Logout(w http.ResponseWriter, r *http.Request) {
 		panic(err)
 	}
 
-	fmt.Print("Confirmed logout : ", SessionData, " -> ")
 	SessionData.Id = 0
 	SessionData.Username = ""
 	SessionData.Email = ""
 	SessionData.IsLogged = false
 	SessionData.Error = ""
-	fmt.Println(SessionData)
+	SessionData.GameData.Questions = []string{}
+	SessionData.GameData.CorrectAnswer = ""
 	http.Redirect(w, r, "/", http.StatusSeeOther)
 
 }
