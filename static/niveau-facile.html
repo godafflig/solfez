@@ -21,12 +21,14 @@
             <div class="niveau-facile">
                 <h3>Niveau actuel : </h3>{{.GameData.CurrentLevel}}
             </div>
+            <!--<br />Nombre de vies
+          restantes : {{.GameData.LifeLeft}}-->
             <!-- <div class="vie"><img src="../static/images/" alt=""></div> classe vie pour plus tard -->
         </div>
         <br>
 
 
-        <!-- <div class="piano">
+      <!-- <div class="piano">
             div qui servira a inserer le piano
         </div>
          -->
@@ -65,13 +67,16 @@
             </div>
 
         </div>
-
+<br><span class="error">{{.Error}} {{.GameData.PreviousCorrectAnswer}}</span>
         <br>
         <div>Bonne réponse : {{.GameData.CorrectAnswer}}</div>
 
-        <form action="/profile">
-            <button type="submit">Go to page profil</button>
-        </form>
+      <form action="/profile">
+        <button type="submit">Go to page profil</button>
+      </form>
+
+      <a href="/difficulte">Changer de difficulté</a>
+      <a href="/classement">Voir le classement</a>
     </div>
     <script src="../static/audio.js"></script>
 </body>

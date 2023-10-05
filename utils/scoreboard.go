@@ -3,7 +3,6 @@ package utils
 import (
 	"fmt"
 	"sort"
-	"strconv"
 )
 
 type Scoreboard struct {
@@ -16,45 +15,18 @@ type Scoreboard struct {
 
 var ScoreboardData Scoreboard
 
-//var Classement []Scoreboard
-
+// compare & save the highest score in the database 'scores'
 func saveHighestScore(newScore int) {
 	db := GetDB()
-
-	// get score from score bdd
-	query := `
-	SELECT score FROM scores WHERE user_id = ?`
-	rows, err := db.Query(query, SessionData.Id)
-	if err != nil {
-		fmt.Println(err)
-	}
-	defer rows.Close()
-
-	var oldScoreString string
-	for rows.Next() {
-		err := rows.Scan(&oldScoreString)
-		if err != nil {
-			fmt.Println(err)
-		}
-	}
-
-	oldScore, err := strconv.Atoi(oldScoreString)
-	if err != nil {
-		fmt.Println(err)
-	}
+	oldScore := getScoreFromScoresTable()
 
 	if newScore > oldScore {
-		query := `
-		UPDATE scores SET score = ? WHERE user_id = ?`
-		_, err := db.Exec(query, newScore, SessionData.Id)
-		if err != nil {
-			fmt.Println(err)
-		}
+		updateScoreInScoreTable(db, newScore, SessionData.Id)
 	}
 }
 
+// sort the classement by score and add the rank
 func SortClassement() {
-
 	db := GetDB()
 
 	// get all scores, usernames & id
