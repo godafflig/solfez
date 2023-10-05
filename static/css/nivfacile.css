@@ -1,19 +1,62 @@
-html, body{
+html, body {
     margin: 0;
     padding: 0;
 }
 
-.bdy{
+.bdy {
     width: 100%;
     height: 100%;
-    
 }
-.container-info-jeu{
+
+.container-info-jeu {
     display: flex;
     align-items: center;
     justify-content: space-evenly;
 }
-.input-note{
-    width: 50px;
+
+.input-note {
+    width: 30px;
+    height: 30px;
+}
+
+.playbtn {
+    background-color: red;
+    width: 100px;
+    height: 100px;
+}
+
+.control-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+img {
+    width: 100px;
+}
+
+.submit-buttons {
+    display: flex;
+    flex-direction: column; /* Aligner verticalement */
+    align-items: center; /* Centrer horizontalement */
+    text-align: center; /* Centrer le texte */
+}
+audio {
+    width: 100%;
+}
+
+.btn-note {
+    display: flex;
+    align-items: center;
+    width: 150px;
     height: 50px;
+    background-color: #E3F6F5;
+    border: 1px solid black;
+    border-radius: 50px;
+}
+
+/* Ajout de cette ligne pour corriger le positionnement des boutons de réponse */
+.choix {
+    background-color: red;
+    display: inline-block;
 }

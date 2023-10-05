@@ -57,7 +57,7 @@ func Routing(w http.ResponseWriter, r *http.Request) {
 		}
 	case "/niveau-facile":
 		if r.Method == "GET" {
-			utils.StartGame(w, r)
+			 utils.StartGame(w, r)
 			template.Must(template.ParseFiles("static/niveau-facile.html")).Execute(w, utils.SessionData)
 		} else if r.Method == "POST" {
 			r.ParseForm()
