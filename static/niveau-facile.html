@@ -88,11 +88,6 @@
           ></audio>
         </div>
       </div>
-      <br /><span class="error"
-        >{{.Error}} {{.GameData.PreviousCorrectAnswer}}</span
-      >
-      <br />
-      <div>Bonne réponse : {{.GameData.CorrectAnswer}}</div>
 
       <div id="piano">
         <div id="ContainerPiano">
@@ -125,6 +120,13 @@
         
         
       </div>
+      <br /><span class="error"
+        >{{.Error}} {{.GameData.PreviousCorrectAnswer}}</span
+      >
+      <br />
+      <div>Bonne réponse : {{.GameData.CorrectAnswer}}</div>
+
+  
       
 
       <form action="/profile">
