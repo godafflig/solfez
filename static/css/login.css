@@ -75,3 +75,27 @@ body {
 .input::placeholder {
     font-size: 20px;
 }
+
+.btnconnexion1 {
+    font-size: 15px;
+}
+.btnconnexion {
+    font-size: 15px;
+}
+.btnconnexion1:hover{
+    background-color: #272343;
+    color: white;
+    cursor: default;
+}
+.btnconnexion:hover{
+    background-color: #272343;
+    color: white;
+    cursor: default;
+}
+.input{
+    padding-left: 30px;
+}
+a {
+    text-decoration: inherit; /* Réutilise la décoration du texte héritée */
+    color: inherit; /* Réutilise la couleur héritée */
+}
