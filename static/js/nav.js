@@ -7,6 +7,7 @@ fetch('navbar.html')
         let newelem = document.createElement("div");
         newelem.innerHTML = text;
         oldelem.parentNode.replaceChild(newelem, oldelem);
+        console.log("TEST");
     })
 
 // Créer un élément script
@@ -22,3 +23,12 @@ script2.onload = function () {
 
 // Ajouter le script au DOM
 document.head.appendChild(script2);
+const links = document.querySelectorAll('nav li')
+
+icons.addEventListener("click", () => {
+    nav.classList.toggle("active");
+})
+
+links.forEach((links) => {
+    links.addEventListener("click", () => { nav.classList.remove('active'); })
+})
