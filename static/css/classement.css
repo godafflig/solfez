@@ -104,6 +104,22 @@ tr.interligne td {
     display: none;
 }
 
+.coin-haut-gauche {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 420px;
+    height: 330px;
+    transform: rotate(180deg);
+}
+
+.coin-bas-droit {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 406px;
+    height: 236;
+}
 
 @media screen and (max-width: 1000px) {
     .classement {
