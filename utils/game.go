@@ -6,30 +6,39 @@ import (
 	"time"
 )
 
-var pianoKeys = []string{"do", "do#/réb", "ré", "ré#/mib", "mi", "fa", "fa#/solb", "sol", "sol#/lab", "la", "la#/sib", "si"}
+var pianoKeys = []string{"C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"}
+var Octave = []string{"4", "5"}
 
 func StartGame(w http.ResponseWriter, r *http.Request) {
 	SessionData.GameData.CurrentLevel = 1
+	InitializePathNotes()
 	QuestionQCM()
 }
 func QuestionQCM() {
 
-	var randomIndex []int
+	var randomIndexNotes []int
+	var randomIndexOctaves []int
 	rand.Seed(time.Now().UnixNano())
 
 	// Generate 3 random piano keys
 	for j := 0; j < 3; j++ {
 
-		for len(randomIndex) != 3 {
-			n := rand.Intn(len(pianoKeys) - 1)
-			if !contains(randomIndex, n) {
-				randomIndex = append(randomIndex, n)
+		for len(randomIndexNotes) <= 2 {
+			n := rand.Intn(len(pianoKeys))
+			if !contains(randomIndexNotes, n) {
+				randomIndexNotes = append(randomIndexNotes, n)
 			}
+		}
+
+		for len(randomIndexOctaves) <= 2 {
+			o := rand.Intn(len(Octave))
+			randomIndexOctaves = append(randomIndexOctaves, o)
+
 		}
 	}
 
 	for i := 0; i < 3; i++ {
-		SessionData.GameData.Questions = append(SessionData.GameData.Questions, pianoKeys[randomIndex[i]])
+		SessionData.GameData.Questions = append(SessionData.GameData.Questions, pianoKeys[randomIndexNotes[i]]+Octave[randomIndexOctaves[i]]+"eme")
 	}
 
 	// Correct answer
@@ -53,6 +62,16 @@ func CheckAnswer(answer string, w http.ResponseWriter, r *http.Request) bool {
 		http.Redirect(w, r, "/lost", http.StatusSeeOther)
 		return false
 	}
+}
+
+func InitializePathNotes() {
+	for i := 0; i < len(Octave); i++ {
+		for j := 0; j < len(pianoKeys); j++ {
+			temp := Octave[i] + pianoKeys[j]
+			SessionData.GameData.Notes = append(SessionData.GameData.Notes, temp)
+		}
+	}
+
 }
 
 func contains(arr []int, val int) bool {

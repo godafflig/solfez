@@ -15,6 +15,8 @@ type Game struct {
 	Questions     []string
 	CorrectAnswer string
 	CurrentLevel  int
+	Notes         []string
+	CorrectNote   string
 }
 
 var SessionData Session
