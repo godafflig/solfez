@@ -48,7 +48,8 @@ func CreateUserTable(db *sql.DB) {
 func CreateScoreTable(db *sql.DB) {
 	query := `
 	CREATE TABLE IF NOT EXISTS scores (
-		user_id INTEGER NOT NULL, 
+		user_id INTEGER NOT NULL,
+		user_name TEXT NOT NULL, 
 		score INTEGER DEFAULT 0 NOT NULL,
 		FOREIGN KEY (user_id) REFERENCES users(user_id),
 		FOREIGN KEY (score) REFERENCES users(score)

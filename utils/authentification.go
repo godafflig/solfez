@@ -21,8 +21,6 @@ func Login(email string, password string, w http.ResponseWriter, r *http.Request
 		SessionData.Score = getScore(GetDB(), email)
 		SessionData.Error = ""
 		SessionData.ProfilePic = GetProfilePicFromDb()
-
-		StartGame(w, r)
 		template.Must(template.ParseFiles("static/Accueil.html")).Execute(w, SessionData)
 	}
 }
@@ -43,13 +41,12 @@ func Register(username string, email string, password string, passwordCheck stri
 	} else {
 		CreateUser(GetDB(), username, password, email)
 		SessionData.Id = getId(GetDB(), email)
+		CreateScore(GetDB(), username, SessionData.Id)
 		SessionData.Username = username
 		SessionData.Email = email
 		SessionData.IsLogged = true
 		SessionData.Error = ""
 		SessionData.ProfilePic = GetProfilePicFromDb()
-
-		StartGame(w, r)
 		template.Must(template.ParseFiles("static/Accueil.html")).Execute(w, SessionData)
 	}
 }
@@ -71,6 +68,7 @@ func Logout(w http.ResponseWriter, r *http.Request) {
 	SessionData.Error = ""
 	SessionData.GameData.Questions = []string{}
 	SessionData.GameData.CorrectAnswer = ""
+	SessionData.Score = 0
 	http.Redirect(w, r, "/", http.StatusSeeOther)
 
 }

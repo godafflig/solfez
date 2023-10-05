@@ -9,7 +9,6 @@ import (
 	"golang.org/x/crypto/bcrypt"
 )
 
-// rajouter le hash des mdp avant d'enregistrer dans bdd
 func CreateUser(db *sql.DB, username string, password string, email string) {
 	//hash des mdp
 	hashedPassword, err := bcrypt.GenerateFromPassword([]byte(password), bcrypt.DefaultCost)
@@ -25,7 +24,15 @@ func CreateUser(db *sql.DB, username string, password string, email string) {
 	}
 }
 
-// vérifier que hash mot de passe = hash mdp bdd
+func DeleteUser(db *sql.DB, email string) {
+	query := `
+	DELETE FROM users WHERE email = ?`
+	_, err := db.Exec(query, email)
+	if err != nil {
+		log.Fatal(err)
+	}
+}
+
 func userExists(db *sql.DB, email string, password string) bool {
 	query := `
 	SELECT password FROM users WHERE email = ?`
@@ -101,6 +108,7 @@ func getId(db *sql.DB, email string) int {
 	}
 	return idInt
 }
+
 func getUsername(db *sql.DB, email string) string {
 	query := `
 	SELECT username FROM users WHERE email = ?`
@@ -117,36 +125,4 @@ func getUsername(db *sql.DB, email string) string {
 		}
 	}
 	return username
-}
-
-func getScore(db *sql.DB, email string) int {
-	query := `
-	SELECT score FROM users WHERE email = ?`
-	rows, err := db.Query(query, email)
-	if err != nil {
-		fmt.Println(err)
-	}
-	defer rows.Close()
-	var score string
-	for rows.Next() {
-		err := rows.Scan(&score)
-		if err != nil {
-			fmt.Println(err)
-		}
-	}
-
-	scoreInt, err := strconv.Atoi(score)
-	if err != nil {
-		fmt.Println(err)
-	}
-	return scoreInt
-}
-
-func updateScore(db *sql.DB, email string, score int) {
-	query := `
-	UPDATE users SET score = ? WHERE email = ?`
-	_, err := db.Exec(query, score, email)
-	if err != nil {
-		fmt.Println(err)
-	}
 }

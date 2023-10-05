@@ -9,6 +9,8 @@ import (
 var pianoKeys = []string{"do", "do#/réb", "ré", "ré#/mib", "mi", "fa", "fa#/solb", "sol", "sol#/lab", "la", "la#/sib", "si"}
 
 func StartGame(w http.ResponseWriter, r *http.Request) {
+	SessionData.GameData.Questions = []string{}
+	SessionData.GameData.CorrectAnswer = ""
 	SessionData.GameData.CurrentLevel = 1
 	QuestionQCM()
 }
@@ -40,6 +42,7 @@ func QuestionQCM() {
 func CheckAnswer(answer string, w http.ResponseWriter, r *http.Request) bool {
 	if answer == SessionData.GameData.CorrectAnswer {
 		SessionData.Score += 1
+		saveHighestScore(SessionData.Score)
 		updateScore(GetDB(), SessionData.Email, SessionData.Score)
 		SessionData.GameData.Questions = []string{}
 		SessionData.GameData.CorrectAnswer = ""
