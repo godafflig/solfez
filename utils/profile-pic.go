@@ -10,7 +10,9 @@ import (
 	"github.com/google/uuid"
 )
 
+// upload the profile picture to the server & to the database
 func HandleUpload(w http.ResponseWriter, r *http.Request) {
+
 	if r.Method != http.MethodPost {
 		http.Error(w, "Méthode non autorisée", http.StatusMethodNotAllowed)
 		return
@@ -53,6 +55,7 @@ func HandleUpload(w http.ResponseWriter, r *http.Request) {
 	http.Redirect(w, r, "/profile", http.StatusSeeOther)
 }
 
+// get the profile picture from the database and returns it
 func GetProfilePicFromDb() string {
 	rows, err := GetDB().Query("SELECT profile_picture FROM users WHERE user_id = ?", SessionData.Id)
 	if err != nil {

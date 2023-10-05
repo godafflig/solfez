@@ -8,6 +8,7 @@ import (
 
 var pianoKeys = []string{"do", "do#/réb", "ré", "ré#/mib", "mi", "fa", "fa#/solb", "sol", "sol#/lab", "la", "la#/sib", "si"}
 
+// initiate the game depending on the level
 func StartGame(w http.ResponseWriter, r *http.Request, level int) {
 	SessionData.GameData.Questions = []string{}
 	SessionData.GameData.CorrectAnswer = ""
@@ -26,6 +27,7 @@ func StartGame(w http.ResponseWriter, r *http.Request, level int) {
 	QuestionQCM()
 }
 
+// continue playing the game
 func playAgain(w http.ResponseWriter, r *http.Request, lifeleft int) {
 	SessionData.GameData.Questions = []string{}
 	SessionData.GameData.CorrectAnswer = ""
@@ -34,6 +36,7 @@ func playAgain(w http.ResponseWriter, r *http.Request, lifeleft int) {
 	QuestionQCM()
 }
 
+// creating 3 questions & one correct answer
 func QuestionQCM() {
 
 	var randomIndex []int
@@ -59,6 +62,7 @@ func QuestionQCM() {
 	SessionData.GameData.CorrectAnswer = SessionData.GameData.Questions[indexCorrectAnswer]
 }
 
+// checking if the answer is correct and updating the datas accordlingly
 func CheckAnswer(answer string, w http.ResponseWriter, r *http.Request) bool {
 	if answer == SessionData.GameData.CorrectAnswer {
 		SessionData.Score += 1
@@ -86,6 +90,7 @@ func CheckAnswer(answer string, w http.ResponseWriter, r *http.Request) bool {
 	}
 }
 
+// check if a value is in an array
 func contains(arr []int, val int) bool {
 	for _, item := range arr {
 		if item == val {

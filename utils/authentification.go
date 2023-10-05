@@ -5,13 +5,14 @@ import (
 	"net/http"
 )
 
+// setting up session
 func Login(email string, password string, w http.ResponseWriter, r *http.Request) {
 
 	if !emailExists(GetDB(), email) {
-		SessionData.Error = "Wrong email."
+		SessionData.Error = "Email incorrect."
 		http.Redirect(w, r, "/login", http.StatusSeeOther)
 	} else if !userExists(GetDB(), email, password) {
-		SessionData.Error = "Wrong password."
+		SessionData.Error = "Mot de passe incorrect."
 		http.Redirect(w, r, "/login", http.StatusSeeOther)
 	} else {
 		SessionData.Id = getId(GetDB(), email)
@@ -25,18 +26,19 @@ func Login(email string, password string, w http.ResponseWriter, r *http.Request
 	}
 }
 
+// creating a new session
 func Register(username string, email string, password string, passwordCheck string, w http.ResponseWriter, r *http.Request) {
 	if password != passwordCheck {
-		SessionData.Error = "Passwords don't match."
+		SessionData.Error = "Les mots de passe ne correspondent pas."
 		http.Redirect(w, r, "/", http.StatusSeeOther)
 		// } else if !isStrongPassword(password) {
 		// 	SessionData.Error = "Password must be at least 8 characters long and contain at least 1 digit, 1 symbol and 1 uppercase letter."
 		// 	http.Redirect(w, r, "/", http.StatusSeeOther)
 	} else if usernameExists(GetDB(), username) {
-		SessionData.Error = "Username already exists."
+		SessionData.Error = "Le nom d'utilisateur existe déjà."
 		http.Redirect(w, r, "/", http.StatusSeeOther)
 	} else if emailExists(GetDB(), email) {
-		SessionData.Error = "Email already exists."
+		SessionData.Error = "L'email existe déjà."
 		http.Redirect(w, r, "/", http.StatusSeeOther)
 	} else {
 		CreateUser(GetDB(), username, password, email)
@@ -45,12 +47,14 @@ func Register(username string, email string, password string, passwordCheck stri
 		SessionData.Username = username
 		SessionData.Email = email
 		SessionData.IsLogged = true
+		SessionData.Score = 0
 		SessionData.Error = ""
 		SessionData.ProfilePic = GetProfilePicFromDb()
 		template.Must(template.ParseFiles("static/Accueil.html")).Execute(w, SessionData)
 	}
 }
 
+// ending the current session and redirecting to home page
 func Logout(w http.ResponseWriter, r *http.Request) {
 
 	// change is_logged to 0 in database
@@ -70,9 +74,9 @@ func Logout(w http.ResponseWriter, r *http.Request) {
 	SessionData.GameData.CorrectAnswer = ""
 	SessionData.Score = 0
 	http.Redirect(w, r, "/", http.StatusSeeOther)
-
 }
 
+// checking is the password is string enough
 func isStrongPassword(password string) bool {
 	const (
 		minLength    = 8
