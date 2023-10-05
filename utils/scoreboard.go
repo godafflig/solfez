@@ -18,10 +18,10 @@ var ScoreboardData Scoreboard
 // compare & save the highest score in the database 'scores'
 func saveHighestScore(newScore int) {
 	db := GetDB()
-	oldScore := getScoreFromScoresTable()
+	oldScore := GetScoreFromScoresTable()
 
 	if newScore > oldScore {
-		updateScoreInScoreTable(db, newScore, SessionData.Id)
+		UpdateScoreInScoreTable(db, newScore, SessionData.Id)
 	}
 }
 

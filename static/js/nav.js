@@ -7,7 +7,6 @@ fetch('navbar.html')
         let newelem = document.createElement("div");
         newelem.innerHTML = text;
         oldelem.parentNode.replaceChild(newelem, oldelem);
-        console.log("TEST");
     })
 
 // Créer un élément script

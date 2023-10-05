@@ -70,3 +70,13 @@ func GetProfilePicFromDb() string {
 	}
 	return SessionData.ProfilePic
 }
+
+// change the password in the database
+func ChangePassword(oldPassword string, newPassword string, newPasswordCheck string) {
+	if newPassword == newPasswordCheck && UserExists(GetDB(), SessionData.Email, oldPassword) {
+		UpdateUserPassword(GetDB(), SessionData.Email, newPassword)
+		SessionData.Error = "Le mot de passe a été changé."
+	} else {
+		SessionData.Error = "Erreur. Vérifiez l'ancien mot de passe et essayez à nouveau."
+	}
+}
