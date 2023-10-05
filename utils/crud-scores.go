@@ -7,6 +7,7 @@ import (
 	"strconv"
 )
 
+// create one score (related the a user id & user name) in database
 func CreateScore(db *sql.DB, username string, userid int) {
 	query := `
 	INSERT INTO scores (user_id, user_name, score) VALUES (?, ?, ?)`
@@ -17,6 +18,7 @@ func CreateScore(db *sql.DB, username string, userid int) {
 
 }
 
+// delete one score from the database
 func DeleteScore(db *sql.DB, email string) {
 	query := `
 	DELETE FROM scores WHERE email = ?`
@@ -26,33 +28,37 @@ func DeleteScore(db *sql.DB, email string) {
 	}
 }
 
-func getScore(db *sql.DB, email string) int {
+// get score from score bdd
+func GetScoreFromScoresTable() int {
+	db := GetDB()
 	query := `
-	SELECT score FROM users WHERE email = ?`
-	rows, err := db.Query(query, email)
+	SELECT score FROM scores WHERE user_id = ?`
+	rows, err := db.Query(query, SessionData.Id)
 	if err != nil {
 		fmt.Println(err)
 	}
 	defer rows.Close()
-	var score string
+
+	var oldScoreString string
 	for rows.Next() {
-		err := rows.Scan(&score)
+		err := rows.Scan(&oldScoreString)
 		if err != nil {
 			fmt.Println(err)
 		}
 	}
 
-	scoreInt, err := strconv.Atoi(score)
+	oldScore, err := strconv.Atoi(oldScoreString)
 	if err != nil {
 		fmt.Println(err)
 	}
-	return scoreInt
+	return oldScore
 }
 
-func updateScore(db *sql.DB, email string, score int) {
+// update one score in the database
+func UpdateScoreInScoreTable(db *sql.DB, id int, newScore int) {
 	query := `
-	UPDATE users SET score = ? WHERE email = ?`
-	_, err := db.Exec(query, score, email)
+		UPDATE scores SET score = ? WHERE user_id = ?`
+	_, err := db.Exec(query, newScore, id)
 	if err != nil {
 		fmt.Println(err)
 	}

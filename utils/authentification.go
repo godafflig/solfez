@@ -5,56 +5,64 @@ import (
 	"net/http"
 )
 
+// setting up session
 func Login(email string, password string, w http.ResponseWriter, r *http.Request) {
 
-	if !emailExists(GetDB(), email) {
-		SessionData.Error = "Wrong email."
+	if !EmailExists(GetDB(), email) {
+		SessionData.Error = "Email incorrect."
 		http.Redirect(w, r, "/login", http.StatusSeeOther)
-	} else if !userExists(GetDB(), email, password) {
-		SessionData.Error = "Wrong password."
+	} else if !UserExists(GetDB(), email, password) {
+		SessionData.Error = "Mot de passe incorrect."
 		http.Redirect(w, r, "/login", http.StatusSeeOther)
 	} else {
-		SessionData.Id = getId(GetDB(), email)
-		SessionData.Username = getUsername(GetDB(), email)
+		SessionData.Id = GetId(GetDB(), email)
+		SessionData.Username = GetUsername(GetDB(), email)
 		SessionData.Email = email
 		SessionData.IsLogged = true
-		SessionData.Score = getScore(GetDB(), email)
+		SessionData.Score = GetScore(GetDB(), email)
 		SessionData.Error = ""
 		SessionData.ProfilePic = GetProfilePicFromDb()
 
-		
+		// redirect
+		tmpl, _ := template.New("name").ParseFiles("static/Accueil.html", "static/navbar.html")
+		tmpl.ExecuteTemplate(w, "base", SessionData)
 		template.Must(template.ParseFiles("static/Accueil.html")).Execute(w, SessionData)
 	}
 }
 
+// creating a new session
 func Register(username string, email string, password string, passwordCheck string, w http.ResponseWriter, r *http.Request) {
 	if password != passwordCheck {
-		SessionData.Error = "Passwords don't match."
+		SessionData.Error = "Les mots de passe ne correspondent pas."
 		http.Redirect(w, r, "/", http.StatusSeeOther)
-		// } else if !isStrongPassword(password) {
+		// } else if !IsStrongPassword(password) {
 		// 	SessionData.Error = "Password must be at least 8 characters long and contain at least 1 digit, 1 symbol and 1 uppercase letter."
 		// 	http.Redirect(w, r, "/", http.StatusSeeOther)
-	} else if usernameExists(GetDB(), username) {
-		SessionData.Error = "Username already exists."
+	} else if UsernameExists(GetDB(), username) {
+		SessionData.Error = "Le nom d'utilisateur existe déjà."
 		http.Redirect(w, r, "/", http.StatusSeeOther)
-	} else if emailExists(GetDB(), email) {
-		SessionData.Error = "Email already exists."
+	} else if EmailExists(GetDB(), email) {
+		SessionData.Error = "L'email existe déjà."
 		http.Redirect(w, r, "/", http.StatusSeeOther)
 	} else {
 		CreateUser(GetDB(), username, password, email)
-		SessionData.Id = getId(GetDB(), email)
+		SessionData.Id = GetId(GetDB(), email)
 		CreateScore(GetDB(), username, SessionData.Id)
 		SessionData.Username = username
 		SessionData.Email = email
 		SessionData.IsLogged = true
+		SessionData.Score = 0
 		SessionData.Error = ""
 		SessionData.ProfilePic = GetProfilePicFromDb()
 
-		StartGame(w, r)
+		// redirect
+		tmpl, _ := template.New("name").ParseFiles("static/Accueil.html", "static/navbar.html")
+		tmpl.ExecuteTemplate(w, "base", SessionData)
 		template.Must(template.ParseFiles("static/Accueil.html")).Execute(w, SessionData)
 	}
 }
 
+// ending the current session and redirecting to home page
 func Logout(w http.ResponseWriter, r *http.Request) {
 
 	// change is_logged to 0 in database
@@ -74,21 +82,19 @@ func Logout(w http.ResponseWriter, r *http.Request) {
 	SessionData.GameData.CorrectAnswer = ""
 	SessionData.Score = 0
 	http.Redirect(w, r, "/", http.StatusSeeOther)
-
 }
 
-func isStrongPassword(password string) bool {
+// checking is the password is string enough
+func IsStrongPassword(password string) bool {
 	const (
 		minLength    = 8
 		minDigits    = 1
 		minSymbols   = 1
 		minUppercase = 1
 	)
-
 	if len(password) < minLength {
 		return false
 	}
-
 	var minDigitsCount, minSymbolsCount, minUppercaseCount int
 	for _, c := range password {
 		switch {
@@ -101,7 +107,6 @@ func isStrongPassword(password string) bool {
 			minSymbolsCount++
 		}
 	}
-
 	if minDigitsCount < minDigits || minSymbolsCount < minSymbols || minUppercaseCount < minUppercase {
 		return false
 	}

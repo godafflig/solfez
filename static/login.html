@@ -1,32 +1,47 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login</title>
+    <link rel="stylesheet" href="../static/css/login.css" />
+  </head>
 
-<head>
-  <meta charset="UTF-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Login</title>
-  <link rel="stylesheet" href="../static/css/login.css" />
-</head>
-
-<body>
-  <div class="container">
-    <form class="formulaire" action="/login" method="POST">
-      <input class="input" type="email" name="email" placeholder="Entrer email..." required />
-      <input class="input" type="password" name="password" placeholder="Mot de passe..." required />
-      <div class="content1">
-        <button class="btnconnexion" type="submit" href="/Accueil">
-          Connexion
-        </button>
-        <div class="login">
-          <p>vous n'avez pas encore un compte</p>
-          <button class="btnconnexion"><a href="/">Aller sur la page vous inscrire</a></button>
+  <body>
+    <div class="container">
+      <img src="../static/images/angle.png" alt="Image d'angle" class="coin-haut-gauche" />
+      <form class="formulaire" action="/login" method="POST">
+        <input
+          class="input"
+          type="email"
+          name="email"
+          placeholder="Entrer email..."
+          required
+        />
+        <input
+          class="input"
+          type="password"
+          name="password"
+          placeholder="Mot de passe..."
+          required
+        />
+        <div class="content1">
+          <a href="/accueil"
+            ><button class="btnconnexion" type="submit" method="POST">
+              Connexion
+            </button></a
+          >
+          <div class="login">
+            <p>vous n'avez pas encore un compte</p>
+            <button class="btnconnexion">
+              <a href="/">Aller sur la page vous inscrire</a>
+            </button>
+          </div>
         </div>
-      </div>
+      </form>
       <span class="error">{{.Error}}</span>
-
-    </form>
-  </div>
-</body>
-
+      <img src="../static/images/angle.png" alt="Image d'angle" class="coin-bas-droit" />
+    </div>
+  </body>
 </html>

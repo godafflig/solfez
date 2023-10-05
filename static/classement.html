@@ -1,3 +1,4 @@
+{{define "base"}}
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -5,59 +6,42 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Classement</title>
     <link rel="stylesheet" href="../static/css/classement.css" />
+    <link href="../static/css/navbar.css" rel="stylesheet" />
   </head>
 
   <body>
+    {{template "navbar" .}}
+    <script id="replace_with_navbar" src="./js/nav.js"></script>
     <div class="container">
-      <img
-        class="trophee-sportif"
-        src="../static/images/trophee-sportif.png"
-        alt=""
-      />
+      <img src="../static/images/angle.png" alt="Image d'angle" class="coin-haut-gauche" />
+      <div class="trophee-classement">
+        <img
+          class="trophee-sportif"
+          src="../static/images/trophee-sportif.png"
+          alt=""
+        />
+        <h1 class="titre-classement">Classement</h1>
+      </div>
       <div class="titre1">
         <h3 class="titre">Pseudo</h3>
         <h3 class="titre">Points</h3>
-        <h3 class="titre">Classement</h3>
+        <div class="tabl-classement">
+          <h3 class="titre">Classement</h3>
+        </div>
       </div>
       <div class="classement">
+        {{range .Classement}}
         <table class="table">
           <tr class="interligne">
-            <td>Pseudo1 : {{.Score}}</td>
-            <td>1700</td>
-            <td>#1</td>
+            <td>{{.Username}}</td>
+            <td>{{.Score}}</td>
+            <td>{{.Rank}}</td>
           </tr>
-
-          <tr class="interligne">
-            <td>Pseudo2</td>
-            <td>1500</td>
-            <td>#2</td>
-          </tr>
-
-          <tr class="interligne">
-            <td>Pseudo3</td>
-            <td>1300</td>
-            <td>#3</td>
-          </tr>
-
-          <tr class="interligne">
-            <td>Pseudo4</td>
-            <td>1200</td>
-            <td>#4</td>
-          </tr>
-
-          <tr class="interligne">
-            <td>Pseudo5</td>
-            <td>1100</td>
-            <td>#5</td>
-          </tr>
-
-          <tr class="interligne">
-            <td>Pseudo6</td>
-            <td>900</td>
-            <td>#6</td>
-          </tr>
+          {{end}}
         </table>
       </div>
+      <img src="../static/images/angle.png" alt="Image d'angle" class="coin-bas-droit" />
     </div>
   </body>
 </html>
+{{end}}
