@@ -36,8 +36,9 @@ html, body {
     border: 0px solid;
     
 }
-#validate-btn:hover{
-    background-color: green;
+#valider-btn:hover{
+  background-color: green;
+    border-radius: 100%;
 }
 .playsbtn{
     display: flex;

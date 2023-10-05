@@ -10,6 +10,8 @@
 </head>
 
 <body>
+    <script id="replace_with_navbar" src="./js/nav.js"></script>
+
     <div class="bdy">
         <div class="container-info-jeu">
             <div class="username">
@@ -28,7 +30,7 @@
         <br>
 
 
-      <!-- <div class="piano">
+        <!-- <div class="piano">
             div qui servira a inserer le piano
         </div>
          -->
@@ -50,7 +52,7 @@
                 </div>
                 {{end}}
                 <!-- mettre dasn le formulaire si jamais la question ne passe pas a la suivante -->
-                <div  style="text-align: center;">
+                <div style="text-align: center;">
                     <input id="valider-btn" type="submit" value=" ">
                 </div>
             </form>
@@ -60,23 +62,24 @@
                         <button id="play-button" class="control-button">
                             <img src="../static/images/replay.png" alt="Replay">
                         </button>
-                        <button id="pause-button" class="control-button"><img src="../static/images/video-pause-button.png" alt="Replay"></button>
+                        <button id="pause-button" class="control-button"><img
+                                src="../static/images/video-pause-button.png" alt="Replay"></button>
                     </div>
                 </div>
                 <audio id="audio-element" src="/static/assets/C6.mp3" type="audio/mpeg"></audio>
             </div>
 
         </div>
-<br><span class="error">{{.Error}} {{.GameData.PreviousCorrectAnswer}}</span>
+        <br><span class="error">{{.Error}} {{.GameData.PreviousCorrectAnswer}}</span>
         <br>
         <div>Bonne réponse : {{.GameData.CorrectAnswer}}</div>
 
-      <form action="/profile">
-        <button type="submit">Go to page profil</button>
-      </form>
+        <form action="/profile">
+            <button type="submit">Go to page profil</button>
+        </form>
 
-      <a href="/difficulte">Changer de difficulté</a>
-      <a href="/classement">Voir le classement</a>
+        <a href="/difficulte">Changer de difficulté</a>
+        <a href="/classement">Voir le classement</a>
     </div>
     <script src="../static/audio.js"></script>
 </body>

@@ -63,7 +63,7 @@ func Routing(w http.ResponseWriter, r *http.Request) {
 		} else if r.Method == "POST" {
 			r.ParseForm()
 			utils.CheckAnswer(r.FormValue("answer"), w, r)
-			template.Must(template.ParseFiles("static/niveau-facile.html")).Execute(w, utils.SessionData)
+			template.Must(template.ParseFiles("static/niveau-facile.html" )).Execute(w, utils.SessionData)
 		}
 	case "/niveau-moyen":
 		if r.Method == "GET" {
