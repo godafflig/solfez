@@ -115,3 +115,10 @@ a {
     width: 406px;
     height: 236;
 }
+
+.error {
+    color: red;
+    display: flex;
+    justify-content: center;
+    font-size: 23px;
+}
