@@ -89,7 +89,7 @@ img {
     align-items: center; /* Centrer horizontalement */
     text-align: center; /* Centrer le texte */
     justify-content: space-evenly;
-    margin-top: 200px;
+    margin: 50px;
   
 }
 audio {

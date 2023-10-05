@@ -66,11 +66,8 @@ func Routing(w http.ResponseWriter, r *http.Request) {
 		} else if r.Method == "POST" {
 			r.ParseForm()
 			utils.CheckAnswer(r.FormValue("answer"), w, r)
-<<<<<<< HEAD
-=======
 			tmpl, _ := template.New("name").ParseFiles("static/niveau-facile.html", "static/navbar.html")
 			tmpl.ExecuteTemplate(w, "base", utils.SessionData)
->>>>>>> 5880334ee249382838649e2e1b1c5d7cd8482435
 			template.Must(template.ParseFiles("static/niveau-facile.html")).Execute(w, utils.SessionData)
 		}
 	case "/niveau-moyen":

@@ -33,10 +33,55 @@
       </div>
       <br />
 
-      <!-- <div class="piano">
-            div qui servira a inserer le piano
+      <div class="piano">
+        <div id="piano">
+          <div id="ContainerPiano"></div>
+          <div id="4C" class="NoteDefault">
+            <div id="4CT" class="NoteDieseDefault"></div>
+          </div>
+
+          <div id="4D" class="NoteDefault">
+            <div id="4DT" class="NoteDieseDefault"></div>
+          </div>
+
+          <div id="4E" class="NoteDefault"></div>
+          <div id="4F" class="NoteDefault">
+            <div id="4FT" class="NoteDieseDefault"></div>
+          </div>
+
+          <div id="4G" class="NoteDefault">
+            <div id="4GT" class="NoteDieseDefault"></div>
+          </div>
+
+          <div id="4A" class="NoteDefault">
+            <div id="4AT" class="NoteDieseDefault"></div>
+          </div>
+
+          <div id="4B" class="NoteDefault"></div>
+          <div id="5C" class="NoteDefault">
+            <div id="5CT" class="NoteDieseDefault"></div>
+          </div>
+
+          <div id="5D" class="NoteDefault">
+            <div id="5DT" class="NoteDieseDefault"></div>
+          </div>
+
+          <div id="5E" class="NoteDefault"></div>
+          <div id="5F" class="NoteDefault">
+            <div id="5FT" class="NoteDieseDefault"></div>
+          </div>
+
+          <div id="5G" class="NoteDefault">
+            <div id="5GT" class="NoteDieseDefault"></div>
+          </div>
+
+          <div id="5A" class="NoteDefault">
+            <div id="5AT" class="NoteDieseDefault"></div>
+          </div>
+
+          <div id="5B" class="NoteDefault"></div>
         </div>
-         -->
+      </div>
 
       <div class="submit-buttons">
         <div class="titre">
@@ -67,6 +112,9 @@
             <input id="valider-btn" type="submit" value=" " />
           </div>
         </form>
+        <span class="error"
+          >{{.Error}} {{.GameData.PreviousCorrectAnswer}}</span
+        >
         <div id="audio-container">
           <div id="audio-controls">
             <div class="playsbtn">
@@ -88,58 +136,12 @@
           ></audio>
         </div>
       </div>
-      <br /><span class="error"
-        >{{.Error}} {{.GameData.PreviousCorrectAnswer}}</span
-      >
+      <br />
       <br />
       <div>Bonne réponse : {{.GameData.CorrectAnswer}}</div>
-
-      <div id="piano">
-        <div id="ContainerPiano">
-        
-        </div>
-        <div id="4C" class="NoteDefault"><div id="4CT" class="NoteDieseDefault"></div></div>
-        
-        <div id="4D" class="NoteDefault"><div id="4DT" class="NoteDieseDefault"></div></div>
-        
-        <div id="4E" class="NoteDefault"></div>
-        <div id="4F" class="NoteDefault"><div id="4FT" class="NoteDieseDefault"></div></div>
-        
-        <div id="4G" class="NoteDefault"> <div id="4GT" class="NoteDieseDefault"></div></div>
-       
-        <div id="4A" class="NoteDefault"><div id="4AT" class="NoteDieseDefault"></div></div>
-        
-        <div id="4B" class="NoteDefault"></div>
-        <div id="5C" class="NoteDefault"><div id="5CT" class="NoteDieseDefault"></div></div>
-        
-        <div id="5D" class="NoteDefault"><div id="5DT" class="NoteDieseDefault"></div></div>
-        
-        <div id="5E" class="NoteDefault"></div>
-        <div id="5F" class="NoteDefault"><div id="5FT" class="NoteDieseDefault"></div></div>
-        
-        <div id="5G" class="NoteDefault"><div id="5GT" class="NoteDieseDefault"></div></div>
-        
-        <div id="5A" class="NoteDefault"><div id="5AT" class="NoteDieseDefault"></div></div>
-        
-        <div id="5B" class="NoteDefault"></div>
-        
-        
-      </div>
-      
-
-      <form action="/profile">
-        <button type="submit">Go to page profil</button>
-      </form>
-
-      <a href="/difficulte">Changer de difficulté</a>
-      <a href="/classement">Voir le classement</a>
     </div>
     <script src="../static/audio.js"></script>
     <script src="../static/script.js"></script>
   </body>
 </html>
 {{end}}
-
-
-
-
