@@ -12,9 +12,11 @@ type Session struct {
 }
 
 type Game struct {
-	Questions     []string
-	CorrectAnswer string
-	CurrentLevel  int
+	Questions             []string
+	CorrectAnswer         string
+	CurrentLevel          int
+	LifeLeft              int
+	PreviousCorrectAnswer string
 }
 
 var SessionData Session

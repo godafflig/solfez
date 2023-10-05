@@ -11,11 +11,19 @@ var pianoKeys = []string{"do", "do#/réb", "ré", "ré#/mib", "mi", "fa", "fa#/s
 func StartGame(w http.ResponseWriter, r *http.Request) {
 	SessionData.GameData.Questions = []string{}
 	SessionData.GameData.CorrectAnswer = ""
-	SessionData.GameData.Questions = []string{}
-    SessionData.GameData.CorrectAnswer = ""
 	SessionData.GameData.CurrentLevel = 1
+	SessionData.GameData.LifeLeft = 3
 	QuestionQCM()
 }
+
+func playAgain(w http.ResponseWriter, r *http.Request, lifeleft int) {
+	SessionData.GameData.Questions = []string{}
+	SessionData.GameData.CorrectAnswer = ""
+	SessionData.GameData.CurrentLevel = 1
+	SessionData.GameData.LifeLeft = lifeleft
+	QuestionQCM()
+}
+
 func QuestionQCM() {
 
 	var randomIndex []int
@@ -44,18 +52,26 @@ func QuestionQCM() {
 func CheckAnswer(answer string, w http.ResponseWriter, r *http.Request) bool {
 	if answer == SessionData.GameData.CorrectAnswer {
 		SessionData.Score += 1
+		SessionData.Error = "Youpi tu l'as trouvé ! :)"
 		saveHighestScore(SessionData.Score)
 		updateScore(GetDB(), SessionData.Email, SessionData.Score)
 		SessionData.GameData.Questions = []string{}
+		SessionData.GameData.PreviousCorrectAnswer = "La bonne réponse était : " + SessionData.GameData.CorrectAnswer
 		SessionData.GameData.CorrectAnswer = ""
-		StartGame(w, r)
+		playAgain(w, r, SessionData.GameData.LifeLeft)
 		return true
 	} else {
 		updateScore(GetDB(), SessionData.Email, SessionData.Score)
+		SessionData.Error = "Oups... Essaie encore !"
 		SessionData.GameData.Questions = []string{}
+		SessionData.GameData.PreviousCorrectAnswer = "La bonne réponse était : " + SessionData.GameData.CorrectAnswer
 		SessionData.GameData.CorrectAnswer = ""
-		StartGame(w, r)
-		http.Redirect(w, r, "/lost", http.StatusSeeOther)
+		if SessionData.GameData.LifeLeft > 1 {
+			SessionData.GameData.LifeLeft -= 1
+			playAgain(w, r, SessionData.GameData.LifeLeft)
+		} else {
+			http.Redirect(w, r, "/lost", http.StatusSeeOther)
+		}
 		return false
 	}
 }

@@ -1,62 +1,79 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>niveaux-facile</title>
-    <link rel="stylesheet" href="../static/css/nivfacile.css">
-</head>
-<body>
+    <link rel="stylesheet" href="../static/css/nivfacile.css" />
+  </head>
+  <body>
     <div class="bdy">
-        <div class="container-info-jeu">
-            <div class="username">Username : {{.Username}}</div>
-            <div class="score">Score : {{.Score}}</div><br>
-            <div class="niveau-facile">Niveau actuel : {{.GameData.CurrentLevel}}</div>
-            <!-- <div class="vie"><img src="../static/images/" alt=""></div> classe vie pour plus tard -->
+      <div class="container-info-jeu">
+        <div class="username">Username : {{.Username}}</div>
+        <div class="score">Score : {{.Score}}</div>
+        <br />
+        <div class="niveau-facile">
+          Niveau actuel : {{.GameData.CurrentLevel}} <br />Nombre de vies
+          restantes : {{.GameData.LifeLeft}}
         </div>
-        <br>
-        <div id="audio-container">
-            <div id="audio-controls">
-                <div class="playsbtn">
-                    <button id="play-button" class="control-button">
-                        <img src="../static/images/replay.png" alt="Replay">
-                    </button>
-                    <button id="pause-button">Pause</button>
-                </div>
-            </div>
-            <audio id="audio-element" src="/static/assets/C6.mp3" type="audio/mpeg"></audio>
+        <!-- <div class="vie"><img src="../static/images/" alt=""></div> classe vie pour plus tard -->
+      </div>
+      <br />
+      <div id="audio-container">
+        <div id="audio-controls">
+          <div class="playsbtn">
+            <button id="play-button" class="control-button">
+              <img src="../static/images/replay.png" alt="Replay" />
+            </button>
+            <button id="pause-button">Pause</button>
+          </div>
         </div>
+        <audio
+          id="audio-element"
+          src="/static/assets/C6.mp3"
+          type="audio/mpeg"
+        ></audio>
+      </div>
 
-        <!-- <div class="piano">
+      <!-- <div class="piano">
             div qui servira a inserer le piano
         </div>
          -->
 
-        <div class="submit-buttons">
-            <form  action="/niveau-facile" method="POST">
-                Question :<br> {{range .GameData.Questions}}
-                <label>
-                    <div class="choix">
-                        <button class="btn-note">
-                            <input class="input-note" type="radio" name="answer" value="{{.}}" required>
-                            {{.}}
-                        </button>
-                    </div>
-                </label>
-                <br>
-                {{end}}
-                <input type="submit" value="Valider la réponse">
-            </form>
-        </div>
-        
-        <br>
-        <div>Bonne réponse : {{.GameData.CorrectAnswer}}</div>
-
-        <form action="/profile">
-            <button type="submit">Go to page profil</button>
+      <div class="submit-buttons">
+        <form action="/niveau-facile" method="POST">
+          Question :<br />
+          {{range .GameData.Questions}}
+          <label>
+            <div class="choix">
+              <button class="btn-note">
+                <input
+                  class="input-note"
+                  type="radio"
+                  name="answer"
+                  value="{{.}}"
+                  required
+                />
+                {{.}}
+              </button>
+            </div>
+          </label>
+          <br />
+          {{end}}
+          <input type="submit" value="Valider la réponse" />
         </form>
+      </div>
+
+      <br />
+      <span class="error">{{.Error}} {{.GameData.PreviousCorrectAnswer}}</span>
+      <br />
+      <div>Bonne réponse : {{.GameData.CorrectAnswer}}</div>
+
+      <form action="/profile">
+        <button type="submit">Go to page profil</button>
+      </form>
     </div>
     <script src="../static/audio.js"></script>
-</body>
+  </body>
 </html>
