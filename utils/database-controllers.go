@@ -26,7 +26,6 @@ func CreateUser(db *sql.DB, username string, password string, email string) {
 
 	id := getId(db, email)
 	fmt.Println("id : ", id)
-	getId(db, email)
 	return
 
 }
@@ -50,8 +49,8 @@ func userExists(db *sql.DB, email string, password string) bool {
 		}
 	}
 
-	fmt.Println("storedPassword : ", storedPassword)
-	fmt.Println("password : ", password)
+	// fmt.Println("storedPassword : ", storedPassword)
+	// fmt.Println("password : ", password)
 
 	err = bcrypt.CompareHashAndPassword([]byte(storedPassword), []byte(password))
 	if err != nil {

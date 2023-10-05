@@ -31,7 +31,7 @@ func SendEmailConfirmation(email, token string) error {
 	m.SetHeader("From", "solfez@gmx.com")
 	m.SetHeader("To", email)
 	m.SetHeader("Subject", "Confirmation d'email")
-	m.SetBody("text/html", "Cliquez sur ce lien pour confirmer votre email : <a href='http://localhost:3000/static/login'>Confirmer</a>")
+	m.SetBody("text/html", "Cliquez sur ce lien pour confirmer votre email : <a href='http://localhost:3000/login'>Confirmer</a>")
 
 	d := gomail.NewDialer("mail.gmx.com", 587, "solfez@gmx.com", "kKg4FNs3xMNPbpm6")
 
@@ -88,15 +88,14 @@ func ActivateUserAccount(token string) {
 func EmailConfirmationHandler(w http.ResponseWriter, r *http.Request) {
 	token := r.URL.Query().Get("token")
 
-	// Vérifiez le jeton dans la base de données ou dans un cache
-	if IsValidEmailVerificationToken(token) {
-		//Activate the user account
-		ActivateUserAccount(token)
-
-		// Redirigez l'utilisateur vers une page de confirmation réussie
-		http.Redirect(w, r, "../static/login", http.StatusSeeOther)
-	} else {
-		// Redirigez l'utilisateur vers une page d'erreur de confirmation
-		http.Redirect(w, r, "/confirmation-error", http.StatusSeeOther)
+	if tempUser, ok := tempUserStore.Load(token); ok {
+		if tempUser, ok := tempUser.(*TempUser); ok {
+			tempUser.Confirmed = true
+			CreateUser(GetDB(), tempUser.Username, tempUser.Password, tempUser.Email)
+			tempUserStore.Delete(token)
+			http.Redirect(w, r, "/login", http.StatusSeeOther)
+			return
+		}
 	}
+	http.Redirect(w, r, "/confirmation-error", http.StatusSeeOther)
 }
