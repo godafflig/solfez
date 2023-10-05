@@ -14,6 +14,8 @@ func main() {
 	// creating database if not exist
 	utils.CreateUserTable(utils.GetDB())
 	utils.CreateScoreTable(utils.GetDB())
+	utils.SessionData = utils.Session{}
+	utils.SortClassement()
 
 	// loading port & url from .env file
 	err := godotenv.Load()
@@ -57,7 +59,7 @@ func Routing(w http.ResponseWriter, r *http.Request) {
 		}
 	case "/niveau-facile":
 		if r.Method == "GET" {
-			utils.StartGame(w, r)
+			 utils.StartGame(w, r)
 			template.Must(template.ParseFiles("static/niveau-facile.html")).Execute(w, utils.SessionData)
 		} else if r.Method == "POST" {
 			r.ParseForm()
@@ -74,12 +76,14 @@ func Routing(w http.ResponseWriter, r *http.Request) {
 		utils.Logout(w, r)
 	case "/lost":
 		template.Must(template.ParseFiles("static/lost.html")).Execute(w, utils.SessionData)
-
 	case "/classement":
-		template.Must(template.ParseFiles("static/classement.html")).Execute(w, utils.SessionData)
+		template.Must(template.ParseFiles("static/classement.html")).Execute(w, utils.ScoreboardData)
 	case "/accueil":
 		template.Must(template.ParseFiles("static/Accueil.html")).Execute(w, utils.SessionData)
 	case "/difficulte":
 		template.Must(template.ParseFiles("static/difficulte.html")).Execute(w, utils.SessionData)
+	case "/delete-account":
+		utils.DeleteUser(utils.GetDB(), utils.SessionData.Email)
+		template.Must(template.ParseFiles("static/index.html")).Execute(w, utils.SessionData)
 	}
 }

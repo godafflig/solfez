@@ -10,6 +10,10 @@ var pianoKeys = []string{"C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "
 var Octave = []string{"4", "5"}
 
 func StartGame(w http.ResponseWriter, r *http.Request) {
+	SessionData.GameData.Questions = []string{}
+	SessionData.GameData.CorrectAnswer = ""
+	SessionData.GameData.Questions = []string{}
+    SessionData.GameData.CorrectAnswer = ""
 	SessionData.GameData.CurrentLevel = 1
 	InitializePathNotes()
 	QuestionQCM()
@@ -49,6 +53,7 @@ func QuestionQCM() {
 func CheckAnswer(answer string, w http.ResponseWriter, r *http.Request) bool {
 	if answer == SessionData.GameData.CorrectAnswer {
 		SessionData.Score += 1
+		saveHighestScore(SessionData.Score)
 		updateScore(GetDB(), SessionData.Email, SessionData.Score)
 		SessionData.GameData.Questions = []string{}
 		SessionData.GameData.CorrectAnswer = ""

@@ -168,3 +168,40 @@ body {
     opacity: 1;
     text-align: center;
 }
+
+.boutonJouer:hover{
+    background-color: #272343;
+    color: white;
+    cursor: default;
+}
+
+@media screen and (max-width: 1000px) {
+    .circle {
+        display: none;
+    }
+    .coin-haut-gauche {
+        display: none;
+    }
+    .coin-bas-droit {
+        width: 30%;
+        height: 30%;
+    }
+    .presentation {
+        height: 100%;
+        vertical-align: center;
+    }
+    .description{
+        margin-top: 250px;
+        max-width: 60%;
+        font-size: 35px;
+    }
+    .title {
+        font-size: 90px;
+    }
+    .boutonJouer{
+        bottom: 50px;
+        left: 50%;
+        -ms-transform: translate(-50%, -50%);
+        transform: translate(-50%, -50%);
+    }
+}

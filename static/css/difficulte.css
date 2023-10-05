@@ -80,3 +80,38 @@ p {
     font-size: 17px;
     margin-top: -5px;
 }
+.title{
+    font-size: 80px;
+    display: none;
+    text-align: center;
+}
+
+.bouton:hover{
+    background-color: #272343;
+    color: white;
+    cursor: default;
+}
+
+@media screen and (max-width: 1000px) {
+    .text-container {
+        margin: 0;
+        height: 300px;
+        width: fit-content;
+        max-width: 300px;
+    }
+    .centrer {
+        top: 20%;
+    }
+    h3{
+        font-size: 30px;
+    }
+    p{
+        font-size: 22px;
+    }
+    .title{
+        display: block;
+        color: black;
+        margin-bottom: 100px;
+        opacity: 1;
+    }
+}
