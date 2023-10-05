@@ -9,28 +9,24 @@
   <link rel="stylesheet" href="../static/css/login.css" />
 </head>
 
-  <body>
-    <div class="container">
-      <form class="formulaire" action="/login" method="POST">
-        <input
-          class="input"
-          type="email"
-          name="email"
-          placeholder="Entrer email..."
-          required
-        />
-        <input
-          class="input"
-          type="password"
-          name="password"
-          placeholder="Mot de passe..."
-          required
-        />
+<body>
+  <div class="container">
+    <form class="formulaire" action="/login" method="POST">
+      <input class="input" type="email" name="email" placeholder="Entrer email..." required />
+      <input class="input" type="password" name="password" placeholder="Mot de passe..." required />
+      <div class="content1">
         <button class="btnconnexion" type="submit" href="/Accueil">
           Connexion
         </button>
-        <span class="error">{{.Error}}</span>
-      </form>
-    </div>
-  </body>
+        <div class="login">
+          <p>vous n'avez pas encore un compte</p>
+          <button class="btnconnexion"><a href="/">Aller sur la page vous inscrire</a></button>
+        </div>
+      </div>
+      <span class="error">{{.Error}}</span>
+
+    </form>
+  </div>
+</body>
+
 </html>

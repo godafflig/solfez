@@ -14,6 +14,7 @@ body {
     width: 100%;
     height: 100%;
     background: linear-gradient(to bottom, rgba(113, 126, 146, 1), rgba(39, 35, 67, 0));
+    margin: 0;
 }
 
 
@@ -33,13 +34,10 @@ body {
 }
 
 .table {
-
     width: 100%;
     margin: 0 auto;
-   border-collapse: collapse;
+    border-collapse: collapse;
     border-radius: 10px;
-    ;
-
 }
 
 .titre {
@@ -89,4 +87,45 @@ tr.interligne td {
     left: 190px;
     top: 80px;
 
+}
+
+.titre-classement{
+    display: none;
+}
+
+
+@media screen and (max-width: 1000px) {
+    .classement {
+        width: 90%;
+        max-height: 60%;
+    }
+    .titre1 {
+        width: 90%;
+    }
+    .trophee-sportif{
+        bottom: 0;
+    }
+    .trophee-classement{
+        top: 0;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: end;
+        height: 10%;
+        padding-bottom: 20px;
+    }
+    .titre-classement{
+        flex: 2;
+        display: inline;
+        font-size: 40px;
+        margin-left: 15px;
+    }
+    .trophee-sportif{
+        flex: 1;
+        position: inherit;
+
+    }
+    .tabl-classement{
+        visibility: hidden;
+    }
 }

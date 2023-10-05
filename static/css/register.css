@@ -68,7 +68,7 @@ P {
 .content1 {
 
     display: flex;
-    gap: 10px;
+    align-content: space-around;
     flex-wrap: nowrap;
     align-items: flex-end;
 
