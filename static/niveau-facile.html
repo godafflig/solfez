@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -7,7 +8,10 @@
     <title>niveaux-facile</title>
     <link rel="stylesheet" href="../static/css/nivfacile.css">
 </head>
+
 <body>
+    <script id="replace_with_navbar" src="./js/nav.js"></script>
+
     <div class="bdy">
         <div class="container-info-jeu">
             <div class="username">Username : {{.Username}}</div>
@@ -34,7 +38,7 @@
          -->
 
         <div class="submit-buttons">
-            <form  action="/niveau-facile" method="POST">
+            <form action="/niveau-facile" method="POST">
                 Question :<br> {{range .GameData.Questions}}
                 <label>
                     <div class="choix">
@@ -49,7 +53,7 @@
                 <input type="submit" value="Valider la réponse">
             </form>
         </div>
-        
+
         <br>
         <div>Bonne réponse : {{.GameData.CorrectAnswer}}</div>
 
@@ -59,4 +63,5 @@
     </div>
     <script src="../static/audio.js"></script>
 </body>
+
 </html>
