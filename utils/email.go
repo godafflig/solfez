@@ -41,9 +41,9 @@ func SendEmailConfirmation(email, token string) error {
 	return nil
 }
 
-// IsValidEmailVerificationToken vérifie si le jeton de confirmation d'e-mail est valide.
+// Si le jeton de confirmation d'e-mail est valide.
 func IsValidEmailVerificationToken(token string) bool {
-	// Recherchez le jeton dans la base de données
+	// Recherche jeton bdd
 	query := `
         SELECT user_id
         FROM email_verification_tokens
@@ -51,16 +51,15 @@ func IsValidEmailVerificationToken(token string) bool {
 	var userId int
 	err := GetDB().QueryRow(query, token).Scan(&userId)
 	if err != nil {
-		// Le jeton n'a pas été trouvé dans la base de données
+		// Le jeton n'a pas été trouvé dans la bdd
 		fmt.Println("Invalid email verification token:", token)
 		return false
 	}
 
-	// Si le jeton a été trouvé, il est valide
 	return true
 }
 
-// ActivateUserAccount active le compte de l'utilisateur correspondant au jeton de confirmation.
+// Activation du compte de l'utilisateur correspondant au jeton de confirmation.
 func ActivateUserAccount(token string) {
 	// Recherchez l'utilisateur correspondant au jeton dans la base de données
 	query := `
