@@ -28,7 +28,7 @@ func StartGame(w http.ResponseWriter, r *http.Request, level int) {
 }
 
 // continue playing the game
-func playAgain(w http.ResponseWriter, r *http.Request, lifeleft int) {
+func PlayAgain(w http.ResponseWriter, r *http.Request, lifeleft int) {
 	SessionData.GameData.Questions = []string{}
 	SessionData.GameData.CorrectAnswer = ""
 	SessionData.GameData.CurrentLevel = 1
@@ -68,22 +68,23 @@ func CheckAnswer(answer string, w http.ResponseWriter, r *http.Request) bool {
 		SessionData.Score += 1
 		SessionData.Error = "Youpi tu l'as trouvé ! :)"
 		saveHighestScore(SessionData.Score)
-		updateScore(GetDB(), SessionData.Email, SessionData.Score)
+		UpdateScore(GetDB(), SessionData.Email, SessionData.Score)
 		SessionData.GameData.Questions = []string{}
 		SessionData.GameData.PreviousCorrectAnswer = "La bonne réponse était : " + SessionData.GameData.CorrectAnswer
 		SessionData.GameData.CorrectAnswer = ""
-		playAgain(w, r, SessionData.GameData.LifeLeft)
+		PlayAgain(w, r, SessionData.GameData.LifeLeft)
 		return true
 	} else {
-		updateScore(GetDB(), SessionData.Email, SessionData.Score)
+		UpdateScore(GetDB(), SessionData.Email, SessionData.Score)
 		SessionData.Error = "Oups... Essaie encore !"
 		SessionData.GameData.Questions = []string{}
 		SessionData.GameData.PreviousCorrectAnswer = "La bonne réponse était : " + SessionData.GameData.CorrectAnswer
 		SessionData.GameData.CorrectAnswer = ""
 		if SessionData.GameData.LifeLeft > 1 {
 			SessionData.GameData.LifeLeft -= 1
-			playAgain(w, r, SessionData.GameData.LifeLeft)
+			PlayAgain(w, r, SessionData.GameData.LifeLeft)
 		} else {
+			SessionData.Score = 0
 			http.Redirect(w, r, "/lost", http.StatusSeeOther)
 		}
 		return false

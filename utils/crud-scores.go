@@ -29,7 +29,7 @@ func DeleteScore(db *sql.DB, email string) {
 }
 
 // get score from score bdd
-func getScoreFromScoresTable() int {
+func GetScoreFromScoresTable() int {
 	db := GetDB()
 	query := `
 	SELECT score FROM scores WHERE user_id = ?`
@@ -55,7 +55,7 @@ func getScoreFromScoresTable() int {
 }
 
 // update one score in the database
-func updateScoreInScoreTable(db *sql.DB, id int, newScore int) {
+func UpdateScoreInScoreTable(db *sql.DB, id int, newScore int) {
 	query := `
 		UPDATE scores SET score = ? WHERE user_id = ?`
 	_, err := db.Exec(query, newScore, id)
