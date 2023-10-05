@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -7,26 +8,23 @@
     <title>niveaux-facile</title>
     <link rel="stylesheet" href="../static/css/nivfacile.css">
 </head>
+
 <body>
     <div class="bdy">
         <div class="container-info-jeu">
-            <div class="username">Username : {{.Username}}</div>
-            <div class="score">Score : {{.Score}}</div><br>
-            <div class="niveau-facile">Niveau actuel : {{.GameData.CurrentLevel}}</div>
+            <div class="username">
+                <h3>Username : </h3>{{.Username}}
+            </div>
+            <div class="score">
+                <h3>Score : </h3>{{.Score}}
+            </div>
+            <div class="niveau-facile">
+                <h3>Niveau actuel : </h3>{{.GameData.CurrentLevel}}
+            </div>
             <!-- <div class="vie"><img src="../static/images/" alt=""></div> classe vie pour plus tard -->
         </div>
         <br>
-        <div id="audio-container">
-            <div id="audio-controls">
-                <div class="playsbtn">
-                    <button id="play-button" class="control-button">
-                        <img src="../static/images/replay.png" alt="Replay">
-                    </button>
-                    <button id="pause-button">Pause</button>
-                </div>
-            </div>
-            <audio id="audio-element" src="/static/assets/C6.mp3" type="audio/mpeg"></audio>
-        </div>
+
 
         <!-- <div class="piano">
             div qui servira a inserer le piano
@@ -34,22 +32,40 @@
          -->
 
         <div class="submit-buttons">
-            <form  action="/niveau-facile" method="POST">
-                Question :<br> {{range .GameData.Questions}}
-                <label>
-                    <div class="choix">
+            <div class="titre">
+                <h2>Quelle note a été joué :</h2>
+            </div>
+            <br>
+            <form class="question" action="/niveau-facile" method="POST">
+                <br> {{range .GameData.Questions}}
+                <div class="choix">
+                    <label>
                         <button class="btn-note">
-                            <input class="input-note" type="radio" name="answer" value="{{.}}" required>
+                            <input class="input-note" type="radio" name="answer" id="{{.}}" value="{{.}}" required>
                             {{.}}
                         </button>
-                    </div>
-                </label>
-                <br>
+                    </label>
+                </div>
                 {{end}}
-                <input type="submit" value="Valider la réponse">
+                <!-- mettre dasn le formulaire si jamais la question ne passe pas a la suivante -->
+                <div  style="text-align: center;">
+                    <input id="valider-btn" type="submit" value=" ">
+                </div>
             </form>
+            <div id="audio-container">
+                <div id="audio-controls">
+                    <div class="playsbtn">
+                        <button id="play-button" class="control-button">
+                            <img src="../static/images/replay.png" alt="Replay">
+                        </button>
+                        <button id="pause-button" class="control-button"><img src="../static/images/video-pause-button.png" alt="Replay"></button>
+                    </div>
+                </div>
+                <audio id="audio-element" src="/static/assets/C6.mp3" type="audio/mpeg"></audio>
+            </div>
+
         </div>
-        
+
         <br>
         <div>Bonne réponse : {{.GameData.CorrectAnswer}}</div>
 
@@ -59,4 +75,5 @@
     </div>
     <script src="../static/audio.js"></script>
 </body>
+
 </html>
