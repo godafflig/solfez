@@ -20,42 +20,14 @@
         <h3 class="titre">Classement</h3>
       </div>
       <div class="classement">
+        {{range .Classement}}
         <table class="table">
           <tr class="interligne">
-            <td>Pseudo1 : {{.Score}}</td>
-            <td>1700</td>
-            <td>#1</td>
+            <td>{{.Username}}</td>
+            <td>{{.Score}}</td>
+            <td>{{.Rank}}</td>
           </tr>
-
-          <tr class="interligne">
-            <td>Pseudo2</td>
-            <td>1500</td>
-            <td>#2</td>
-          </tr>
-
-          <tr class="interligne">
-            <td>Pseudo3</td>
-            <td>1300</td>
-            <td>#3</td>
-          </tr>
-
-          <tr class="interligne">
-            <td>Pseudo4</td>
-            <td>1200</td>
-            <td>#4</td>
-          </tr>
-
-          <tr class="interligne">
-            <td>Pseudo5</td>
-            <td>1100</td>
-            <td>#5</td>
-          </tr>
-
-          <tr class="interligne">
-            <td>Pseudo6</td>
-            <td>900</td>
-            <td>#6</td>
-          </tr>
+          {{end}}
         </table>
       </div>
     </div>
