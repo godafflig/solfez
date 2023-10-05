@@ -8,11 +8,21 @@ import (
 
 var pianoKeys = []string{"do", "do#/réb", "ré", "ré#/mib", "mi", "fa", "fa#/solb", "sol", "sol#/lab", "la", "la#/sib", "si"}
 
-func StartGame(w http.ResponseWriter, r *http.Request) {
+func StartGame(w http.ResponseWriter, r *http.Request, level int) {
 	SessionData.GameData.Questions = []string{}
 	SessionData.GameData.CorrectAnswer = ""
-	SessionData.GameData.CurrentLevel = 1
-	SessionData.GameData.LifeLeft = 3
+
+	switch level {
+	case 1:
+		SessionData.GameData.CurrentLevel = 1
+		SessionData.GameData.LifeLeft = 3
+	case 2:
+		SessionData.GameData.CurrentLevel = 2
+		SessionData.GameData.LifeLeft = 2
+	case 3:
+		SessionData.GameData.CurrentLevel = 3
+		SessionData.GameData.LifeLeft = 1
+	}
 	QuestionQCM()
 }
 
