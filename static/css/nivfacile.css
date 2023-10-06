@@ -154,7 +154,7 @@ audio {
 
 }
 
-.btn-note {
+/* .btn-note {
     background-color: #272343;
     border: 1px solid black;
     border-radius: 50px;
@@ -167,7 +167,7 @@ audio {
     align-items: center;
     justify-content: center;
 
-}
+} */
 
 .btn-note:hover {
     background-color: green;

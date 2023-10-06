@@ -1,117 +1,87 @@
 {{define "base"}}
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>niveaux-facile</title>
-    <link rel="stylesheet" href="../static/css/nivfacile.css" />
-    <link href="../static/css/navbar.css" rel="stylesheet" />
-  </head>
 
-  <body>
-    {{template "navbar" .}}
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>niveaux-facile</title>
+  <link rel="stylesheet" href="../static/css/nivfacile.css" />
+  <link href="../static/css/navbar.css" rel="stylesheet" />
+</head>
 
-    <div class="bdy">
-        <div class="container-info-jeu">
-            <div class="username">
-                <h3>{{.Username}}</h3>
-            </div>
-            <div class="score">
-                <h3>{{.Score}}</h3>
-            </div>
-            <div class="niveau-facile">
-                <h3>Niveau actuel : </h3>{{.GameData.CurrentLevel}}
-            </div>
-            <!--<br />Nombre de vies
-      <div class="container-info-jeu">
-        <div class="username">
-          <h3>Username :</h3>
-          {{.Username}}
-        </div>
-        <div class="score">
-          <h3>Score :</h3>
-          {{.Score}}
-        </div>
-        <div class="niveau-facile">
-          <h3>Niveau actuel :</h3>
-          {{.GameData.CurrentLevel}}
-        </div>
-        <!--<br />Nombre de vies
-          restantes : {{.GameData.LifeLeft}}-->
-            <!-- <div class="vie"><img src="../static/images/" alt=""></div> classe vie pour plus tard -->
-        </div>
-        <div class="score">
-          <h3>Score :</h3>
-          {{.Score}}
-        </div>
-        <div class="niveau-facile">
-          <h3>Niveau actuel :</h3>
-          {{.GameData.CurrentLevel}}
-        </div>
-        <!--<br />Nombre de vies
-          restantes : {{.GameData.LifeLeft}}-->
-        <!-- <div class="vie"><img src="../static/images/" alt=""></div> classe vie pour plus tard -->
-      </div>
-      <br />
+<body>
+  {{template "navbar" .}}
 
-      <div class="piano">
-        <div id="piano">
-          <div id="ContainerPiano"></div>
-          <div id="4C" class="NoteDefault">
-            <div id="4CT" class="NoteDieseDefault"></div>
-          </div>
 
-          <div id="4D" class="NoteDefault">
-            <div id="4DT" class="NoteDieseDefault"></div>
-          </div>
-
-          <div id="4E" class="NoteDefault"></div>
-          <div id="4F" class="NoteDefault">
-            <div id="4FT" class="NoteDieseDefault"></div>
-          </div>
-
-          <div id="4G" class="NoteDefault">
-            <div id="4GT" class="NoteDieseDefault"></div>
-          </div>
-
-          <div id="4A" class="NoteDefault">
-            <div id="4AT" class="NoteDieseDefault"></div>
-          </div>
-
-          <div id="4B" class="NoteDefault"></div>
-          <div id="5C" class="NoteDefault">
-            <div id="5CT" class="NoteDieseDefault"></div>
-          </div>
-
-          <div id="5D" class="NoteDefault">
-            <div id="5DT" class="NoteDieseDefault"></div>
-          </div>
-
-          <div id="5E" class="NoteDefault"></div>
-          <div id="5F" class="NoteDefault">
-            <div id="5FT" class="NoteDieseDefault"></div>
-          </div>
-
-          <div id="5G" class="NoteDefault">
-            <div id="5GT" class="NoteDieseDefault"></div>
-          </div>
-
-          <div id="5A" class="NoteDefault">
-            <div id="5AT" class="NoteDieseDefault"></div>
-          </div>
-
-          <div id="5B" class="NoteDefault"></div>
-        </div>
+  <div class="container-info-jeu">
+    <div class="username">
+      <h3>{{.Username}}</h3>
+    </div>
+    <div class="score">
+      <h3>{{.Score}}</h3>
+    </div>
+    <div class="niveau-facile">
+      <h3>Niveau actuel : </h3>{{.GameData.CurrentLevel}}
+    </div>
+  <br />
+  <div class="piano">
+    <div id="piano">
+      <div id="ContainerPiano"></div>
+      <div id="4C" class="NoteDefault">
+        <div id="4CT" class="NoteDieseDefault"></div>
       </div>
 
-        <div class="submit-buttons">
-            <div class="titre">
-                <h2>Quelle note a été joué ?</h2>
-            </div>
-            <br>
-            <form class="question" action="/niveau-facile" method="POST">
+      <div id="4D" class="NoteDefault">
+        <div id="4DT" class="NoteDieseDefault"></div>
+      </div>
+
+      <div id="4E" class="NoteDefault"></div>
+      <div id="4F" class="NoteDefault">
+        <div id="4FT" class="NoteDieseDefault"></div>
+      </div>
+
+      <div id="4G" class="NoteDefault">
+        <div id="4GT" class="NoteDieseDefault"></div>
+      </div>
+
+      <div id="4A" class="NoteDefault">
+        <div id="4AT" class="NoteDieseDefault"></div>
+      </div>
+
+      <div id="4B" class="NoteDefault"></div>
+      <div id="5C" class="NoteDefault">
+        <div id="5CT" class="NoteDieseDefault"></div>
+      </div>
+
+      <div id="5D" class="NoteDefault">
+        <div id="5DT" class="NoteDieseDefault"></div>
+      </div>
+
+      <div id="5E" class="NoteDefault"></div>
+      <div id="5F" class="NoteDefault">
+        <div id="5FT" class="NoteDieseDefault"></div>
+      </div>
+
+      <div id="5G" class="NoteDefault">
+        <div id="5GT" class="NoteDieseDefault"></div>
+      </div>
+
+      <div id="5A" class="NoteDefault">
+        <div id="5AT" class="NoteDieseDefault"></div>
+      </div>
+
+      <div id="5B" class="NoteDefault"></div>
+    </div>
+  </div>
+
+  <div class="submit-buttons">
+    <div class="titre">
+      <h2>Quelle note a été joué ?</h2>
+    </div>
+    <br>
+    <!-- <form class="question" action="/niveau-facile" method="POST">
                 <br> {{range .GameData.Questions}}
                 <div class="choix">
                     <label>
@@ -122,26 +92,23 @@
                     </label>
                 </div>
                 {{end}}
-                <!-- mettre dasn le formulaire si jamais la question ne passe pas a la suivante -->
-                <div style="text-align: center;">
+                 mettre dasn le formulaire si jamais la question ne passe pas a la suivante -->
+    <!-- <div style="text-align: center;">
                     <input id="valider-btn" type="submit" value=" ">
-                </div>
-            </form>
-            <div id="audio-container">
-                <div id="audio-controls">
-                    <div class="playsbtn">
-                        <button id="play-button" class="control-button">
-                            <img src="../static/images/replay.png" alt="Replay">
-                        </button>
-                        <button id="pause-button" class="control-button"><img
-                                src="../static/images/video-pause-button.png" alt="Replay"></button>
-                    </div>
-                </div>
-                <audio id="audio-element" src="/static/assets/C6.mp3" type="audio/mpeg"></audio>
+                </div> -->
+    </form>
+    <div id="audio-container">
+      <div id="audio-controls">
+        <!-- <div class="playsbtn">
+          <button id="play-button" class="control-button">
+            <img src="../static/images/replay.png" alt="Replay">
+          </button>
+          <button id="pause-button" class="control-button"><img src="../static/images/video-pause-button.png"
+              alt="Replay"></button>
+        </div> -->
+      </div>
+      <audio id="audio-element" src="/static/assets/C6.mp3" type="audio/mpeg"></audio>
       <div class="submit-buttons">
-        <div class="titre">
-          <h2>Quelle note a été joué :</h2>
-        </div>
         <br />
         <form class="question" action="/niveau-facile" method="POST">
           <br />
@@ -149,14 +116,7 @@
           <div class="choix">
             <label>
               <button class="btn-note">
-                <input
-                  class="input-note"
-                  type="radio"
-                  name="answer"
-                  id="{{.}}"
-                  value="{{.}}"
-                  required
-                />
+                <input class="input-note" type="radio" name="answer" id="{{.}}" value="{{.}}" required />
                 {{.}}
               </button>
             </label>
@@ -167,9 +127,7 @@
             <input id="valider-btn" type="submit" value=" " />
           </div>
         </form>
-        <span class="error"
-          >{{.Error}} {{.GameData.PreviousCorrectAnswer}}</span
-        >
+        <span class="error">{{.Error}} {{.GameData.PreviousCorrectAnswer}}</span>
         <div id="audio-container">
           <div id="audio-controls">
             <div class="playsbtn">
@@ -177,18 +135,11 @@
                 <img src="../static/images/replay.png" alt="Replay" />
               </button>
               <button id="pause-button" class="control-button">
-                <img
-                  src="../static/images/video-pause-button.png"
-                  alt="Replay"
-                />
+                <img src="../static/images/video-pause-button.png" alt="Replay" />
               </button>
             </div>
           </div>
-          <audio
-            id="audio-element"
-            src="/static/assets/notes/{{.GameData.CorrectNote}}.mp3"
-            type="audio/mpeg"
-          ></audio>
+          <audio id="audio-element" src="/static/assets/notes/{{.GameData.CorrectNote}}.mp3" type="audio/mpeg"></audio>
         </div>
       </div>
       <br />
@@ -197,6 +148,7 @@
     </div>
     <script src="../static/audio.js"></script>
     <script src="../static/script.js"></script>
-  </body>
+</body>
+
 </html>
 {{end}}
