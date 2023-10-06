@@ -7,11 +7,16 @@
     <li><a href="/accueil">Accueil</a></li>
     <li><a href="/classement">Classement</a></li>
     <li><a href="/difficulte">Jouer</a></li>
+    
     <li>
       <a href="/profile"
         ><img class="menu-images" src="../static/images/user.png" />
       </a>
     </li>
+    <li><a href="/logout"><button class="btn-deco" type="submit">Se déconnecter</button></a></li>
+    <form action="/delete-account" onSubmit="if(!confirm('Es-tu sûr.e de vouloir nous quitter ?')){return false;}"><button
+      class="btn-deco" type="submit">Supprimer mon compte</button>
+  </form>
   </ul>
   <div id="icons"></div>
 </nav>
