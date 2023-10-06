@@ -36,6 +36,7 @@
       <div class="piano">
         <div id="piano">
           <div id="ContainerPiano"></div>
+
           <div id="4C" class="NoteDefault">
             <div id="4CT" class="NoteDieseDefault"></div>
           </div>
@@ -85,11 +86,9 @@
 
       <div class="submit-buttons">
         <div class="titre">
-          <h2>Sélectionnez la note sur entendue sur le piano puis valider !</h2>
+          <h2>Cliquez sur la note jouée puis validez !</h2>
         </div>
-        <br />
-        <form class="question" action="/niveau-facile" method="POST">
-          <br />
+        <form class="question" action="/niveau-moyen" method="POST">
           <div style="text-align: center">
             <input id="valider-btn" type="submit" value=" " />
           </div>
@@ -123,7 +122,7 @@
       <div>Bonne réponse : {{.GameData.CorrectAnswer}}</div>
     </div>
     <script src="../static/audio.js"></script>
-    <script src="../static/script.js"></script>
+    <script src="../static/script-niveau-moyen.js"></script>
   </body>
 </html>
 {{end}}

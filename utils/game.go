@@ -32,10 +32,10 @@ func StartGame(w http.ResponseWriter, r *http.Request, level int) {
 }
 
 // continue playing the game
-func PlayAgain(w http.ResponseWriter, r *http.Request, lifeleft int) {
+func PlayAgain(w http.ResponseWriter, r *http.Request, lifeleft int, level int) {
 	SessionData.GameData.Questions = []string{}
 	SessionData.GameData.CorrectAnswer = ""
-	SessionData.GameData.CurrentLevel = 1
+	SessionData.GameData.CurrentLevel = level
 	SessionData.GameData.LifeLeft = lifeleft
 	QuestionQCM(w, r)
 }
@@ -85,6 +85,7 @@ func QuestionQCM(w http.ResponseWriter, r *http.Request) {
 
 // checking if the answer is correct and updating the datas accordlingly
 func CheckAnswer(answer string, w http.ResponseWriter, r *http.Request) bool {
+
 	if answer == SessionData.GameData.CorrectAnswer {
 		switch SessionData.GameData.CurrentLevel {
 		case 1:
@@ -102,7 +103,7 @@ func CheckAnswer(answer string, w http.ResponseWriter, r *http.Request) bool {
 		SessionData.GameData.Questions = []string{}
 		SessionData.GameData.PreviousCorrectAnswer = "La bonne réponse était : " + SessionData.GameData.CorrectAnswer
 		SessionData.GameData.CorrectAnswer = ""
-		PlayAgain(w, r, SessionData.GameData.LifeLeft)
+		PlayAgain(w, r, SessionData.GameData.LifeLeft, SessionData.GameData.CurrentLevel)
 		return true
 	} else {
 		UpdateScore(GetDB(), SessionData.Email, SessionData.Score)
@@ -115,7 +116,7 @@ func CheckAnswer(answer string, w http.ResponseWriter, r *http.Request) bool {
 		SessionData.GameData.CorrectAnswer = ""
 		if SessionData.GameData.LifeLeft > 1 {
 			SessionData.GameData.LifeLeft -= 1
-			PlayAgain(w, r, SessionData.GameData.LifeLeft)
+			PlayAgain(w, r, SessionData.GameData.LifeLeft, SessionData.GameData.CurrentLevel)
 		} else {
 			SessionData.Score = 0
 			UpdateScore(GetDB(), SessionData.Email, SessionData.Score)
