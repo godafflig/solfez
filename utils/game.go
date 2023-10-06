@@ -1,12 +1,15 @@
 package utils
 
 import (
+	"fmt"
 	"math/rand"
 	"net/http"
 	"time"
 )
 
-var pianoKeys = []string{"do", "do#/réb", "ré", "ré#/mib", "mi", "fa", "fa#/solb", "sol", "sol#/lab", "la", "la#/sib", "si"}
+var pianoKeys = []string{"C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"}
+var pianoKeysDisplay = []string{"Do", "Do#", "Ré", "Ré#", "Mi", "Fa", "Fa#", "Sol", "Sol#", "La", "La#", "Si"}
+var Octave = []string{"4", "5"}
 
 // initiate the game depending on the level
 func StartGame(w http.ResponseWriter, r *http.Request, level int) {
@@ -24,7 +27,7 @@ func StartGame(w http.ResponseWriter, r *http.Request, level int) {
 		SessionData.GameData.CurrentLevel = 3
 		SessionData.GameData.LifeLeft = 1
 	}
-	QuestionQCM()
+	QuestionQCM(w, r)
 }
 
 // continue playing the game
@@ -33,33 +36,49 @@ func PlayAgain(w http.ResponseWriter, r *http.Request, lifeleft int) {
 	SessionData.GameData.CorrectAnswer = ""
 	SessionData.GameData.CurrentLevel = 1
 	SessionData.GameData.LifeLeft = lifeleft
-	QuestionQCM()
+	QuestionQCM(w, r)
 }
 
 // creating 3 questions & one correct answer
-func QuestionQCM() {
+func QuestionQCM(w http.ResponseWriter, r *http.Request) {
 
-	var randomIndex []int
+	var randomIndexNotes []int
+	var randomIndexOctaves []int
 	rand.Seed(time.Now().UnixNano())
 
 	// Generate 3 random piano keys
 	for j := 0; j < 3; j++ {
 
-		for len(randomIndex) != 3 {
+		for len(randomIndexNotes) != 3 {
 			n := rand.Intn(len(pianoKeys) - 1)
-			if !contains(randomIndex, n) {
-				randomIndex = append(randomIndex, n)
+			if !contains(randomIndexNotes, n) {
+				randomIndexNotes = append(randomIndexNotes, n)
 			}
+		}
+
+		for len(randomIndexOctaves) <= 2 {
+			o := rand.Intn(len(Octave))
+			randomIndexOctaves = append(randomIndexOctaves, o)
+
 		}
 	}
 
 	for i := 0; i < 3; i++ {
-		SessionData.GameData.Questions = append(SessionData.GameData.Questions, pianoKeys[randomIndex[i]])
+		SessionData.GameData.Questions = append(SessionData.GameData.Questions, pianoKeysDisplay[randomIndexNotes[i]]+Octave[randomIndexOctaves[i]]+"eme")
 	}
 
-	// Correct answer
 	indexCorrectAnswer := rand.Intn(3)
+	SessionData.GameData.CorrectNote = Octave[randomIndexOctaves[indexCorrectAnswer]] + pianoKeys[randomIndexNotes[indexCorrectAnswer]]
 	SessionData.GameData.CorrectAnswer = SessionData.GameData.Questions[indexCorrectAnswer]
+	html := fmt.Sprintf(`
+
+	<div id="Elnote" value="%s"></div>
+
+`, SessionData.GameData.CorrectNote)
+
+	// Write the HTML response
+	w.Header().Set("Content-Type", "text/html")
+	fmt.Fprint(w, html)
 }
 
 // checking if the answer is correct and updating the datas accordlingly
@@ -99,4 +118,14 @@ func contains(arr []int, val int) bool {
 		}
 	}
 	return false
+}
+
+func InitializePathNotes() {
+	for i := 0; i < len(Octave); i++ {
+		for j := 0; j < len(pianoKeys); j++ {
+			temp := Octave[i] + pianoKeys[j]
+			SessionData.GameData.Notes = append(SessionData.GameData.Notes, temp)
+		}
+	}
+
 }
