@@ -93,7 +93,7 @@
           {{range .GameData.Questions}}
           <div class="choix">
             <label>
-              <button class="btn-note">
+              <div class="btn-note">
                 <input
                   class="input-note"
                   type="radio"
@@ -103,7 +103,7 @@
                   required
                 />
                 {{.}}
-              </button>
+              </div>
             </label>
           </div>
           {{end}}
