@@ -26,16 +26,14 @@
         />
         <h1 class="titre-classement">Classement</h1>
       </div>
-      <div class="titre1">
-        <h3 class="titre">Pseudo</h3>
-        <h3 class="titre">Meilleur score</h3>
-        <div class="tabl-classement">
-          <h3 class="titre">Classement</h3>
-        </div>
-      </div>
-      <div class="classement">
-        {{range .Classement}}
+      <div class="table-container">
         <table class="table">
+          <tr class="header-table">
+            <th class="titre">Pseudo</th>
+            <th class="titre">Meilleur score</th>
+            <th class="titre">Classement</th>
+          </tr>
+          {{range .Classement}}
           <tr class="interligne">
             <td>{{.Username}}</td>
             <td>{{.Score}}</td>
