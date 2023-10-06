@@ -7,7 +7,7 @@ import (
 	"time"
 )
 
-var pianoKeys = []string{"C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"}
+var pianoKeys = []string{"C", "CT", "D", "DT", "E", "F", "FT", "G", "GT", "A", "AT", "B"}
 var pianoKeysDisplay = []string{"Do", "Do#", "Ré", "Ré#", "Mi", "Fa", "Fa#", "Sol", "Sol#", "La", "La#", "Si"}
 var Octave = []string{"4", "5"}
 
@@ -15,6 +15,7 @@ var Octave = []string{"4", "5"}
 func StartGame(w http.ResponseWriter, r *http.Request, level int) {
 	SessionData.GameData.Questions = []string{}
 	SessionData.GameData.CorrectAnswer = ""
+	SessionData.Error = ""
 
 	switch level {
 	case 1:
@@ -64,6 +65,7 @@ func QuestionQCM(w http.ResponseWriter, r *http.Request) {
 	}
 
 	for i := 0; i < 3; i++ {
+		// changer ici pianoKeys en pianoKeysDisplay pour afficher les notes en français mais le son ne marche plus dans ce cas
 		SessionData.GameData.Questions = append(SessionData.GameData.Questions, pianoKeysDisplay[randomIndexNotes[i]]+Octave[randomIndexOctaves[i]]+"eme")
 	}
 
@@ -84,10 +86,19 @@ func QuestionQCM(w http.ResponseWriter, r *http.Request) {
 // checking if the answer is correct and updating the datas accordlingly
 func CheckAnswer(answer string, w http.ResponseWriter, r *http.Request) bool {
 	if answer == SessionData.GameData.CorrectAnswer {
-		SessionData.Score += 1
+		switch SessionData.GameData.CurrentLevel {
+		case 1:
+			SessionData.Score += 1
+		case 2:
+			SessionData.Score += 5
+		case 3:
+			SessionData.Score += 10
+		}
 		SessionData.Error = "Youpi tu l'as trouvé ! :)"
-		saveHighestScore(SessionData.Score)
 		UpdateScore(GetDB(), SessionData.Email, SessionData.Score)
+		saveHighestScore(SessionData.Score)
+		SortClassement()
+		UpdateStatistics("win")
 		SessionData.GameData.Questions = []string{}
 		SessionData.GameData.PreviousCorrectAnswer = "La bonne réponse était : " + SessionData.GameData.CorrectAnswer
 		SessionData.GameData.CorrectAnswer = ""
@@ -95,7 +106,10 @@ func CheckAnswer(answer string, w http.ResponseWriter, r *http.Request) bool {
 		return true
 	} else {
 		UpdateScore(GetDB(), SessionData.Email, SessionData.Score)
+		saveHighestScore(SessionData.Score)
+		SortClassement()
 		SessionData.Error = "Oups... Essaie encore !"
+		UpdateStatistics("lose")
 		SessionData.GameData.Questions = []string{}
 		SessionData.GameData.PreviousCorrectAnswer = "La bonne réponse était : " + SessionData.GameData.CorrectAnswer
 		SessionData.GameData.CorrectAnswer = ""
@@ -104,6 +118,7 @@ func CheckAnswer(answer string, w http.ResponseWriter, r *http.Request) bool {
 			PlayAgain(w, r, SessionData.GameData.LifeLeft)
 		} else {
 			SessionData.Score = 0
+			UpdateScore(GetDB(), SessionData.Email, SessionData.Score)
 			http.Redirect(w, r, "/lost", http.StatusSeeOther)
 		}
 		return false

@@ -83,7 +83,9 @@ P {
     flex-wrap: nowrap;
     align-items: flex-end;
 }
-
+.login{
+    margin-left: 45px;
+}
 .btnconnexion1 {
     font-size: 15px;
 }
@@ -122,4 +124,10 @@ a {
     right: 0;
     width: 406px;
     height: 236;
+}
+.error {
+    color: red;
+    display: flex;
+    justify-content: center;
+    font-size: 23px;
 }

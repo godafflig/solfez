@@ -50,6 +50,7 @@ body {
     text-align: center;
     color: #272343;
     font-size: 70px;
+    z-index: 3;
 }
 
 .centrer {
@@ -72,9 +73,10 @@ body {
 }
 
 .text-container {
+    z-index: 1;
     flex: 1;
-    max-width: 230px;
-    height: 230px;
+    min-width: 220px;
+    height: 200px;
     background-color: #E3F6F5;
     padding-left: 10px;
     padding-right: 10px;
@@ -82,6 +84,7 @@ body {
     margin-right: 100px;
     margin-left: 100px;
     text-align: center;
+    overflow: hidden;
 }
 
 h3 {
@@ -109,7 +112,7 @@ p {
     .text-container {
         margin: 0;
         height: 300px;
-        width: fit-content;
+        width: 300px;
         max-width: 300px;
     }
 
