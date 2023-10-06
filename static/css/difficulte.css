@@ -108,7 +108,7 @@ p {
     cursor: default;
 }
 
-@media screen and (min-width: 1000px) {
+@media screen and (max-width: 1000px) {
     .text-container {
         margin: 0;
         height: 300px;
@@ -133,5 +133,9 @@ p {
         color: black;
         margin-bottom: 100px;
         opacity: 1;
+    }
+
+    .background {
+        background: red; /* Changez la couleur de fond du body ici */
     }
 }
