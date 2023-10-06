@@ -56,39 +56,36 @@
         height: 50px;
         width: 50px;
     }
-
-
-  
 }
 @media only screen and (max-device-width: 480px){
-    
+
     #icons {
         display: block;
         margin-left: 90%;
+      font-size: 50px;
     }
-
     #icons:before {
         content: "\2630";
+       
     }
-
     .active #icons:before {
         content: "\2715 ";
+        
     }
-
     body {
         background: white;
         overflow: hidden;
 
     }
-
     nav {
         border-bottom-left-radius: 0px;
         border-bottom-right-radius: 0px;
         box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-        padding: 3%;
+      background-color: rgba(186, 232, 232, 1);
+        height: 100px;
 
     }
-
+   
     nav ul {
 
         display: none;
@@ -101,20 +98,22 @@
         height: 100%;
         text-align: center;
     }
-
     nav li {
         flex: 1;
         padding: 3% 0;
         font-size: 24px;
         margin-top: 7%;
-
+        
     }
-
     nav.active ul {
         max-height: 100%;
         display: flex;
-        left: -20%;
-        background-color: white;
+       margin-right: 0px;
+        background-color:rgba(186, 232, 232, 1);
+        list-style-type : none;
+        background: white;
     }
-
+    nav.active ul img{
+        width: 60px;
+    }
 }

@@ -119,6 +119,7 @@ tr.interligne td {
     right: 0;
     width: 406px;
     height: 236;
+    z-index: -1;
 }
 
 @media screen and (max-width: 1000px) {
