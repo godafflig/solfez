@@ -166,10 +166,10 @@ audio {
     padding: 5px 10px; 
     width: 150px;
     height: 50px;
-    font-size: 22pxs;
+    font-size: 22px;
     color: white;
-    
 }
+
 .btn-note:hover{
     background-color: green;
 }

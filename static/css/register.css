@@ -33,7 +33,6 @@ body {
     flex-direction: column;
     padding-top: 156px;
     gap: 19px;
-
 }
 
 .input {
@@ -116,6 +115,7 @@ a {
     width: 420px;
     height: 330px;
     transform: rotate(180deg);
+    z-index: -1;
 }
 
 .coin-bas-droit {
@@ -124,6 +124,7 @@ a {
     right: 0;
     width: 406px;
     height: 236;
+    z-index: -1;
 }
 .error {
     color: red;
