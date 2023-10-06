@@ -7,7 +7,7 @@ import (
 	"time"
 )
 
-var pianoKeys = []string{"C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"}
+var pianoKeys = []string{"C", "CT", "D", "DT", "E", "F", "FT", "G", "GT", "A", "AT", "B"}
 var pianoKeysDisplay = []string{"Do", "Do#", "Ré", "Ré#", "Mi", "Fa", "Fa#", "Sol", "Sol#", "La", "La#", "Si"}
 var Octave = []string{"4", "5"}
 
@@ -66,7 +66,7 @@ func QuestionQCM(w http.ResponseWriter, r *http.Request) {
 
 	for i := 0; i < 3; i++ {
 		// changer ici pianoKeys en pianoKeysDisplay pour afficher les notes en français mais le son ne marche plus dans ce cas
-		SessionData.GameData.Questions = append(SessionData.GameData.Questions, pianoKeys[randomIndexNotes[i]]+Octave[randomIndexOctaves[i]]+"eme")
+		SessionData.GameData.Questions = append(SessionData.GameData.Questions, pianoKeysDisplay[randomIndexNotes[i]]+Octave[randomIndexOctaves[i]]+"eme")
 	}
 
 	indexCorrectAnswer := rand.Intn(3)
