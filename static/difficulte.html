@@ -1,40 +1,27 @@
 {{define "base"}}
 <!DOCTYPE html>
 <html>
-  <head>
-    <link
-      href="https://fonts.googleapis.com/css?family=Inter&display=swap"
-      rel="stylesheet"
-    />
-    <link href="../static/css/difficulte.css" rel="stylesheet" />
-    <link href="../static/css/navbar.css" rel="stylesheet" />
-    <title>Choix de la difficulte</title>
-  </head>
 
-  <body>
-    {{template "navbar" .}}
-    <div class="container">
-      <div class="background"></div>
-      <div class="centrer">
-        <h1 class="title">Choisissez la difficulté</h1>
-        <a href="/niveau-facile"
-          ><input class="bouton" type="button" value="Facile"
-        /></a>
-        <a href="/niveau-moyen"
-          ><input
-            class="bouton"
-            style="margin-top: 120px"
-            type="button"
-            value="Moyen"
-        /></a>
-        <a href="/niveau-difficile"
-          ><input
-            class="bouton"
-            style="margin-top: 240px"
-            type="button"
-            value="Difficile"
-        /></a>
-      </div>
+<head>
+  <link href="https://fonts.googleapis.com/css?family=Inter&display=swap" rel="stylesheet" />
+  <link href="../static/css/difficulte.css" rel="stylesheet" />
+  <link href="../static/css/navbar.css" rel="stylesheet" />
+  <title>Choix de la difficulte</title>
+</head>
+
+<body>
+  {{template "navbar" .}}
+  <div class="container">
+    <div class="background"></div>
+    <!-- <div class="centrer"> -->
+    <h1 class="title">Choisissez la difficulté</h1>
+    <div class="container-btn">
+      <a href="/niveau-facile"><input class="bouton" type="button" value="Facile" /></a>
+      <a href="/niveau-moyen"><input class="bouton" style="margin-top: 120px" type="button" value="Moyen" /></a>
+      <a href="/niveau-difficile"><input class="bouton" style="margin-top: 240px" type="button" value="Difficile" /></a>
+    </div>
+    <!-- </div> -->
+    <div class="center">
       <div class="explication-difficulte">
         <div class="text-container">
           <h3>Facile</h3>
@@ -62,6 +49,8 @@
         </div>
       </div>
     </div>
-  </body>
+  </div>
+</body>
+
 </html>
 {{end}}
