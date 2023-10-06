@@ -98,7 +98,9 @@ body {
     color: white;
 }
 
-/* ... Autres règles CSS ... */
+.boutonJouer{
+    margin-top: 10%;
+}
 
 /* Styles pour les petits écrans */
 @media screen and (max-width: 480px) {
@@ -113,5 +115,9 @@ body {
 
     .title {
         font-size: 45px; /* Réduire la taille du titre pour les petits écrans */
+    }
+
+    .boutonJouer{
+        top: 10px;
     }
 }
