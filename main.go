@@ -93,6 +93,7 @@ func Routing(w http.ResponseWriter, r *http.Request) {
 			template.Must(template.ParseFiles("static/niveau-difficile.html")).Execute(w, utils.SessionData)
 		}
 	case "/profile":
+		utils.SessionData.Error = ""
 		if r.Method == "GET" {
 			tmpl, _ := template.New("name").ParseFiles("static/profile.html", "static/navbar.html")
 			tmpl.ExecuteTemplate(w, "base", utils.SessionData)
@@ -116,6 +117,8 @@ func Routing(w http.ResponseWriter, r *http.Request) {
 		tmpl.ExecuteTemplate(w, "base", utils.SessionData)
 		template.Must(template.ParseFiles("static/Accueil.html")).Execute(w, utils.SessionData)
 	case "/difficulte":
+		utils.SessionData.Error = ""
+		utils.SessionData.GameData.PreviousCorrectAnswer = ""
 		tmpl, _ := template.New("name").ParseFiles("static/difficulte.html", "static/navbar.html")
 		tmpl.ExecuteTemplate(w, "base", utils.ScoreboardData)
 		template.Must(template.ParseFiles("static/difficulte.html")).Execute(w, utils.SessionData)

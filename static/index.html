@@ -1,36 +1,61 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Register</title>
+    <link href="../static/css/register.css" rel="stylesheet" />
+  </head>
 
-<head>
-  <meta charset="UTF-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Register</title>
-  <link href="../static/css/register.css" rel="stylesheet" />
-</head>
+  <body>
+    <div class="container">
+      <img
+        src="../static/images/angle.png"
+        alt="Image d'angle"
+        class="coin-haut-gauche"
+      />
+      <form class="formulaire" action="/register" method="POST">
+        <input
+          class="input"
+          type="text"
+          name="username"
+          placeholder="Pseudo"
+          required
+        />
 
-<body>
-  <div class="container">
-    <img src="../static/images/angle.png" alt="Image d'angle" class="coin-haut-gauche" />
-    <form class="formulaire" action="/register" method="POST">
-      <input class="input" type="text" name="username" placeholder="Pseudo" required />
+        <input class="input" type="email" name="email" placeholder="Email" />
+        <input
+          class="input"
+          type="password"
+          name="password"
+          placeholder="Entrer mot de passe"
+          required
+        />
 
-      <input class="input" type="email" name="email" placeholder="Email" />
-      <input class="input" type="password" name="password" placeholder="Entrer mot de passe" required />
-
-      <input class="input" type="password" name="password-check" placeholder="Confirmer votre mot de passe"
-        required />
-      <div class="content1">
-        <input class="btnconnexion1" type="submit" value="Créer mon compte" />
-        <div class="login">
-          <p>vous avez deja un compte</p>
-          <button class="btnconnexion"><a href="/login">Aller sur la page login</a></button>
+        <input
+          class="input"
+          type="password"
+          name="password-check"
+          placeholder="Confirmer votre mot de passe"
+          required
+        />
+        <div class="content1">
+          <input class="btnconnexion1" type="submit" value="Créer mon compte" />
+          <span class="error">{{.Error}}</span>
+          <div class="login">
+            <p>Si vous avez déja un compte :</p>
+            <button class="btnconnexion">
+              <a href="/login">Aller sur la page login</a>
+            </button>
+          </div>
         </div>
-      </div>
-      <span class="error">{{.Error}}</span>
-    </form>
-    <img src="../static/images/angle.png" alt="Image d'angle" class="coin-bas-droit" />
-  </div>
-</body>
-
+      </form>
+      <img
+        src="../static/images/angle.png"
+        alt="Image d'angle"
+        class="coin-bas-droit"
+      />
+    </div>
+  </body>
 </html>

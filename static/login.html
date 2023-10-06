@@ -10,7 +10,11 @@
 
   <body>
     <div class="container">
-      <img src="../static/images/angle.png" alt="Image d'angle" class="coin-haut-gauche" />
+      <img
+        src="../static/images/angle.png"
+        alt="Image d'angle"
+        class="coin-haut-gauche"
+      />
       <form class="formulaire" action="/login" method="POST">
         <input
           class="input"
@@ -33,15 +37,19 @@
             </button></a
           >
           <div class="login">
-            <p>vous n'avez pas encore un compte</p>
+            <p>Si vous n'avez pas encore de compte :</p>
             <button class="btnconnexion">
-              <a href="/">Aller sur la page vous inscrire</a>
+              <a href="/">Créer mon compte</a>
             </button>
           </div>
         </div>
       </form>
       <span class="error">{{.Error}}</span>
-      <img src="../static/images/angle.png" alt="Image d'angle" class="coin-bas-droit" />
+      <img
+        src="../static/images/angle.png"
+        alt="Image d'angle"
+        class="coin-bas-droit"
+      />
     </div>
   </body>
 </html>

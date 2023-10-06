@@ -22,6 +22,7 @@ func Login(email string, password string, w http.ResponseWriter, r *http.Request
 		SessionData.Score = GetScore(GetDB(), email)
 		SessionData.Error = ""
 		SessionData.ProfilePic = GetProfilePicFromDb()
+		SessionData.HighestScore = GetScoreFromScoresTable()
 
 		// redirect
 		tmpl, _ := template.New("name").ParseFiles("static/Accueil.html", "static/navbar.html")
@@ -54,6 +55,9 @@ func Register(username string, email string, password string, passwordCheck stri
 		SessionData.Score = 0
 		SessionData.Error = ""
 		SessionData.ProfilePic = GetProfilePicFromDb()
+		SessionData.Statistics.TotalGamesPlayed = 0
+		SessionData.Statistics.TotalGamesWon = 0
+		SessionData.Statistics.TotalGamesLost = 0
 
 		// redirect
 		tmpl, _ := template.New("name").ParseFiles("static/Accueil.html", "static/navbar.html")

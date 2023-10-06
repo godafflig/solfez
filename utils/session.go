@@ -1,14 +1,16 @@
 package utils
 
 type Session struct {
-	Id         int
-	Username   string
-	Email      string
-	IsLogged   bool
-	Score      int
-	Error      string
-	ProfilePic string
-	GameData   Game
+	Id           int
+	Username     string
+	Email        string
+	IsLogged     bool
+	Score        int
+	HighestScore int
+	Error        string
+	ProfilePic   string
+	GameData     Game
+	Statistics   Stats
 }
 
 type Game struct {
@@ -21,6 +23,15 @@ type Game struct {
 	Notes                 []string
 }
 
+type Stats struct {
+	TotalGamesPlayed int
+	TotalGamesWon    int
+	TotalGamesLost   int
+	//TimeSpendPlaying date.Duration
+}
+
 var SessionData Session
 
 var GameData Game
+
+var Statistics Stats
