@@ -1,27 +1,30 @@
 @font-face {
     font-family: 'RobotoMono';
     src: url('../fonts/RobotoMono-Regular.ttf') format('ttf');
-    /* Ajoutez d'autres formats si nécessaire */
     font-weight: normal;
     font-style: normal;
 }
 
-
 * {
     box-sizing: border-box;
-    font-family: RobotoMono;
+    font-family: RobotoMono, sans-serif;
+    margin: 0;
+    padding: 0;
 }
 
 body {
     font-size: 14px;
+<<<<<<< HEAD
     margin: 0; /* Réinitialiser la marge par défaut du body */
+=======
+    color: white; /* Texte en blanc */
+>>>>>>> 7fc1e93d6c9cdff0404a3343a4886b2ba716ebee
     overflow: hidden;
 }
 
 .container {
     width: 100%;
-    height: 100vh; /* Utilise toute la hauteur de l'écran */
-    opacity: 1;
+    min-height: 100vh;
     position: relative;
     overflow: hidden;
 }
@@ -30,179 +33,96 @@ body {
     width: 100%;
     height: 100%;
     background: linear-gradient(rgba(112, 126, 146, 1), rgba(39, 35, 67, 0.11));
-    opacity: 1;
     position: absolute;
     top: 0;
     left: 0;
-    overflow: hidden;
-}
-
-.header {
-    width: 831px;
-    color: rgba(255, 255, 255, 1);
-    position: absolute;
-    top: 101px;
-    left: 142px;
-    font-family: Inter;
-    font-weight: Regular;
-    font-size: 12px;
     opacity: 1;
-    text-align: left;
-}
-
-.presentation {
-    position: absolute;
-    top: 100px;
-    text-align: center;
-    width: 100%;
-    display: flex;
-    flex-direction: column; /* Aligner les éléments verticalement */
-    align-items: center; /* Centrer verticalement */
-}
-
-.title {
-    width: 779px;
-    color: rgba(255, 255, 255, 1);
-    margin: 0 auto; /* Centrer horizontalement */
-    font-family: RobotoMono;
-    max-width: 100%;
-    font-size: 64px;
-    opacity: 1;
-}
-
-.description {
-    display: flex;
-    justify-content: center;
-    position: relative; /* Utilisez position relative ici */
-    width: 594px;
-    color: rgba(255, 255, 255, 1);
-    font-size: 20px;
-    opacity: 1;
-    margin-top: 20px; /* Ajoutez un espacement vertical entre les div */
-    max-width: 100%;
-}
-
-
-.circle {
-    width: 205px;
-    height: 211px;
-    background: url("../static/images/musicAcceuil.png");
-    background-repeat: no-repeat;
-    background-position: center center;
-    background-size: cover;
-    opacity: 1;
-    position: absolute;
-    top: 70%;
-    left: 40px;
-    border-radius: 50%;
-    overflow: hidden;
-}
-
-.coin-haut-gauche {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 420px;
-    height: 330px;
-    transform: rotate(180deg);
-}
-
-.coin-bas-droit {
-    position: absolute;
-    bottom: 0;
-    right: 0;
-    width: 406px;
-    height: 236;
     z-index: -1;
 }
 
-.menu {
-    width: 100%;
-    height: 113px;
-    background-repeat: no-repeat;
-    background-position: center center;
-    background-size: cover;
-    opacity: 1;
+.angle {
     position: absolute;
-    top: 0px;
-    left: 0px;
-    overflow: hidden;
+    width: 420px;
+    height: 330px;
+    background-image: url('../images/angle.png');
+    background-size: cover;
+}
+
+.top-left {
+    top: 0;
+    left: 0;
+    transform: rotate(180deg);
+}
+
+.bottom-right {
+    bottom: 0;
+    right: 0;
+}
+
+.responsive-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 20px;
+    position: relative;
+    z-index: 1;
+}
+
+.presentation {
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.title {
+    font-size: 64px;
+    margin-bottom: 20px;
+}
+
+.description {
+    font-size: 20px;
+    margin-bottom: 40px;
+}
+
+.boutonJouer {
+    width: 100%;
+    max-width: 400px;
+    padding: 15px;
+    border: none;
+    border-radius: 100px;
+    background-color: #E3F6F5;
+    color: #272343;
+    font-size: 36px;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.boutonJouer:hover {
+    background-color: #272343;
+    color: white;
 }
 
 .boutonJouer{
-    width: 377px;
-    height: 95px;
-    position: absolute;
-    top: 76%;
-    left: 50%;
-    -ms-transform: translate(-50%, -50%);
-    transform: translate(-50%, -50%);
-    border-radius: 100px;
-    padding: 0 20px;    
-    text-align: center;
-    background-color: #E3F6F5;
-    color: #272343;
-    font-size: 70px;
+    margin-top: 10%;
 }
 
-.bottom-circle {
-    width: 377px;
-    height: 95px;
-    background: rgba(227, 246, 245, 1);
-    opacity: 1;
-    position: absolute;
-    top: 8px;
-    left: 13px;
-    border: 1px solid rgba(0, 0, 0, 1);
-    border-radius: 100px;
-    overflow: hidden;
-}
-
-.bottom-rect {
-    width: 289px;
-    height: 67px;
-    background: rgba(39, 35, 67, 1);
-    opacity: 1;
-    position: absolute;
-    top: 22px;
-    left: 57px;
-}
-
-.login {
-    width: 140px;
-    color: rgba(0, 0, 0, 1);
-    position: absolute;
-    top: 258px;
-    left: 728px;
-    font-size: 32px;
-    opacity: 1;
-    text-align: center;
-}
-
-.boutonJouer:hover{
-    background-color: #272343;
-    color: white;
-    cursor: default;
-}
-
-@media only screen and (max-device-width: 480px) {
-    .circle {
+/* Styles pour les petits écrans */
+@media screen and (max-width: 480px) {
+    .top-left {
         display: none;
     }
-    .coin-haut-gauche {
-        display: none;
+    .description {
+        font-size: 14px; /* Réduire la taille de la police pour les petits écrans */
+        max-width: 90%; /* Ajuster la largeur du texte pour les petits écrans */
+        margin: 0 auto; /* Centrer le texte horizontalement sur les petits écrans */
     }
-    .coin-bas-droit {
-        width: 30%;
-        height: 30%;
+
+    .title {
+        font-size: 45px; /* Réduire la taille du titre pour les petits écrans */
     }
-    .presentation {
-        margin-top: 100px;
-    }
+
     .boutonJouer{
-        bottom: 10px;
-        left: 50%;
-        -ms-transform: translate(-50%, -50%);
-        transform: translate(-50%, -50%);
+        top: 10px;
     }
 }
