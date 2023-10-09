@@ -3,6 +3,7 @@ package utils
 import (
 	"fmt"
 	"strconv"
+	"time"
 )
 
 func UpdateStatistics(result string) {
@@ -117,4 +118,35 @@ func GetTotalGamesLost() int {
 		fmt.Println(err)
 	}
 	return losesInt
+}
+
+// convert date of creation into the time since the account was created
+func ConvertDateOfCreation() string {
+	dbDate := GetCreationDate(GetDB())
+	dbTime, _ := time.Parse(time.RFC3339, dbDate)
+	// if err != nil {
+	// 	fmt.Println("Erreur lors de la conversion de la date:", err)
+	// }
+	now := time.Now()
+	diff := now.Sub(dbTime)
+
+	var unit string
+	var quantity int
+
+	if diff.Hours() > 24*30 {
+		unit = "mois"
+		quantity = int(diff.Hours() / (24 * 30))
+	} else if diff.Hours() > 24 {
+		unit = "jours"
+		quantity = int(diff.Hours() / 24)
+	} else if diff.Hours() >= 1 {
+		unit = "heures"
+		quantity = int(diff.Hours())
+	} else {
+		unit = "minutes"
+		quantity = int(diff.Minutes())
+	}
+
+	SessionData.Statistics.AccountCreatedSince = fmt.Sprintf("Membre depuis %d %s.\n", quantity, unit)
+	return SessionData.Statistics.AccountCreatedSince
 }

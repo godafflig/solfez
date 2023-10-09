@@ -168,6 +168,24 @@ func GetScore(db *sql.DB, email string) int {
 	return scoreInt
 }
 
+func GetCreationDate(db *sql.DB) string {
+	query := `
+	SELECT created_at FROM users WHERE user_id = ?`
+	rows, err := db.Query(query, SessionData.Id)
+	if err != nil {
+		fmt.Println("1: ", err)
+	}
+	defer rows.Close()
+	var creationDate string
+	for rows.Next() {
+		err := rows.Scan(&creationDate)
+		if err != nil {
+			fmt.Println("2: ", err)
+		}
+	}
+	return creationDate
+}
+
 // update one score from the database 'users' based on the email
 func UpdateScore(db *sql.DB, email string, score int) {
 	query := `

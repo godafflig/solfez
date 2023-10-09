@@ -91,6 +91,8 @@ func Routing(w http.ResponseWriter, r *http.Request) {
 		}
 	case "/profile":
 		utils.SessionData.Error = ""
+		utils.SessionData.Statistics.AccountCreatedSince = utils.ConvertDateOfCreation()
+		utils.ConvertDateOfCreation()
 		if r.Method == "GET" {
 			ExecuteTemplate(w, r, "static/profile.html")
 		} else if r.Method == "POST" {

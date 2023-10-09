@@ -24,9 +24,10 @@ type Game struct {
 }
 
 type Stats struct {
-	TotalGamesPlayed int
-	TotalGamesWon    int
-	TotalGamesLost   int
+	TotalGamesPlayed    int
+	TotalGamesWon       int
+	TotalGamesLost      int
+	AccountCreatedSince string
 	//TimeSpendPlaying date.Duration
 }
 
