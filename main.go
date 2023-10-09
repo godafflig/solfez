@@ -96,7 +96,11 @@ func Routing(w http.ResponseWriter, r *http.Request) {
 		} else if r.Method == "POST" {
 			utils.HandleUpload(w, r)
 		}
-	case "/update":
+	case "/update-username":
+		r.ParseForm()
+		utils.ChangeUsername(r.FormValue("oldusername"), r.FormValue("newusername"), r.FormValue("newusernameconfirm"))
+		ExecuteTemplate(w, r, "static/profile.html")
+	case "/update-password":
 		r.ParseForm()
 		utils.ChangePassword(r.FormValue("oldpassword"), r.FormValue("newpassword"), r.FormValue("newpwdconfirm"))
 		ExecuteTemplate(w, r, "static/profile.html")

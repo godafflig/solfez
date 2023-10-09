@@ -42,14 +42,7 @@ func DeleteUser(db *sql.DB, email string, w http.ResponseWriter, r *http.Request
 		fmt.Println(err)
 	}
 
-	SessionData.Id = 0
-	SessionData.Username = ""
-	SessionData.Email = ""
-	SessionData.IsLogged = false
-	SessionData.Error = ""
-	SessionData.GameData.Questions = []string{}
-	SessionData.GameData.CorrectAnswer = ""
-	SessionData.Score = 0
+	ClearDatas()
 	http.Redirect(w, r, "/", http.StatusSeeOther)
 }
 
@@ -185,10 +178,25 @@ func UpdateScore(db *sql.DB, email string, score int) {
 	}
 }
 
+func UpdateUsername(db *sql.DB, email string, username string) {
+	query := `
+	UPDATE users SET username = ? WHERE email = ?`
+	_, err := db.Exec(query, username, email)
+	if err != nil {
+		fmt.Println(err)
+	}
+	SessionData.Username = username
+}
 func UpdateUserPassword(db *sql.DB, email string, password string) {
+	//hash des mdp
+	hashedPassword, err := bcrypt.GenerateFromPassword([]byte(password), bcrypt.DefaultCost)
+	if err != nil {
+		log.Fatal(err)
+	}
+
 	query := `
 	UPDATE users SET password = ? WHERE email = ?`
-	_, err := db.Exec(query, password, email)
+	_, err = db.Exec(query, hashedPassword, email)
 	if err != nil {
 		fmt.Println(err)
 	}

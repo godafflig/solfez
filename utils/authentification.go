@@ -23,6 +23,9 @@ func Login(email string, password string, w http.ResponseWriter, r *http.Request
 		SessionData.Error = ""
 		SessionData.ProfilePic = GetProfilePicFromDb()
 		SessionData.HighestScore = GetScoreFromScoresTable()
+		SessionData.Statistics.TotalGamesPlayed = GetTotalGamesPlayed()
+		SessionData.Statistics.TotalGamesWon = GetTotalGamesWon()
+		SessionData.Statistics.TotalGamesLost = GetTotalGamesLost()
 
 		// redirect
 		tmpl, _ := template.New("name").ParseFiles("static/Accueil.html", "static/navbar.html")
@@ -76,15 +79,7 @@ func Logout(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		panic(err)
 	}
-
-	SessionData.Id = 0
-	SessionData.Username = ""
-	SessionData.Email = ""
-	SessionData.IsLogged = false
-	SessionData.Error = ""
-	SessionData.GameData.Questions = []string{}
-	SessionData.GameData.CorrectAnswer = ""
-	SessionData.Score = 0
+	ClearDatas()
 	http.Redirect(w, r, "/", http.StatusSeeOther)
 }
 

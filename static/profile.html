@@ -34,8 +34,40 @@
   </form></br>
   <br>
 
-  Changer de mot de passe <i>(ça marche pas encore)</i>:
-  <form class="formulaire" action="/update" method="POST">
+  Changer de nom d'utilisateur :
+  <form class="formulaire" action="/update-username" method="POST">
+    <input
+      class="input"
+      type="text"
+      name="oldusername"
+      placeholder="Entrer ancien nom d'utilisateur..."
+      required
+    />
+    <input
+      class="input"
+      type="text"
+      name="newusername"
+      placeholder="Nouveau nom d'utilisateur..."
+      required
+    />
+    <input
+      class="input"
+      type="text"
+      name="newusernameconfirm"
+      placeholder="Confirmer le nouveau nom d'utilisateur..."
+      required
+    />
+    <div class="content1">
+      
+      <div class="login">
+        <button class="btnconnexion" type="submit">Confirmer</button>
+      </div>
+    </div>
+  </form>
+  <br>
+
+  Changer de mot de passe :
+  <form class="formulaire" action="/update-password" method="POST">
     <input
       class="input"
       type="password"
@@ -60,9 +92,7 @@
     <div class="content1">
       
       <div class="login">
-        <button class="btnconnexion">
-          <a href="/update">Confirmer</a>
-        </button>
+        <button class="btnconnexion" type="submit">Confirmer</button>
       </div>
     </div>
   </form>
