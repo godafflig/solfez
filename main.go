@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"html/template"
 	"log"
 	"net/http"
@@ -115,9 +116,15 @@ func Routing(w http.ResponseWriter, r *http.Request) {
 		tmpl.ExecuteTemplate(w, "base", utils.ScoreboardData)
 		template.Must(template.ParseFiles("static/classement.html")).Execute(w, utils.ScoreboardData)
 	case "/accueil":
-		tmpl, _ := template.New("name").ParseFiles("static/Accueil.html", "static/navbar.html")
+		tmpl, err := template.New("name").ParseFiles("static/Accueil.html", "static/navbar.html")
+		if err != nil {
+			fmt.Println(err)
+		}
 		tmpl.ExecuteTemplate(w, "base", utils.SessionData)
-		template.Must(template.ParseFiles("static/Accueil.html")).Execute(w, utils.SessionData)
+		err = template.Must(template.ParseFiles("static/Accueil.html")).Execute(w, utils.SessionData)
+		if err != nil {
+			fmt.Println(err)
+		}
 	case "/difficulte":
 		utils.SessionData.Error = ""
 		utils.SessionData.GameData.PreviousCorrectAnswer = ""
