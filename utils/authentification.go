@@ -1,7 +1,6 @@
 package utils
 
 import (
-	"fmt"
 	"html/template"
 	"net/http"
 )
@@ -60,7 +59,6 @@ func Register(username string, email string, password string, passwordCheck stri
 		SessionData.Statistics.TotalGamesWon = 0
 		SessionData.Statistics.TotalGamesLost = 0
 
-		fmt.Println("ok")
 		// redirect
 		tmpl, _ := template.New("name").ParseFiles("static/Accueil.html", "static/navbar.html")
 		tmpl.ExecuteTemplate(w, "base", SessionData)

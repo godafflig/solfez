@@ -4,6 +4,7 @@ import (
 	"database/sql"
 	"fmt"
 	"log"
+	"net/http"
 	"strconv"
 
 	"golang.org/x/crypto/bcrypt"
@@ -25,14 +26,31 @@ func CreateUser(db *sql.DB, username string, password string, email string) {
 	}
 }
 
-// delete one user from the database
-func DeleteUser(db *sql.DB, email string) {
+// delete one user from both database
+func DeleteUser(db *sql.DB, email string, w http.ResponseWriter, r *http.Request) {
 	query := `
 	DELETE FROM users WHERE email = ?`
 	_, err := db.Exec(query, email)
 	if err != nil {
-		log.Fatal(err)
+		fmt.Println(err)
 	}
+
+	query2 := `
+	DELETE FROM scores WHERE user_id = ?`
+	_, err = db.Exec(query2, SessionData.Id)
+	if err != nil {
+		fmt.Println(err)
+	}
+
+	SessionData.Id = 0
+	SessionData.Username = ""
+	SessionData.Email = ""
+	SessionData.IsLogged = false
+	SessionData.Error = ""
+	SessionData.GameData.Questions = []string{}
+	SessionData.GameData.CorrectAnswer = ""
+	SessionData.Score = 0
+	http.Redirect(w, r, "/", http.StatusSeeOther)
 }
 
 // check if one user exists in the database

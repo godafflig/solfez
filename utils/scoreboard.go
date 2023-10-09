@@ -28,6 +28,9 @@ func saveHighestScore(newScore int) {
 func SortClassement() {
 	db := GetDB()
 
+	// Clear the previous data
+	ScoreboardData.Classement = []Scoreboard{}
+
 	// get all scores, usernames & id
 	query := `SELECT user_id, user_name, score FROM scores`
 	rows, err := db.Query(query)
