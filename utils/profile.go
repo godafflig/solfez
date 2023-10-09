@@ -96,6 +96,7 @@ func ChangePassword(oldPassword string, newPassword string, newPasswordCheck str
 	}
 }
 
+// clear the session data
 func ClearDatas() {
 	SessionData.Id = 0
 	SessionData.Username = ""

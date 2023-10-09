@@ -6,6 +6,7 @@ import (
 	"time"
 )
 
+// update the nb of questions answered correct, wrong & total numbers of questions played + save the highest score in the database 'scores'
 func UpdateStatistics(result string) {
 	SessionData.Statistics.TotalGamesPlayed += 1
 	UpdateTotalGames()
@@ -19,6 +20,7 @@ func UpdateStatistics(result string) {
 	SessionData.HighestScore = GetScoreFromScoresTable()
 }
 
+// update the total questions played in the database 'users'
 func UpdateTotalGames() {
 	db := GetDB()
 	query := `
@@ -29,6 +31,7 @@ func UpdateTotalGames() {
 	}
 }
 
+// update the total questions won in the database 'users'
 func UpdateWins() {
 	db := GetDB()
 	query := `
@@ -39,6 +42,7 @@ func UpdateWins() {
 	}
 }
 
+// update the total questions lost in the database 'users'
 func UpdateLoses() {
 	db := GetDB()
 	query := `
@@ -49,6 +53,7 @@ func UpdateLoses() {
 	}
 }
 
+// get the total questions played from the database 'users'
 func GetTotalGamesPlayed() int {
 	db := GetDB()
 	query := `
@@ -72,6 +77,7 @@ func GetTotalGamesPlayed() int {
 	return totalGames
 }
 
+// get the total questions won from the database 'users'
 func GetTotalGamesWon() int {
 	db := GetDB()
 	query := `
@@ -96,6 +102,7 @@ func GetTotalGamesWon() int {
 	return wonInt
 }
 
+// get the total questions lost from the database 'users'
 func GetTotalGamesLost() int {
 	db := GetDB()
 	query := `

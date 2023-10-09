@@ -65,7 +65,6 @@ func QuestionQCM(w http.ResponseWriter, r *http.Request) {
 	}
 
 	for i := 0; i < 3; i++ {
-		// changer ici pianoKeys en pianoKeysDisplay pour afficher les notes en français mais le son ne marche plus dans ce cas
 		SessionData.GameData.Questions = append(SessionData.GameData.Questions, pianoKeysDisplay[randomIndexNotes[i]]+Octave[randomIndexOctaves[i]]+"eme")
 	}
 

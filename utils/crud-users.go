@@ -168,6 +168,7 @@ func GetScore(db *sql.DB, email string) int {
 	return scoreInt
 }
 
+// get the account creation date from the database 'users'
 func GetCreationDate(db *sql.DB) string {
 	query := `
 	SELECT created_at FROM users WHERE user_id = ?`
@@ -196,6 +197,7 @@ func UpdateScore(db *sql.DB, email string, score int) {
 	}
 }
 
+// update the username in the database 'users'
 func UpdateUsername(db *sql.DB, email string, username string) {
 	query := `
 	UPDATE users SET username = ? WHERE email = ?`
@@ -205,6 +207,8 @@ func UpdateUsername(db *sql.DB, email string, username string) {
 	}
 	SessionData.Username = username
 }
+
+// update password in the database 'users'
 func UpdateUserPassword(db *sql.DB, email string, password string) {
 	//hash des mdp
 	hashedPassword, err := bcrypt.GenerateFromPassword([]byte(password), bcrypt.DefaultCost)

@@ -38,7 +38,6 @@ func main() {
 	if err != nil {
 		log.Fatal(err)
 	}
-
 }
 
 func Routing(w http.ResponseWriter, r *http.Request) {

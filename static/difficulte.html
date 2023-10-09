@@ -1,56 +1,76 @@
 {{define "base"}}
 <!DOCTYPE html>
 <html>
+  <head>
+    <link
+      href="https://fonts.googleapis.com/css?family=Inter&display=swap"
+      rel="stylesheet"
+    />
+    <link href="../static/css/difficulte.css" rel="stylesheet" />
+    <link href="../static/css/navbar.css" rel="stylesheet" />
+    <title>Choix de la difficulte</title>
+  </head>
 
-<head>
-  <link href="https://fonts.googleapis.com/css?family=Inter&display=swap" rel="stylesheet" />
-  <link href="../static/css/difficulte.css" rel="stylesheet" />
-  <link href="../static/css/navbar.css" rel="stylesheet" />
-  <title>Choix de la difficulte</title>
-</head>
-
-<body>
-  {{template "navbar" .}}
-  <div class="container">
-    <div class="background"></div>
-    <!-- <div class="centrer"> -->
-    <h1 class="title">Choisissez la difficulté</h1>
-    <div class="container-btn">
-      <a href="/niveau-facile"><input class="bouton" type="button" value="Facile" /></a>
-      <a href="/niveau-moyen"><input class="bouton" style="margin-top: 120px" type="button" value="Moyen" /></a>
-      <a href="/niveau-difficile"><input class="bouton" style="margin-top: 240px" type="button" value="Difficile" /></a>
-    </div>
-    <!-- </div> -->
-    <div class="center">
-      <div class="explication-difficulte">
-        <div class="text-container">
-          <h3>Facile</h3>
-          <br />
-          <p>
-            Devinez la note correspondant au son entendu et à la touche du piano
-            qui s'allume !
-            <br />Vous aurez à choisir parmi trois options via un qcm.<br /><br /><br />(après 3 erreurs, votre score redescend à 0)
-          </p>
-        </div>
-        <div class="text-container">
-          <h3>Moyen</h3>
-          <br />
-          <p>
-            Reconnaissez la note entendue et placez la au bon endroit sur le
-            piano.<br />
-          </p>
-        </div>
-        <div class="text-container">
-          <h3>Difficile</h3>
-          <br />
-          <p>
-            Trouvez l'accord entendu et reproduisez le sur le piano !<br />
-          </p>
+  <body>
+    {{template "navbar" .}}
+    <div class="container">
+      <div class="background"></div>
+      <!-- <div class="centrer"> -->
+      <h1 class="title">Choisissez la difficulté</h1>
+      <div class="container-btn">
+        <a href="/niveau-facile"
+          ><input class="bouton" type="button" value="Facile"
+        /></a>
+        <a href="/niveau-moyen"
+          ><input
+            class="bouton"
+            style="margin-top: 120px"
+            type="button"
+            value="Moyen"
+        /></a>
+        <a href="/niveau-difficile"
+          ><input
+            class="bouton"
+            style="margin-top: 240px"
+            type="button"
+            value="Difficile"
+        /></a>
+      </div>
+      <!-- </div> -->
+      <div class="center">
+        <div class="explication-difficulte">
+          <div class="text-container">
+            <h3>Facile</h3>
+            <br /><br />
+            <p>
+              Devinez la note correspondant au son entendu et à la touche du
+              piano qui s'allume !
+              <br />Vous aurez à choisir parmi trois options via un qcm.<br /><br />Nombre
+              de vies : 3<br />(après 3 erreurs, votre score redescend à 0)<br />
+            </p>
+          </div>
+          <div class="text-container">
+            <h3>Moyen</h3>
+            <br /><br />
+            <p>
+              Reconnaissez la note entendue et placez la au bon endroit sur le
+              piano.<br />Vous pouvez sélectionner n'importe quelle note du
+              piano parmi 2 octaves et ensuite validez votre choix.<br /><br />Nombre
+              de vies : 2<br />(après 2 erreurs, votre score redescend à 0)<br />
+            </p>
+          </div>
+          <div class="text-container">
+            <h3>Difficile</h3>
+            <br /><br />
+            <p>
+              Trouvez l'accord entendu et reproduisez le sur le piano !<br />Sélectionnez
+              3 notes sur le piano puis validez votre choix.<br /><br>Nombre de vies
+              : 1<br />(après une seule erreur, votre score redescend à 0)
+            </p>
+          </div>
         </div>
       </div>
     </div>
-  </div>
-</body>
-
+  </body>
 </html>
 {{end}}

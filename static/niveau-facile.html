@@ -8,6 +8,7 @@
     <title>niveau-facile</title>
     <link rel="stylesheet" href="../static/css/nivfacile.css" />
     <link href="../static/css/navbar.css" rel="stylesheet" />
+    <script src="../static/js/timer.js"></script>
   </head>
 
   <body>
@@ -27,9 +28,15 @@
           <h3>Niveau actuel :</h3>
           {{.GameData.CurrentLevel}}
         </div>
-        <!--<br />Nombre de vies
-          restantes : {{.GameData.LifeLeft}}-->
+        <div>
+          <h3>Nombre de vies restantes :</h3>
+          {{.GameData.LifeLeft}}
+        </div>
         <!-- <div class="vie"><img src="../static/images/" alt=""></div> classe vie pour plus tard -->
+        <div>
+          <h3>Temps restant :</h3>
+          <div id="timer">20</div>
+        </div>
       </div>
       <br />
 
@@ -143,8 +150,8 @@
       <br />
       <div>Bonne réponse : {{.GameData.CorrectAnswer}}</div>
     </div>
-    <script src="../static/audio.js"></script>
-    <script src="../static/script.js"></script>
+    <script src="../static/js/audio.js"></script>
+    <script src="../static/js/script-niveau-facile.js"></script>
   </body>
 </html>
 {{end}}

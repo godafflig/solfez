@@ -28,7 +28,8 @@ type Stats struct {
 	TotalGamesWon       int
 	TotalGamesLost      int
 	AccountCreatedSince string
-	//TimeSpendPlaying date.Duration
+	Time                string
+	//TimeSpendPlaying    chan time.Duration
 }
 
 var SessionData Session
