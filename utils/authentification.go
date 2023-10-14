@@ -28,9 +28,9 @@ func Login(email string, password string, w http.ResponseWriter, r *http.Request
 		SessionData.Statistics.TotalGamesLost = GetTotalGamesLost()
 
 		// redirect
-		tmpl, _ := template.New("name").ParseFiles("static/Accueil.html", "static/navbar.html")
+		tmpl, _ := template.New("name").ParseFiles("static/difficulte.html", "static/navbar.html")
 		tmpl.ExecuteTemplate(w, "base", SessionData)
-		template.Must(template.ParseFiles("static/Accueil.html")).Execute(w, SessionData)
+		template.Must(template.ParseFiles("static/difficulte.html")).Execute(w, SessionData)
 	}
 }
 
@@ -63,9 +63,9 @@ func Register(username string, email string, password string, passwordCheck stri
 		SessionData.Statistics.TotalGamesLost = 0
 
 		// redirect
-		tmpl, _ := template.New("name").ParseFiles("static/Accueil.html", "static/navbar.html")
+		tmpl, _ := template.New("name").ParseFiles("static/difficulte.html", "static/navbar.html")
 		tmpl.ExecuteTemplate(w, "base", SessionData)
-		template.Must(template.ParseFiles("static/Accueil.html")).Execute(w, SessionData)
+		template.Must(template.ParseFiles("static/difficulte.html")).Execute(w, SessionData)
 	}
 }
 

@@ -68,7 +68,7 @@ func QuestionQCM(w http.ResponseWriter, r *http.Request) {
 
 	for i := 0; i < 3; i++ {
 		if SessionData.GameData.CurrentLevel < 3 {
-			SessionData.GameData.Questions = append(SessionData.GameData.Questions, pianoKeys[randomIndexNotes[i]]+Octave[randomIndexOctaves[i]]+"eme")
+			SessionData.GameData.Questions = append(SessionData.GameData.Questions, pianoKeysDisplay[randomIndexNotes[i]]+Octave[randomIndexOctaves[i]]+"eme")
 		} else {
 			SessionData.GameData.Questions = append(SessionData.GameData.Questions, Octave[randomIndexOctaves[i]]+pianoKeys[randomIndexNotes[i]])
 		}
@@ -91,7 +91,9 @@ func QuestionQCM(w http.ResponseWriter, r *http.Request) {
 // checking if the answer is correct and updating the datas accordlingly
 func CheckAnswer(answer string, w http.ResponseWriter, r *http.Request) bool {
 
-	SessionData.GameData.CorrectAnswer = ConvertNote()
+	if SessionData.GameData.CurrentLevel >= 3 {
+		SessionData.GameData.CorrectAnswer = ConvertNote()
+	}
 
 	if (SessionData.GameData.CurrentLevel < 3 && answer == SessionData.GameData.CorrectAnswer) || (SessionData.GameData.CurrentLevel == 3 && checkTheTreePossibilities(answer, SessionData.GameData.CorrectAnswer)) {
 		switch SessionData.GameData.CurrentLevel {

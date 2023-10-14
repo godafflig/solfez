@@ -4,14 +4,40 @@
 
 <nav id="nav">
   <ul>
-    <li><a href="/accueil">Accueil</a></li>
+    <li>
+      {{if .IsLogged}}
+      <a href="/profile">
+        <img
+          class="menu-images"
+          src="{{.ProfilePic}}"
+          style="border-radius: 80%"
+        />
+      </a>
+      {{else}}
+      <a href="/profile">
+        <img class="menu-images" src="../static/images/user.png" />
+      </a>
+      {{end}}
+    </li>
+
+    <li><a href="/">Accueil</a></li>
     <li><a href="/classement">Classement</a></li>
     <li><a href="/difficulte">Jouer</a></li>
 
     <li>
-      <a href="/profile"
-        ><img class="menu-images" src="../static/images/user.png" />
-      </a>
+      <!-- <a
+        onSubmit="if(!confirm('Es-tu sûr.e de ne pas vouloir de déconnecter ?')){return false;}"
+        href="/logout"
+        >
+      </a> -->
+      <form
+        action="/logout"
+        onSubmit="if(!confirm('Es-tu sûr.e de vouloir te déconnecter ?')){return false;}"
+      >
+        <button type="submit" class="logout-btn">
+          <img class="menu-images" src="../static/images/logout.png" />
+        </button>
+      </form>
     </li>
   </ul>
   <div id="icons"></div>

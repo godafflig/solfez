@@ -44,8 +44,10 @@ func Routing(w http.ResponseWriter, r *http.Request) {
 	switch r.URL.Path {
 
 	case "/":
+		tmpl, _ := template.New("name").ParseFiles("static/index.html", "static/navbar.html")
+		tmpl.ExecuteTemplate(w, "base", utils.SessionData)
 		template.Must(template.ParseFiles("static/index.html")).Execute(w, utils.SessionData)
-	case "/register":
+	case "/register-form":
 		r.ParseForm()
 		utils.Register(r.FormValue("username"), r.FormValue("email"), r.FormValue("password"), r.FormValue("password-check"), w, r)
 	case "/login":
@@ -55,8 +57,8 @@ func Routing(w http.ResponseWriter, r *http.Request) {
 			r.ParseForm()
 			utils.Login(r.FormValue("email"), r.FormValue("password"), w, r)
 		}
-	case "/accueil":
-		ExecuteTemplate(w, r, "static/Accueil.html")
+	case "/register":
+		template.Must(template.ParseFiles("static/register.html")).Execute(w, utils.SessionData)
 	case "/difficulte":
 		utils.SessionData.Error = ""
 		utils.SessionData.GameData.PreviousCorrectAnswer = ""
@@ -115,7 +117,7 @@ func Routing(w http.ResponseWriter, r *http.Request) {
 			template.Must(template.ParseFiles("static/classement.html")).Execute(w, utils.ScoreboardData)
 		} else {
 			utils.SessionData.Error = "Vous devez vous connecter pour accéder au jeu."
-			template.Must(template.ParseFiles("static/index.html")).Execute(w, utils.SessionData)
+			template.Must(template.ParseFiles("static/login.html")).Execute(w, utils.SessionData)
 		}
 	case "/logout":
 		utils.Logout(w, r)
@@ -128,12 +130,12 @@ func Routing(w http.ResponseWriter, r *http.Request) {
 }
 
 func ExecuteTemplate(w http.ResponseWriter, r *http.Request, pageHtml string) {
-	// if utils.SessionData.IsLogged {
-	tmpl, _ := template.New("name").ParseFiles(pageHtml, "static/navbar.html")
-	tmpl.ExecuteTemplate(w, "base", utils.SessionData)
-	template.Must(template.ParseFiles(pageHtml)).Execute(w, utils.SessionData)
-	// } else {
-	// 	utils.SessionData.Error = "Vous devez vous connecter pour accéder au jeu."
-	// 	template.Must(template.ParseFiles("static/index.html")).Execute(w, utils.SessionData)
-	// }
+	if utils.SessionData.IsLogged {
+		tmpl, _ := template.New("name").ParseFiles(pageHtml, "static/navbar.html")
+		tmpl.ExecuteTemplate(w, "base", utils.SessionData)
+		template.Must(template.ParseFiles(pageHtml)).Execute(w, utils.SessionData)
+	} else {
+		utils.SessionData.Error = "Vous devez vous connecter pour accéder au jeu."
+		template.Must(template.ParseFiles("static/login.html")).Execute(w, utils.SessionData)
+	}
 }

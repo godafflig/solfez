@@ -53,8 +53,8 @@
 
     .menu-images {
         vertical-align: middle;
-        height: 50px;
-        width: 50px;
+        height: 40px;
+        width: 40px;
     }
     .btn-deco{
         border: none;
@@ -123,4 +123,10 @@
     nav.active ul img{
         width: 60px;
     }
+}
+
+.logout-btn {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
 }
