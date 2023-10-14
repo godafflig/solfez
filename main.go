@@ -81,7 +81,7 @@ func Routing(w http.ResponseWriter, r *http.Request) {
 		}
 	case "/niveau-difficile":
 		if r.Method == "GET" {
-			utils.StartGame(w, r, 2)
+			utils.StartGame(w, r, 3)
 			ExecuteTemplate(w, r, "static/niveau-difficile.html")
 		} else if r.Method == "POST" {
 			r.ParseForm()
@@ -128,12 +128,12 @@ func Routing(w http.ResponseWriter, r *http.Request) {
 }
 
 func ExecuteTemplate(w http.ResponseWriter, r *http.Request, pageHtml string) {
-	if utils.SessionData.IsLogged {
-		tmpl, _ := template.New("name").ParseFiles(pageHtml, "static/navbar.html")
-		tmpl.ExecuteTemplate(w, "base", utils.SessionData)
-		template.Must(template.ParseFiles(pageHtml)).Execute(w, utils.SessionData)
-	} else {
-		utils.SessionData.Error = "Vous devez vous connecter pour accéder au jeu."
-		template.Must(template.ParseFiles("static/index.html")).Execute(w, utils.SessionData)
-	}
+	// if utils.SessionData.IsLogged {
+	tmpl, _ := template.New("name").ParseFiles(pageHtml, "static/navbar.html")
+	tmpl.ExecuteTemplate(w, "base", utils.SessionData)
+	template.Must(template.ParseFiles(pageHtml)).Execute(w, utils.SessionData)
+	// } else {
+	// 	utils.SessionData.Error = "Vous devez vous connecter pour accéder au jeu."
+	// 	template.Must(template.ParseFiles("static/index.html")).Execute(w, utils.SessionData)
+	// }
 }
