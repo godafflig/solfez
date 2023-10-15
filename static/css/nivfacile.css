@@ -6,7 +6,7 @@
     font-style: normal;
 }
 * {
-    font-family: RobotoMono;
+    font-family: "RobotoMono";
 }
 
 html, body {
@@ -20,16 +20,24 @@ html, body {
     background: linear-gradient(rgba(112, 126, 146, 1), rgba(255, 255, 255, 0.11));
 }
 
+.error {
+    font-weight: bold;
+    font-size: 25px;
+}
+
 .question{
     display: flex;
     justify-content: center;
     align-items: center;
     width: auto;
-    height: 100px;
+    margin-top: 10px;
     border: 2px solid black;
     border-radius: 50px 50px 50px 50px;
-    padding: 50px;
+    padding: 15px;
+}
 
+audio{
+    display: none;
 }
 
 @media (max-width: 400px) {
@@ -51,10 +59,9 @@ html, body {
 @media (max-width: 800px) {
 
     .question {
-        margin: 150px 0 0 0 ;
-        width: 200px;
-        padding: 0;
+        padding: 20px;
         justify-content: center;
+        align-items: center;
         flex-direction: column;
     }
     .btn-note{
@@ -63,10 +70,8 @@ html, body {
         padding: 5px 10px;
     }
     .choix{
-        width: 300px;
+        margin-top: 8px;
     }
-
-
 }
 
 #valider-btn {
@@ -91,7 +96,7 @@ html, body {
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-top: 50px;
+    margin-top: 20px;
 }
 
 .container-info-jeu {
@@ -114,13 +119,17 @@ html, body {
 
 
 .control-button {
-    background: none;
+    background: #E3F6F5;
+    top: 0;
+    margin: 5px;
+    border-radius: 20px;
+    padding: 5px;
     border: none;
     cursor: pointer;
 }
 
 img {
-    width: 100px;
+    width: 60px;
 }
 
 .submit-buttons {
@@ -214,14 +223,10 @@ audio {
     }
 }
 
-/* Cela affichera les boutons radio côte à côte horizontalement, avec un espace entre eux. Vous pouvez ajuster les marges et les espaces à l'intérieur du bouton selon vos préférences. */
-
-
 /* Ajout de cette ligne pour corriger le positionnement des boutons de réponse */
 .choix {
     display: inline-block;
-    margin-right: 0px;
-    /* Espace entre les boutons, ajustez selon vos besoins */
+    margin-right: 4px;
 }
 
 
@@ -230,7 +235,6 @@ audio {
 #piano{
     display: flex;
     justify-content: center;
-    padding-top: 40px;
 }
 
 #ImgPiano{

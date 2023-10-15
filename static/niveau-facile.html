@@ -95,6 +95,7 @@
           <h2>Quelle note a été jouée ?</h2>
         </div>
         <br />
+        <span class="error">{{.Error}} {{.GameData.PreviousCorrectAnswer}}</span><br />
         <form class="question" action="/niveau-facile" method="POST">
           <br />
           {{range .GameData.Questions}}
@@ -119,9 +120,6 @@
             <input id="valider-btn" type="submit" value=" " />
           </div>
         </form>
-        <span class="error"
-          >{{.Error}} {{.GameData.PreviousCorrectAnswer}}</span
-        >
         <div id="audio-container">
           <div id="audio-controls">
             <div class="playsbtn">
@@ -137,7 +135,6 @@
             </div>
           </div>
           <audio
-            style="display: none"
             id="audio-element"
             src="/static/assets/notes/{{.GameData.CorrectNote}}.mp3"
             type="audio/mpeg"

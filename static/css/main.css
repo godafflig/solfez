@@ -14,11 +14,8 @@
 
 body {
     font-size: 14px;
-<<<<<<< HEAD
     margin: 0; /* Réinitialiser la marge par défaut du body */
-=======
     color: white; /* Texte en blanc */
->>>>>>> 7fc1e93d6c9cdff0404a3343a4886b2ba716ebee
     overflow: hidden;
 }
 
