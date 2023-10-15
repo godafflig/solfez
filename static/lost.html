@@ -1,9 +1,23 @@
 {{define "base"}}
-
-<body>
+<!DOCTYPE html>
+<html lang>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>niveau-difficile</title>
+    <link rel="stylesheet" href="../static/css/loose.css" />
     <link href="../static/css/navbar.css" rel="stylesheet" />
-</body>
-{{template "navbar" .}} you lost
-
-</body>
+  </head>
+  <body>
+    {{template "navbar" .}}
+    
+    <div class="bdy">
+        <div class="game-over-container">
+            <h1>Game Over</h1>
+            <p>Your score: <span id="score">{{.Score}}</span></p>
+            <a href="/difficulte"><button id="play-again" >Play Again</button></a>
+        </div>
+    </div>
+  </body>
+</html>
 {{end}}
