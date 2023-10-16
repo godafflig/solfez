@@ -110,15 +110,7 @@ func Routing(w http.ResponseWriter, r *http.Request) {
 	case "/lost":
 		ExecuteTemplate(w, r, "static/lost.html")
 	case "/classement":
-		if utils.SessionData.IsLogged {
-			utils.SortClassement()
-			tmpl, _ := template.New("name").ParseFiles("static/classement.html", "static/navbar.html")
-			tmpl.ExecuteTemplate(w, "base", utils.ScoreboardData)
-			template.Must(template.ParseFiles("static/classement.html")).Execute(w, utils.ScoreboardData)
-		} else {
-			utils.SessionData.Error = "Vous devez vous connecter pour accéder au jeu."
-			template.Must(template.ParseFiles("static/login.html")).Execute(w, utils.SessionData)
-		}
+		ExecuteTemplate(w, r, "static/classement.html")
 	case "/logout":
 		utils.Logout(w, r)
 	case "/delete-account":

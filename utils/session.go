@@ -12,6 +12,7 @@ type Session struct {
 	ProfilePic    string
 	GameData      Game
 	Statistics    Stats
+	ScoreboardData Scoreboard
 }
 
 type Game struct {
@@ -30,11 +31,23 @@ type Stats struct {
 	TotalGamesLost      int
 	AccountCreatedSince string
 	Time                string
-	//TimeSpendPlaying    chan time.Duration
 }
+
+type Scoreboard struct {
+	IsLogged   bool
+	UserId     int
+	Username   string
+	Score      int
+	Rank       int
+	Classement []Scoreboard
+}
+
 
 var SessionData Session
 
 var GameData Game
 
 var Statistics Stats
+
+var ScoreboardData Scoreboard
+

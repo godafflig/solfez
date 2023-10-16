@@ -94,7 +94,6 @@ th, td {
     text-align: center;
 }
 
-<<<<<<< HEAD
 .table-titre1 {
     padding: 0px;
 }
@@ -145,8 +144,6 @@ tr.interligne td {
     z-index: -1;
 }
 
-=======
->>>>>>> b2303a788aafd89396ace7aa10acd0de4ebb362f
 @media screen and (max-width: 1000px) {
     .table-container {
         width: 95%;

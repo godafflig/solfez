@@ -5,16 +5,6 @@ import (
 	"sort"
 )
 
-type Scoreboard struct {
-	UserId     int
-	Username   string
-	Score      int
-	Rank       int
-	Classement []Scoreboard
-}
-
-var ScoreboardData Scoreboard
-
 // compare & save the highest score in the database 'scores'
 func saveHighestScore(newScore int) {
 	db := GetDB()
@@ -31,7 +21,10 @@ func SortClassement() {
 	// Clear the previous data
 	ScoreboardData.Classement = []Scoreboard{}
 
-	// get all scores, usernames & id
+	// define the IsLogged value
+	ScoreboardData.IsLogged = true
+
+	// get all scores, usernames, profile pics & id from 'scores' table
 	query := `SELECT user_id, user_name, score FROM scores`
 	rows, err := db.Query(query)
 	if err != nil {
@@ -51,15 +44,17 @@ func SortClassement() {
 		scores = append(scores, Scoreboard{UserId: userID, Username: username, Score: scoreValue})
 	}
 
+	// sort the scores by score
 	sort.Slice(scores, func(i, j int) bool {
 		return scores[i].Score > scores[j].Score
 	})
-	ScoreboardData.Classement = scores
+
+	SessionData.ScoreboardData.Classement = scores
 
 	// add the rank to the struct
 	rank := 1
-	for i := 0; i < len(ScoreboardData.Classement); i++ {
-		ScoreboardData.Classement[i].Rank = rank
+	for i := 0; i < len(SessionData.ScoreboardData.Classement); i++ {
+		SessionData.ScoreboardData.Classement[i].Rank = rank
 		rank++
 	}
 }

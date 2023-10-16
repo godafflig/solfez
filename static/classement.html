@@ -29,15 +29,17 @@
       <div class="table-container">
         <table class="table">
           <tr class="header-table">
+            <th class="titre">Photo</th>
             <th class="titre">Pseudo</th>
             <th class="titre">Meilleur score</th>
             <th class="titre">Classement</th>
           </tr>
-          {{range .Classement}}
+          {{range .ScoreboardData.Classement}}
           <tr class="interligne">
             <td>{{.Username}}</td>
             <td>{{.Score}}</td>
             <td>{{.Rank}}</td>
+            <td>{{.Score}}</td>
           </tr>
           {{end}}
         </table>
