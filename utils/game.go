@@ -126,7 +126,8 @@ func CheckAnswer(answer string, w http.ResponseWriter, r *http.Request) bool {
 		if SessionData.GameData.LifeLeft > 1 {
 			SessionData.GameData.LifeLeft -= 1
 			PlayAgain(w, r, SessionData.GameData.LifeLeft, SessionData.GameData.CurrentLevel)
-		} else {
+		} else if SessionData.GameData.LifeLeft == 1 {
+			SessionData.PreviousScore = SessionData.Score
 			SessionData.Score = 0
 			UpdateScore(GetDB(), SessionData.Email, SessionData.Score)
 			http.Redirect(w, r, "/lost", http.StatusSeeOther)

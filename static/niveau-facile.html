@@ -35,7 +35,7 @@
         <!-- <div class="vie"><img src="../static/images/" alt=""></div> classe vie pour plus tard -->
         <div>
           <h3>Temps restant :</h3>
-          <div id="timer">120</div>
+          <div id="timer">10</div>
         </div>
       </div>
       <br />
@@ -95,7 +95,8 @@
           <h2>Quelle note a été jouée ?</h2>
         </div>
         <br />
-        <span class="error">{{.Error}} {{.GameData.PreviousCorrectAnswer}}</span><br />
+        <span class="error">{{.Error}} {{.GameData.PreviousCorrectAnswer}}</span
+        ><br />
         <form class="question" action="/niveau-facile" method="POST">
           <br />
           {{range .GameData.Questions}}
@@ -115,7 +116,6 @@
             </label>
           </div>
           {{end}}
-          <!-- mettre dasn le formulaire si jamais la question ne passe pas a la suivante -->
           <div style="text-align: center">
             <input id="valider-btn" type="submit" value=" " />
           </div>

@@ -1,16 +1,17 @@
 package utils
 
 type Session struct {
-	Id           int
-	Username     string
-	Email        string
-	IsLogged     bool
-	Score        int
-	HighestScore int
-	Error        string
-	ProfilePic   string
-	GameData     Game
-	Statistics   Stats
+	Id            int
+	Username      string
+	Email         string
+	IsLogged      bool
+	Score         int
+	PreviousScore int
+	HighestScore  int
+	Error         string
+	ProfilePic    string
+	GameData      Game
+	Statistics    Stats
 }
 
 type Game struct {

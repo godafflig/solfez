@@ -35,7 +35,7 @@
         <!-- <div class="vie"><img src="../static/images/" alt=""></div> classe vie pour plus tard -->
         <div>
           <h3>Temps restant :</h3>
-          <div id="timer">120</div>
+          <div id="timer">30</div>
         </div>
       </div>
       <br />
@@ -95,10 +95,12 @@
         <div class="titre">
           <h2>Cliquez sur la note jouée puis validez !</h2>
         </div>
-        <span class="error">{{.Error}} {{.GameData.PreviousCorrectAnswer}}</span>
+        <span class="error"
+          >{{.Error}} {{.GameData.PreviousCorrectAnswer}}</span
+        >
         <form class="question" action="/niveau-moyen" method="POST">
           <div style="text-align: center">
-            <input id="valider-btn" type="submit" value=" "/>
+            <input id="valider-btn" type="submit" value=" " />
           </div>
         </form>
         <div id="audio-container">

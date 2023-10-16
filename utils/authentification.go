@@ -8,11 +8,8 @@ import (
 // setting up session
 func Login(email string, password string, w http.ResponseWriter, r *http.Request) {
 
-	if !EmailExists(GetDB(), email) {
-		SessionData.Error = "Email incorrect."
-		http.Redirect(w, r, "/login", http.StatusSeeOther)
-	} else if !UserExists(GetDB(), email, password) {
-		SessionData.Error = "Mot de passe incorrect."
+	if !EmailExists(GetDB(), email) || !UserExists(GetDB(), email, password) {
+		SessionData.Error = "Email ou mot de passe incorrect."
 		http.Redirect(w, r, "/login", http.StatusSeeOther)
 	} else {
 		SessionData.Id = GetId(GetDB(), email)

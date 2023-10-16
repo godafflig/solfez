@@ -14,4 +14,4 @@ const countdownInterval = setInterval(updateTimer, 1000);
     
 setTimeout(() => {
           clearInterval(countdownInterval);
-}, 30000);
+}, 60000);
