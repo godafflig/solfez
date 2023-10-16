@@ -110,6 +110,7 @@ func Routing(w http.ResponseWriter, r *http.Request) {
 	case "/lost":
 		ExecuteTemplate(w, r, "static/lost.html")
 	case "/classement":
+		utils.SortClassement()
 		ExecuteTemplate(w, r, "static/classement.html")
 	case "/logout":
 		utils.Logout(w, r)
