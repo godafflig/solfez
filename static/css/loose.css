@@ -20,15 +20,25 @@
     align-items: flex-start;
 }
 
+body{
+    margin: 0;
+    background: linear-gradient(rgba(112, 126, 146, 1), rgba(39, 35, 67, 0.11));
+}
+
 .game-over-container {
-    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
     background-color: #E3F6F5;
     border-radius: 20px;
     border: 2px solid #333;
     border-radius: 10px;
-    width: 300px;
-    margin: 100px auto;
-    padding: 20px;
+    width: 50%;
+    min-height: 50%;
+    height: fit-content;
+    margin: 20px auto;
+    padding: 30px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
 }
 
@@ -42,6 +52,7 @@ button:hover {
 }
 
 #play-again {
+    flex: 2;
     cursor: pointer;
     font-weight: bold;
     background-color: #272343a3;
@@ -58,4 +69,28 @@ button:hover {
 #play-again:hover {
     background-color: #272343 ;
     cursor: pointer;
+}
+
+h1{
+    flex: 3;
+    font-size: 60px;
+}
+
+p{
+    flex: 1;
+    font-size: 30px;
+}
+
+
+@media only screen and (max-device-width: 480px) {
+    body{
+        margin: 0;
+        background: linear-gradient(rgba(112, 126, 146, 1), rgba(39, 35, 67, 0.11));
+    }
+    .bdy{
+        background: linear-gradient(rgba(112, 126, 146, 1), rgba(39, 35, 67, 0.11));
+    }
+    h1{
+        font-size: 30px;
+    }
 }
