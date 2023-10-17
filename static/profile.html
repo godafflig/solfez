@@ -16,103 +16,73 @@
   {{template "navbar" .}}
 
   <div class="container">
-  <div class="titre">
-  Bienvenue sur ta page profil, {{.Username}} !</div>
-  <div class="center"><a href="/logout"><button class="btn-logout" type="submit">Se déconnecter</button></a></div>
+    <div class="titre">
+      Bienvenue sur ta page profil, {{.Username}} !</div>
+    <div class="center"><a href="/logout"><button class="btn-logout" type="submit">Se déconnecter</button></a></div>
 
-  <div class="container-stats">
-    <div class="profile-pic">
-  <img src="{{.ProfilePic}}" alt="" style="max-height: 250px" />
-  <div>Changer de photo de profil :
-    <form action="/profile" method="POST" enctype="multipart/form-data">
-      <input type="file" name="profile_picture" required />
-      <input type="submit" value="Ajouter la photo sélectionnée" />
-    </form>
-  </div>
-</div>
-<div class="colored-box">
-  <div class="box-title">Statistiques</div>
-  <div>Meilleur score : {{.HighestScore}}</div></br>
-  <div>Nombre de questions jouées : {{.Statistics.TotalGamesPlayed}}</div>
-  <div>Nombre de réponses correctes : {{.Statistics.TotalGamesWon}}</div>
-  <div>Nombre de réponses fausses : {{.Statistics.TotalGamesLost}}</div>
-  <div>{{.Statistics.AccountCreatedSince}}</div>
-</div>
-</div>
-
-
-<div class="container-stats">
-  <div class="grey-box">
-  <div class="grey-title">Changer de nom d'utilisateur</div>
-  <form class="formulaire" action="/update-username" method="POST">
-    <input
-      class="input"
-      type="text"
-      name="oldusername"
-      placeholder="Ancien nom d'utilisateur..."
-      required
-    />
-    <input
-      class="input"
-      type="text"
-      name="newusername"
-      placeholder="Nouveau nom d'utilisateur..."
-      required
-    />
-    <input
-      class="input"
-      type="text"
-      name="newusernameconfirm"
-      placeholder="Confirmer nouveau nom..."
-      required
-    />      
-      <div>
-        <button class="btn" type="submit">Confirmer</button>
+    <div class="container-stats">
+      <div class="colored-box">
+        <div class="profile-pic">
+          <img src="{{.ProfilePic}}" alt="" style="max-height: 250px"/>
+          <div>Changer de photo de profil :
+            <form action="/profile" method="POST" enctype="multipart/form-data">
+              <input type="file" name="profile_picture" placeholder="choisir photo de profil" required  />
+              <input type="submit" value="Mettre à jour la photo de profil" />
+            </form>
+          </div>
+        </div>
       </div>
-  </form>
-  </div>
-
-  <div class="grey-box">
-    <div class="grey-title">Changer de mot de passe</div>
-  <form class="formulaire" action="/update-password" method="POST">
-    <input
-      class="input"
-      type="password"
-      name="oldpassword"
-      placeholder="Ancien mot de passe..."
-      required
-    />
-    <input
-      class="input"
-      type="password"
-      name="newpassword"
-      placeholder="Nouveau mot de passe..."
-      required
-    />
-    <input
-      class="input"
-      type="password"
-      name="newpwdconfirm"
-      placeholder="Confirmer nouveau mot de passe..."
-      required
-    />
-
-      <div class="">
-        <button class="btn" type="submit">Confirmer</button>
+      <div class="colored-box">
+        <div class="box-title">Statistiques</div>
+        <div><p>Meilleur score : {{.HighestScore}}</p></div></br>
+        <div><p>Nombre de questions jouées : {{.Statistics.TotalGamesPlayed}}</p></div>
+        <div><p>Nombre de réponses correctes : {{.Statistics.TotalGamesWon}}</p></div>
+        <div><p>Nombre de réponses fausses : {{.Statistics.TotalGamesLost}}</p></div>
+        <div><p>{{.Statistics.AccountCreatedSince}}</p></div>
+      </div>
     </div>
-  </form>
-</div>
 
-</div>
 
-<div class="center">
-  <span class="error">{{.Error}}</span></div>
+    <div class="container-stats">
+      <div class="grey-box">
+        <div class="grey-title">Changer de nom d'utilisateur</div>
+        <form class="formulaire" action="/update-username" method="POST">
+          <input class="input" type="text" name="oldusername" placeholder="Ancien nom d'utilisateur..." required />
+          <input class="input" type="text" name="newusername" placeholder="Nouveau nom d'utilisateur..." required />
+          <input class="input" type="text" name="newusernameconfirm" placeholder="Confirmer nouveau nom..." required />
+          <div>
+            <button class="btn" type="submit">Confirmer</button>
+          </div>
+        </form>
+      </div>
 
-  <div class="center">  
-  <form action="/delete-account" onSubmit="if(!confirm('Es-tu sûr.e de vouloir nous quitter ?')){return false;}"><button
-      type="submit" class="btn">Supprimer mon compte</button>
-  </form></div>
-</div>
+      <div class="grey-box">
+        <div class="grey-title">Changer de mot de passe</div>
+        <form class="formulaire" action="/update-password" method="POST">
+          <input class="input" type="password" name="oldpassword" placeholder="Ancien mot de passe..." required />
+          <input class="input" type="password" name="newpassword" placeholder="Nouveau mot de passe..." required />
+          <input class="input" type="password" name="newpwdconfirm" placeholder="Confirmer nouveau mot de passe..."
+            required />
+
+          <div class="">
+            <button class="btn" type="submit">Confirmer</button>
+          </div>
+        </form>
+      </div>
+
+    </div>
+
+    <div class="center">
+      <span class="error">{{.Error}}</span>
+    </div>
+
+    <div class="center">
+      <form action="/delete-account" onSubmit="if(!confirm('Es-tu sûr.e de vouloir nous quitter ?')){return false;}">
+        <button type="submit" class="btn">Supprimer mon compte</button>
+      </form>
+    </div>
+  </div>
 </body>
+
 </html>
 {{end}}
