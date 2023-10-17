@@ -98,7 +98,12 @@
         <span class="error"
           >{{.Error}} {{.GameData.PreviousCorrectAnswer}}</span
         >
-        <form class="question" action="/niveau-difficile" method="POST">
+        <form
+          id="myForm"
+          class="question"
+          action="/niveau-difficile"
+          method="POST"
+        >
           <div style="text-align: center">
             <input id="valider-btn" type="submit" value=" " />
           </div>

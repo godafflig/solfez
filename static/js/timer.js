@@ -7,7 +7,9 @@ function updateTimer() {
             timerElement.innerText = seconds;
           } else {
             alert("Le temps est écoulé !");
-            window.location.reload();
+            document.getElementById("myForm").submit();
+
+            //window.location.reload();
           }
 }
     
