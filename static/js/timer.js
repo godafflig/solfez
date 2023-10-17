@@ -6,7 +6,8 @@ function updateTimer() {
             seconds--;
             timerElement.innerText = seconds;
           } else {
-            window.location.href = "/lost";
+            alert("Le temps est écoulé !");
+            window.location.reload();
           }
 }
     
@@ -14,4 +15,4 @@ const countdownInterval = setInterval(updateTimer, 1000);
     
 setTimeout(() => {
           clearInterval(countdownInterval);
-}, 60000);
+}, 30000);

@@ -35,7 +35,7 @@
         <!-- <div class="vie"><img src="../static/images/" alt=""></div> classe vie pour plus tard -->
         <div>
           <h3>Temps restant :</h3>
-          <div id="timer">59</div>
+          <div id="timer">29</div>
         </div>
       </div>
       <br />
@@ -97,7 +97,12 @@
         <br />
         <span class="error">{{.Error}} {{.GameData.PreviousCorrectAnswer}}</span
         ><br />
-        <form class="question" action="/niveau-facile" method="POST">
+        <form
+          id="myForm"
+          class="question"
+          action="/niveau-facile"
+          method="POST"
+        >
           <br />
           {{range .GameData.Questions}}
           <div class="choix">
