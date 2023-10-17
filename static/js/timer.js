@@ -7,14 +7,9 @@ function updateTimer() {
             timerElement.innerText = seconds;
           } else {
             alert("Le temps est écoulé !");
+            clearInterval(countdownInterval);
             document.getElementById("myForm").submit();
-
-            //window.location.reload();
           }
 }
     
 const countdownInterval = setInterval(updateTimer, 1000);
-    
-setTimeout(() => {
-          clearInterval(countdownInterval);
-}, 30000);
