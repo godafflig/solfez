@@ -77,6 +77,7 @@ func QuestionQCM(w http.ResponseWriter, r *http.Request) {
 	indexCorrectAnswer := rand.Intn(3)
 	SessionData.GameData.CorrectNote = Octave[randomIndexOctaves[indexCorrectAnswer]] + pianoKeys[randomIndexNotes[indexCorrectAnswer]]
 	SessionData.GameData.CorrectAnswer = SessionData.GameData.Questions[indexCorrectAnswer]
+	DisplayCorrectAnswer()
 	html := fmt.Sprintf(`
 
 	<div id="Elnote" value="%s"></div>
@@ -222,4 +223,16 @@ func slicesAreEqual(slice1, slice2 []string) bool {
 		}
 	}
 	return true
+}
+
+// display the correct answer in the console
+func DisplayCorrectAnswer() {
+	switch SessionData.GameData.CurrentLevel {
+	case 1:
+		fmt.Println("La bonne réponse est : " + SessionData.GameData.CorrectAnswer)
+	case 2:
+		fmt.Println("La bonne réponse est : " + SessionData.GameData.CorrectAnswer)
+	case 3:
+		fmt.Println("La bonne réponse est : " + ConvertNote())
+	}
 }
