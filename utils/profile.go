@@ -77,9 +77,10 @@ func ChangeUsername(oldUsername string, newUsername string, newUsernameConfirm s
 		SessionData.Error = "Le nom d'utilisateur existe déjà."
 	} else if newUsername != newUsernameConfirm {
 		SessionData.Error = "Les deux nouveaux noms d'utilisateur ne correspondent pas."
-	} else if UserExists(GetDB(), SessionData.Email, oldUsername) {
+	} else if UsernameExists(GetDB(), oldUsername) {
 		UpdateUsername(GetDB(), SessionData.Email, newUsername)
 		UpdateUsernameInScoresTable(GetDB(), SessionData.Id, newUsername)
+		SessionData.Username = newUsername
 		SessionData.Error = "Le nom d'utilisateur a été changé."
 	} else {
 		SessionData.Error = "Erreur. Vérifiez l'ancien nom d'utilisateur et essayez à nouveau."
