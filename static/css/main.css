@@ -45,6 +45,17 @@ body {
     background-size: cover;
 }
 
+.logo {
+    position: absolute;
+    width: 250px;
+    height: 250px;
+    top: 50%;
+    left: 20px;
+    background-image: url('../images/logo.png');
+    background-size: contain;
+    border-radius: 100%;
+}
+
 .top-left {
     top: 0;
     left: 0;
@@ -121,5 +132,11 @@ body {
 
     .boutonJouer{
         top: 10px;
+    }
+}
+
+@media screen and (max-width: 900px) {
+    .logo {
+        display: none;
     }
 }
