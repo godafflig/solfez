@@ -143,6 +143,8 @@
             id="audio-element"
             src="/static/assets/notes/{{.GameData.CorrectNote}}.mp3"
             type="audio/mpeg"
+            style="display: none;"
+            controlsList="noplaybackrate nodownload nofullscreen"
             controls
             autoplay
           ></audio>
@@ -150,7 +152,6 @@
       </div>
       <br />
       <br />
-      <div>Bonne réponse : {{.GameData.CorrectAnswer}}</div>
     </div>
     <script src="../static/js/audio.js"></script>
     <script src="../static/js/script-niveau-facile.js"></script>

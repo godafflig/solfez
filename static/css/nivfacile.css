@@ -37,7 +37,12 @@ html, body {
 }
 
 audio{
-    display: none;
+    max-width: 95%;
+    margin-top: 4px;
+}
+
+audio::-webkit-media-controls-panel {
+    background-color: #E3F6F5;
 }
 
 @media (max-width: 400px) {
@@ -146,9 +151,6 @@ img {
   
 }
 
-audio {
-    width: 100%;
-}
 
 .selected {
     background-color: green;
@@ -291,9 +293,6 @@ cursor: pointer;
     height: 100px;
 }
 
-audio {
-    width: 100%;
-}
 
 /* Ajout de cette ligne pour corriger le positionnement des boutons de réponse */
 #4C{
