@@ -16,6 +16,10 @@
         alt="Image d'angle"
         class="coin-haut-gauche"
       />
+
+      <div class="box">
+        <div class="colored-box">
+      <div class="title-login">Créer un compte</div>
       <form class="formulaire" action="/register-form" method="POST">
         <input
           class="input"
@@ -47,17 +51,24 @@
           placeholder="Confirmer votre mot de passe"
           required
         />
+        <span class="error">{{.Error}}</span>
+
+
         <div class="content1">
           <input class="btnconnexion1" type="submit" value="Créer mon compte" />
-          <div class="login">
-            <p>Si vous avez déja un compte :</p>
-            <button class="btnconnexion" formnovalidate>
-              <a href="/login">Aller sur la page login</a>
-            </button>
-          </div>
         </div>
-      </form>
-      <br /><span class="error">{{.Error}}</span>
+      </div>
+      </form> 
+    </div>
+
+    <div class="colored-box2">
+      <div class="login">
+        Vous avez déjà un compte ?
+        <a href="/login"><button class="btn-create-account">Se connecter</button></a>
+      </div>
+    </div>
+          
+          
       <img
         src="../static/images/angle.png"
         alt="Image d'angle"

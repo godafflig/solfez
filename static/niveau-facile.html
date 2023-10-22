@@ -8,7 +8,11 @@
     <title>niveau-facile</title>
     <link rel="stylesheet" href="../static/css/nivfacile.css" />
     <link href="../static/css/navbar.css" rel="stylesheet" />
-    <link rel="shortcut icon" href="../static/images/Logo.png" type="image/x-icon">
+    <link
+      rel="shortcut icon"
+      href="../static/images/Logo.png"
+      type="image/x-icon"
+    />
     <script src="../static/js/timer.js"></script>
   </head>
 
@@ -92,12 +96,13 @@
       </div>
 
       <div class="submit-buttons">
+        <span class="error"
+          >{{.Error}} {{.GameData.PreviousCorrectAnswer}}</span
+        >
         <div class="titre">
           <h2>Quelle note a été jouée ?</h2>
         </div>
-        <br />
-        <span class="error">{{.Error}} {{.GameData.PreviousCorrectAnswer}}</span
-        ><br />
+
         <form
           id="myForm"
           class="question"
@@ -129,6 +134,7 @@
         <div id="audio-container">
           <div id="audio-controls">
             <div class="playsbtn">
+              <div class="small-text">Rejouer la note :</div>
               <button id="play-button" class="control-button">
                 <img src="../static/images/replay.png" alt="Replay" />
               </button>
@@ -144,7 +150,7 @@
             id="audio-element"
             src="/static/assets/notes/{{.GameData.CorrectNote}}.mp3"
             type="audio/mpeg"
-            style="display: none;"
+            style="display: none"
             controlsList="noplaybackrate nodownload nofullscreen"
             controls
             autoplay

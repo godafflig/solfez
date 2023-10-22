@@ -22,7 +22,8 @@ html, body {
 
 .error {
     font-weight: bold;
-    font-size: 25px;
+    font-size: 100%;
+    padding-bottom: 1%;
 }
 
 .question{
@@ -30,10 +31,9 @@ html, body {
     justify-content: center;
     align-items: center;
     width: auto;
-    margin-top: 10px;
-    border: 2px solid black;
     border-radius: 50px 50px 50px 50px;
-    padding: 15px;
+    border: black solid 1px;
+    padding: 0.5%;
 }
 
 audio{
@@ -80,11 +80,11 @@ audio::-webkit-media-controls-panel {
 }
 
 #valider-btn {
-    width: 100px;
-    height: 100px;
+    width: 80px;
+    height: 80px;
     border-radius: 0px 50px 50px 0px;
     background-image: url('../images/check.png');
-    background-size: 100px;
+    background-size: 80px;
     background-repeat: no-repeat;
     text-align: center;
     color: transparent;
@@ -109,7 +109,7 @@ audio::-webkit-media-controls-panel {
     display: flex;
     align-items: flex-start;
     justify-content: space-evenly;
-    padding: 50px;
+    padding: 2%;
 }
 
 .container-info-jeu h3 {
@@ -135,7 +135,7 @@ audio::-webkit-media-controls-panel {
 }
 
 img {
-    width: 60px;
+    width: 30px;
 }
 
 .submit-buttons {
@@ -147,8 +147,8 @@ img {
     text-align: center;
     /* Centrer le texte */
     justify-content: space-evenly;
-    margin: 50px;
-  
+    margin-top: 2%;
+    margin-bottom: 1%;
 }
 
 
@@ -188,14 +188,19 @@ img {
 
 .titre {
     background-color: #E3F6F5;
-    width: 487px;
-    height: 59px;
+    width: 30%;
+    height: 5%;
     border-radius: 100px;
-    padding: 20px;
+    padding: 1%;
     text-align: center;
     color: #272343;
-    font-size: 25px;
+    font-size: 100%;
     display: inline-table;
+    margin-bottom: 1%;
+}
+
+.small-text {
+    font-weight: bold;
 }
 @media screen and (max-width: 800px) {
 

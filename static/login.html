@@ -16,6 +16,10 @@
         alt="Image d'angle"
         class="coin-haut-gauche"
       />
+
+      <div class="box">
+        <div class="colored-box">
+      <div class="title-login">Se connecter</div>
       <form class="formulaire" action="/login" method="POST">
         <input
           class="input"
@@ -31,21 +35,27 @@
           placeholder="Mot de passe..."
           required
         />
+        <span class="error">{{.Error}}</span>
+
         <div class="content1">
+
           <a href="/accueil"
             ><button class="btnconnexion" type="submit" method="POST">
               Connexion
             </button></a
           >
-          <div class="login">
-            <p>Si vous n'avez pas encore de compte :</p>
-            <button class="btnconnexion" formnovalidate>
-              <a href="/register">Créer mon compte</a>
-            </button>
-          </div>
         </div>
+      </div>
       </form>
-      <span class="error">{{.Error}}</span>
+    </div>
+
+    <div class="colored-box2">
+      <div class="login">
+        Vous n'avez pas encore de compte ?
+        <a href="/register"><button class="btn-create-account">Créer mon compte</button></a>
+      </div>
+    </div>
+
       <img
         src="../static/images/angle.png"
         alt="Image d'angle"

@@ -88,11 +88,55 @@ font-style: normal;
           border-radius: 10px;
           border: none;
           color: black;
-          background-color: #e3f6f5d0;
+          background-color: #e3f6f5af;
           box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.25);
           padding: 10px;
           margin: 10px;
           text-align: center;
+}
+
+.test {
+    background-color: #27234325;
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.25);
+    padding: 10px;
+    margin: 10px;
+    border-radius: 10px;
+    border: none;
+    }
+
+.pic-box {
+    background-color: #e3f6f5d0;
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.25);
+    padding: 10px;
+    margin: 10px;
+    border-radius: 10px;
+    text-align: center;
+}
+
+.pic-title-box {
+    color: white;
+    min-width: 30px;
+    font-size: 20px;
+    margin-bottom: 20px;
+    font-weight: bold;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    background-color: #2723439b;
+    border-radius: 10px;
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.25);
+    word-wrap: break-word;
+    max-width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.custom-upload {
+    background-color: pink;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    cursor: pointer;
 }
 
 .grey-box {

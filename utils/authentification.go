@@ -41,10 +41,10 @@ func Register(username string, email string, password string, passwordCheck stri
 		// 	http.Redirect(w, r, "/", http.StatusSeeOther)
 	} else if UsernameExists(GetDB(), username) {
 		SessionData.Error = "Le nom d'utilisateur existe déjà."
-		http.Redirect(w, r, "/", http.StatusSeeOther)
+		http.Redirect(w, r, "/register", http.StatusSeeOther)
 	} else if EmailExists(GetDB(), email) {
 		SessionData.Error = "L'email existe déjà."
-		http.Redirect(w, r, "/", http.StatusSeeOther)
+		http.Redirect(w, r, "/register", http.StatusSeeOther)
 	} else {
 		CreateUser(GetDB(), username, password, email)
 		SessionData.Id = GetId(GetDB(), email)
