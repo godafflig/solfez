@@ -94,6 +94,7 @@ body {
 
 .input {
     width: 350px;
+    max-width: 80%;
     height: 50px;
     background-color: #E3F6F5;
     border: 1px solid black;

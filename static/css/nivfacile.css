@@ -14,6 +14,26 @@ html, body {
     padding: 0;
 }
 
+.bouton {
+    background-color: #E3F6F5;
+    min-width: 240px;
+    height: 50px;
+    border-width: 0px;
+    position: relative;
+    border-radius: 100px;
+    text-align: center;
+    color: #272343;
+    font-size: 200%;
+    z-index: 3;
+    cursor : pointer;
+}
+
+a {
+    cursor: pointer;
+    text-decoration: none;
+}
+
+
 .bdy {
     width: 100%;
     height: fit-content;

@@ -94,6 +94,7 @@ body {
 
 .input {
     width: 350px;
+    max-width: 80%;
     height: 50px;
     background-color: #E3F6F5;
     border: 1px solid black;
@@ -101,6 +102,7 @@ body {
     display: flex;
     text-align: left 10px;
     margin-bottom: 3%;
+    padding-left: 30px;
 }
 
 .content1 {
@@ -196,9 +198,6 @@ P {
     background-color: #272343;
     color: white;
     cursor: pointer;
-}
-.input{
-    padding-left: 30px;
 }
 a {
     text-decoration: inherit; /* Réutilise la décoration du texte héritée */
