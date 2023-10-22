@@ -45,6 +45,7 @@ body {
 }
 
 .bouton {
+    cursor : pointer;
     margin-top: 20%;
     background-color: #E3F6F5;
     min-width: 240px;
@@ -59,7 +60,6 @@ body {
     color: #272343;
     font-size: 200%;
     z-index: 3;
-    cursor : pointer;
     margin: 10%;
 }
 
@@ -124,7 +124,7 @@ p {
 .bouton:hover {
     background-color: #272343;
     color: white;
-    cursor: default;
+    cursor: pointer;
 }
 
 @media screen and (max-width: 1000px) {
@@ -138,6 +138,7 @@ p {
         height: 100px;
         width: 500px;
         font-size: 50px;
+        cursor: pointer;
     }
     .container-btn {
         width: 100%;

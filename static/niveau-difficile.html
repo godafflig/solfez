@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>niveau-difficile</title>
-    <link rel="stylesheet" href="../static/css/nivfacile.css" />
+    <link rel="stylesheet" href="../static/css/nivdifficile.css" />
     <link href="../static/css/navbar.css" rel="stylesheet" />
     <link
       rel="shortcut icon"
@@ -116,16 +116,7 @@
         <div id="audio-container">
           <div id="audio-controls">
             <div class="playsbtn">
-              <div class="small-text">Rejouer les notes :</div>
-              <button id="play-button" class="control-button">
-                <img src="../static/images/replay.png" alt="Replay" />
-              </button>
-              <button id="pause-button" class="control-button">
-                <img
-                  src="../static/images/video-pause-button.png"
-                  alt="Replay"
-                />
-              </button>
+              <div class="small-text">Rejouer les notes individuellement :</div>
             </div>
           </div>
           {{range .GameData.Questions}}
