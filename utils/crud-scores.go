@@ -63,3 +63,13 @@ func UpdateScoreInScoreTable(db *sql.DB, id int, newScore int) {
 		fmt.Println(err)
 	}
 }
+
+// update the username in the database 'scores'
+func UpdateUsernameInScoresTable(db *sql.DB, id int, newUsername string) {
+	query := `
+		UPDATE scores SET user_name = ? WHERE user_id = ?`
+	_, err := db.Exec(query, newUsername, id)
+	if err != nil {
+		fmt.Println(err)
+	}
+}

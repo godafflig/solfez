@@ -71,6 +71,22 @@ func GetProfilePicFromDb() string {
 	return SessionData.ProfilePic
 }
 
+// change the username in the database
+func ChangeUsername(oldUsername string, newUsername string, newUsernameConfirm string) {
+	if UsernameExists(GetDB(), newUsername) {
+		SessionData.Error = "Le nom d'utilisateur existe déjà."
+	} else if newUsername != newUsernameConfirm {
+		SessionData.Error = "Les deux nouveaux noms d'utilisateur ne correspondent pas."
+	} else if UsernameExists(GetDB(), oldUsername) {
+		UpdateUsername(GetDB(), SessionData.Email, newUsername)
+		UpdateUsernameInScoresTable(GetDB(), SessionData.Id, newUsername)
+		SessionData.Username = newUsername
+		SessionData.Error = "Le nom d'utilisateur a été changé."
+	} else {
+		SessionData.Error = "Erreur. Vérifiez l'ancien nom d'utilisateur et essayez à nouveau."
+	}
+}
+
 // change the password in the database
 func ChangePassword(oldPassword string, newPassword string, newPasswordCheck string) {
 	if newPassword == newPasswordCheck && UserExists(GetDB(), SessionData.Email, oldPassword) {
@@ -79,4 +95,19 @@ func ChangePassword(oldPassword string, newPassword string, newPasswordCheck str
 	} else {
 		SessionData.Error = "Erreur. Vérifiez l'ancien mot de passe et essayez à nouveau."
 	}
+}
+
+// clear the session data
+func ClearDatas() {
+	SessionData.Id = 0
+	SessionData.Username = ""
+	SessionData.Email = ""
+	SessionData.IsLogged = false
+	SessionData.Error = ""
+	SessionData.GameData.Questions = []string{}
+	SessionData.GameData.CorrectAnswer = ""
+	SessionData.Score = 0
+	SessionData.Statistics.TotalGamesPlayed = 0
+	SessionData.Statistics.TotalGamesWon = 0
+	SessionData.Statistics.TotalGamesLost = 0
 }

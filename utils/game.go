@@ -4,6 +4,8 @@ import (
 	"fmt"
 	"math/rand"
 	"net/http"
+	"sort"
+	"strings"
 	"time"
 )
 
@@ -32,10 +34,10 @@ func StartGame(w http.ResponseWriter, r *http.Request, level int) {
 }
 
 // continue playing the game
-func PlayAgain(w http.ResponseWriter, r *http.Request, lifeleft int) {
+func PlayAgain(w http.ResponseWriter, r *http.Request, lifeleft int, level int) {
 	SessionData.GameData.Questions = []string{}
 	SessionData.GameData.CorrectAnswer = ""
-	SessionData.GameData.CurrentLevel = 1
+	SessionData.GameData.CurrentLevel = level
 	SessionData.GameData.LifeLeft = lifeleft
 	QuestionQCM(w, r)
 }
@@ -65,13 +67,17 @@ func QuestionQCM(w http.ResponseWriter, r *http.Request) {
 	}
 
 	for i := 0; i < 3; i++ {
-		// changer ici pianoKeys en pianoKeysDisplay pour afficher les notes en français mais le son ne marche plus dans ce cas
-		SessionData.GameData.Questions = append(SessionData.GameData.Questions, pianoKeysDisplay[randomIndexNotes[i]]+Octave[randomIndexOctaves[i]]+"eme")
+		if SessionData.GameData.CurrentLevel < 3 {
+			SessionData.GameData.Questions = append(SessionData.GameData.Questions, pianoKeysDisplay[randomIndexNotes[i]]+Octave[randomIndexOctaves[i]]+"eme")
+		} else {
+			SessionData.GameData.Questions = append(SessionData.GameData.Questions, Octave[randomIndexOctaves[i]]+pianoKeys[randomIndexNotes[i]])
+		}
 	}
 
 	indexCorrectAnswer := rand.Intn(3)
 	SessionData.GameData.CorrectNote = Octave[randomIndexOctaves[indexCorrectAnswer]] + pianoKeys[randomIndexNotes[indexCorrectAnswer]]
 	SessionData.GameData.CorrectAnswer = SessionData.GameData.Questions[indexCorrectAnswer]
+	DisplayCorrectAnswer()
 	html := fmt.Sprintf(`
 
 	<div id="Elnote" value="%s"></div>
@@ -85,7 +91,12 @@ func QuestionQCM(w http.ResponseWriter, r *http.Request) {
 
 // checking if the answer is correct and updating the datas accordlingly
 func CheckAnswer(answer string, w http.ResponseWriter, r *http.Request) bool {
-	if answer == SessionData.GameData.CorrectAnswer {
+
+	if SessionData.GameData.CurrentLevel >= 3 {
+		SessionData.GameData.CorrectAnswer = ConvertNote()
+	}
+
+	if (SessionData.GameData.CurrentLevel < 3 && answer == SessionData.GameData.CorrectAnswer) || (SessionData.GameData.CurrentLevel == 3 && checkTheTreePossibilities(answer, SessionData.GameData.CorrectAnswer)) {
 		switch SessionData.GameData.CurrentLevel {
 		case 1:
 			SessionData.Score += 1
@@ -102,7 +113,7 @@ func CheckAnswer(answer string, w http.ResponseWriter, r *http.Request) bool {
 		SessionData.GameData.Questions = []string{}
 		SessionData.GameData.PreviousCorrectAnswer = "La bonne réponse était : " + SessionData.GameData.CorrectAnswer
 		SessionData.GameData.CorrectAnswer = ""
-		PlayAgain(w, r, SessionData.GameData.LifeLeft)
+		PlayAgain(w, r, SessionData.GameData.LifeLeft, SessionData.GameData.CurrentLevel)
 		return true
 	} else {
 		UpdateScore(GetDB(), SessionData.Email, SessionData.Score)
@@ -115,14 +126,16 @@ func CheckAnswer(answer string, w http.ResponseWriter, r *http.Request) bool {
 		SessionData.GameData.CorrectAnswer = ""
 		if SessionData.GameData.LifeLeft > 1 {
 			SessionData.GameData.LifeLeft -= 1
-			PlayAgain(w, r, SessionData.GameData.LifeLeft)
-		} else {
+			PlayAgain(w, r, SessionData.GameData.LifeLeft, SessionData.GameData.CurrentLevel)
+		} else if SessionData.GameData.LifeLeft == 1 {
+			SessionData.PreviousScore = SessionData.Score
 			SessionData.Score = 0
 			UpdateScore(GetDB(), SessionData.Email, SessionData.Score)
 			http.Redirect(w, r, "/lost", http.StatusSeeOther)
 		}
 		return false
 	}
+
 }
 
 // check if a value is in an array
@@ -135,12 +148,91 @@ func contains(arr []int, val int) bool {
 	return false
 }
 
-func InitializePathNotes() {
-	for i := 0; i < len(Octave); i++ {
-		for j := 0; j < len(pianoKeys); j++ {
-			temp := Octave[i] + pianoKeys[j]
-			SessionData.GameData.Notes = append(SessionData.GameData.Notes, temp)
+// convert the note from english to french with the octave
+func ConvertNote() string {
+	var result string
+	var notes []string
+	var octave []string
+
+	// get the octave of the notes
+	for i := 0; i < len(SessionData.GameData.Questions); i++ {
+		note := SessionData.GameData.Questions[i]
+		octave = append(octave, string(note[0]))
+	}
+
+	// get the notes
+	for i := 0; i < len(SessionData.GameData.Questions); i++ {
+		note := SessionData.GameData.Questions[i]
+		note = convertNoteToFrench(note)
+
+		notes = append(notes, note)
+	}
+
+	// add the octave to the notes
+	for i := 0; i < len(SessionData.GameData.Questions); i++ {
+		result += notes[i] + octave[i] + "eme"
+		if i < len(SessionData.GameData.Questions)-1 {
+			result += ", "
+		}
+	}
+	return result
+}
+
+// convert the note from english to french without the octave
+func convertNoteToFrench(en string) string {
+	// remove the first character of the english note (which is the number of the octave)
+	en = en[1:]
+
+	// get the index of the note in the english tab
+	var index int
+	for i := 0; i < len(pianoKeys); i++ {
+		if en == pianoKeys[i] {
+			index = i
 		}
 	}
 
+	// return the french note
+	return pianoKeysDisplay[index]
+}
+
+// check if the answer is correct no matter the order of the answers
+func checkTheTreePossibilities(str1, str2 string) bool {
+	arr1 := strings.Split(str1, ",")
+	arr2 := strings.Split(str2, ",")
+
+	for i := range arr1 {
+		arr1[i] = strings.TrimSpace(arr1[i])
+	}
+	for i := range arr2 {
+		arr2[i] = strings.TrimSpace(arr2[i])
+	}
+
+	sort.Strings(arr1)
+	sort.Strings(arr2)
+
+	return slicesAreEqual(arr1, arr2)
+}
+
+func slicesAreEqual(slice1, slice2 []string) bool {
+	if len(slice1) != len(slice2) {
+		return false
+	}
+	for i, v := range slice1 {
+		if v != slice2[i] {
+			return false
+		}
+	}
+	return true
+}
+
+// display the correct answer in the console
+func DisplayCorrectAnswer() {
+	switch SessionData.GameData.CurrentLevel {
+	case 1:
+		fmt.Println("La bonne réponse est : " + SessionData.GameData.CorrectAnswer)
+	case 2:
+		fmt.Println("La bonne réponse est : " + SessionData.GameData.CorrectAnswer)
+	case 3:
+		fmt.Println("La bonne réponse est : " + ConvertNote())
+	}
 }

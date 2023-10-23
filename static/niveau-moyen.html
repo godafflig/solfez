@@ -8,6 +8,12 @@
     <title>niveau-moyen</title>
     <link rel="stylesheet" href="../static/css/nivfacile.css" />
     <link href="../static/css/navbar.css" rel="stylesheet" />
+    <link
+      rel="shortcut icon"
+      href="../static/images/Logo.png"
+      type="image/x-icon"
+    />
+    <script src="../static/js/timer.js"></script>
   </head>
 
   <body>
@@ -27,15 +33,22 @@
           <h3>Niveau actuel :</h3>
           {{.GameData.CurrentLevel}}
         </div>
-        <!--<br />Nombre de vies
-          restantes : {{.GameData.LifeLeft}}-->
+        <div>
+          <h3>Nombre de vies restantes :</h3>
+          {{.GameData.LifeLeft}}
+        </div>
         <!-- <div class="vie"><img src="../static/images/" alt=""></div> classe vie pour plus tard -->
+        <div>
+          <h3>Temps restant :</h3>
+          <div id="timer">29</div>
+        </div>
       </div>
       <br />
 
       <div class="piano">
         <div id="piano">
           <div id="ContainerPiano"></div>
+
           <div id="4C" class="NoteDefault">
             <div id="4CT" class="NoteDieseDefault"></div>
           </div>
@@ -85,21 +98,20 @@
 
       <div class="submit-buttons">
         <div class="titre">
-          <h2>Sélectionnez la note sur entendue sur le piano puis valider !</h2>
+          <h2>Cliquez sur la note jouée puis validez !</h2>
         </div>
-        <br />
-        <form class="question" action="/niveau-facile" method="POST">
-          <br />
+        <span class="error"
+          >{{.Error}} {{.GameData.PreviousCorrectAnswer}}</span
+        >
+        <form id="myForm" class="question" action="/niveau-moyen" method="POST">
           <div style="text-align: center">
             <input id="valider-btn" type="submit" value=" " />
           </div>
         </form>
-        <span class="error"
-          >{{.Error}} {{.GameData.PreviousCorrectAnswer}}</span
-        >
         <div id="audio-container">
           <div id="audio-controls">
             <div class="playsbtn">
+              <div class="small-text">Rejouer la note :</div>
               <button id="play-button" class="control-button">
                 <img src="../static/images/replay.png" alt="Replay" />
               </button>
@@ -110,20 +122,27 @@
                 />
               </button>
             </div>
+            <div class="playsbtn">
+              <a href="/niveau-facile" style="margin-right: 5px;"><input class="bouton" type="button" value="Niveau précédent"/></a>
+              <a href="/niveau-difficile" style="margin-left: 5px;"><input class="bouton" type="button" value="Niveau suivant"/></a>
+            </div>
           </div>
           <audio
             id="audio-element"
             src="/static/assets/notes/{{.GameData.CorrectNote}}.mp3"
             type="audio/mpeg"
+            controls
+            style="display: none"
+            controlsList="noplaybackrate nodownload nofullscreen"
+            autoplay
           ></audio>
         </div>
       </div>
       <br />
       <br />
-      <div>Bonne réponse : {{.GameData.CorrectAnswer}}</div>
     </div>
-    <script src="../static/audio.js"></script>
-    <script src="../static/script.js"></script>
+    <script src="../static/js/audio.js"></script>
+    <script src="../static/js/script-niveau-moyen.js"></script>
   </body>
 </html>
 {{end}}

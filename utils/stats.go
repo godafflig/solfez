@@ -1,7 +1,12 @@
 package utils
 
-import "fmt"
+import (
+	"fmt"
+	"strconv"
+	"time"
+)
 
+// update the nb of questions answered correct, wrong & total numbers of questions played + save the highest score in the database 'scores'
 func UpdateStatistics(result string) {
 	SessionData.Statistics.TotalGamesPlayed += 1
 	UpdateTotalGames()
@@ -15,6 +20,7 @@ func UpdateStatistics(result string) {
 	SessionData.HighestScore = GetScoreFromScoresTable()
 }
 
+// update the total questions played in the database 'users'
 func UpdateTotalGames() {
 	db := GetDB()
 	query := `
@@ -25,6 +31,7 @@ func UpdateTotalGames() {
 	}
 }
 
+// update the total questions won in the database 'users'
 func UpdateWins() {
 	db := GetDB()
 	query := `
@@ -35,6 +42,7 @@ func UpdateWins() {
 	}
 }
 
+// update the total questions lost in the database 'users'
 func UpdateLoses() {
 	db := GetDB()
 	query := `
@@ -43,4 +51,109 @@ func UpdateLoses() {
 	if err != nil {
 		fmt.Println(err)
 	}
+}
+
+// get the total questions played from the database 'users'
+func GetTotalGamesPlayed() int {
+	db := GetDB()
+	query := `
+	SELECT total_games FROM users WHERE user_id = ?`
+	rows, err := db.Query(query, SessionData.Id)
+	if err != nil {
+		fmt.Println(err)
+	}
+	defer rows.Close()
+	var totalGamesStr string
+	for rows.Next() {
+		err := rows.Scan(&totalGamesStr)
+		if err != nil {
+			fmt.Println(err)
+		}
+	}
+	totalGames, err := strconv.Atoi(totalGamesStr)
+	if err != nil {
+		fmt.Println(err)
+	}
+	return totalGames
+}
+
+// get the total questions won from the database 'users'
+func GetTotalGamesWon() int {
+	db := GetDB()
+	query := `
+	SELECT wins FROM users WHERE user_id = ?`
+	rows, err := db.Query(query, SessionData.Id)
+	if err != nil {
+		fmt.Println(err)
+	}
+	defer rows.Close()
+	var wonStr string
+	for rows.Next() {
+		err := rows.Scan(&wonStr)
+		if err != nil {
+			fmt.Println(err)
+		}
+	}
+
+	wonInt, err := strconv.Atoi(wonStr)
+	if err != nil {
+		fmt.Println(err)
+	}
+	return wonInt
+}
+
+// get the total questions lost from the database 'users'
+func GetTotalGamesLost() int {
+	db := GetDB()
+	query := `
+	SELECT loses FROM users WHERE user_id = ?`
+	rows, err := db.Query(query, SessionData.Id)
+	if err != nil {
+		fmt.Println(err)
+	}
+	defer rows.Close()
+	var losesStr string
+	for rows.Next() {
+		err := rows.Scan(&losesStr)
+		if err != nil {
+			fmt.Println(err)
+		}
+	}
+
+	losesInt, err := strconv.Atoi(losesStr)
+	if err != nil {
+		fmt.Println(err)
+	}
+	return losesInt
+}
+
+// convert date of creation into the time since the account was created
+func ConvertDateOfCreation() string {
+	dbDate := GetCreationDate(GetDB())
+	dbTime, _ := time.Parse(time.RFC3339, dbDate)
+	// if err != nil {
+	// 	fmt.Println("Erreur lors de la conversion de la date:", err)
+	// }
+	now := time.Now()
+	diff := now.Sub(dbTime)
+
+	var unit string
+	var quantity int
+
+	if diff.Hours() > 24*30 {
+		unit = "mois"
+		quantity = int(diff.Hours() / (24 * 30))
+	} else if diff.Hours() > 24 {
+		unit = "jours"
+		quantity = int(diff.Hours() / 24)
+	} else if diff.Hours() >= 1 {
+		unit = "heures"
+		quantity = int(diff.Hours())
+	} else {
+		unit = "minutes"
+		quantity = int(diff.Minutes())
+	}
+
+	SessionData.Statistics.AccountCreatedSince = fmt.Sprintf("Membre depuis %d %s.\n", quantity, unit)
+	return SessionData.Statistics.AccountCreatedSince
 }

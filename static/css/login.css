@@ -24,6 +24,60 @@ body {
     background: linear-gradient(to bottom, rgba(113, 126, 146, 1), rgba(39, 35, 67, 0));
 }
 
+.box {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    flex-direction: column;
+    padding-top: 6%;
+    position: relative;
+    z-index: 1;
+}
+
+.colored-box {
+    width: fit-content;
+    padding: 2%;
+    margin: 2%;
+    border-radius: 10px;
+    color: black;
+    background-color: #e3f6f56d;
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.25);
+    text-align: center;
+    max-width: 80%;
+    word-wrap: break-word;
+    overflow: hidden;
+    text-overflow: ellipsis;
+
+}
+
+.colored-box2 {
+    width: 100%;
+    color: black;
+    font-size: 50%;
+    word-wrap: break-word;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    position: relative;
+    z-index: 1;
+
+}
+
+.title-login {
+    width: 100%;
+    color: black;
+    font-weight: bold;
+    font-size: 200%;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    flex-direction: column;
+    padding-top: 6%;
+    padding-bottom: 6%;
+    position: relative;
+    z-index: 1;
+}
+
 .formulaire {
     width: 100%;
     height: 100%;
@@ -31,17 +85,23 @@ body {
     align-items: center;
     justify-content: space-evenly;
     flex-direction: column;
-    padding-top: 180px;
+    padding-top: 5%;
+    position: relative;
+    z-index: 1;
+    padding-bottom: 4%;
+
 }
 
 .input {
     width: 350px;
+    max-width: 80%;
     height: 50px;
     background-color: #E3F6F5;
     border: 1px solid black;
     border-radius: 50px;
     display: flex;
     text-align: left 10px;
+    margin-bottom: 6%;
 }
 
 .content1 {
@@ -51,14 +111,22 @@ body {
     align-items: flex-end;
     justify-content: space-between;
 }
+
+.content2 {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-end;
+    width: 100%;
+    gap: 10px;
+    justify-content: space-between;
+}
+
 .login {
-    width: 140px;
+    width: 100%;
     color: rgba(0, 0, 0, 1);
-    font-weight: Regular;
-    font-size: 20px; /* Réduisez la taille du texte pour éviter le débordement */
+    font-size: 150%;
     opacity: 1;
     text-align: center;
-    margin-right: 10px; /* Ajoutez de la marge à droite pour espacer le texte du bouton */
 }
 
 .btnconnexion {
@@ -70,6 +138,16 @@ body {
     display: flex;
     align-items: center;
     justify-content: center; /* Centre le contenu horizontalement et verticalement */
+    cursor: pointer;
+}
+
+.btn-create-account {
+    background-color: #E3F6F5;
+    border-radius: 50px;
+    border: none;
+    border: 1px solid black;
+    padding: 0.5%;
+    cursor: pointer;
 }
 
 .input::placeholder {
@@ -85,12 +163,12 @@ body {
 .btnconnexion1:hover{
     background-color: #272343;
     color: white;
-    cursor: default;
+    cursor: pointer;
 }
 .btnconnexion:hover{
     background-color: #272343;
     color: white;
-    cursor: default;
+    cursor: pointer;
 }
 .input{
     padding-left: 30px;
@@ -121,4 +199,16 @@ a {
     display: flex;
     justify-content: center;
     font-size: 23px;
+    z-index: 1;
+    position: relative;
+    padding-bottom: 4%;
+}
+
+@media (max-width: 800px) {
+    .coin-bas-droit {
+        display: none;
+    }
+    .coin-haut-gauche {
+        display: none;
+    }
 }

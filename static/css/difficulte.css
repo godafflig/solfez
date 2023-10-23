@@ -34,90 +34,119 @@ body {
     position: absolute;
     top: 0;
     left: 0;
-    overflow: hidden;
+}
+
+.container-btn {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
 }
 
 .bouton {
+    cursor : pointer;
+    margin-top: 20%;
     background-color: #E3F6F5;
-    width: 377px;
-    height: 95px;
-    position: absolute;
-    left: 50%;
-    -ms-transform: translate(-50%, -50%);
-    transform: translate(-50%, -50%);
+    min-width: 240px;
+    height: 50px;
+    border-width: 0px;
+    position: relative;
     border-radius: 100px;
-    padding: 0 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     text-align: center;
     color: #272343;
-    font-size: 70px;
+    font-size: 200%;
     z-index: 3;
+    margin: 10%;
+}
+
+a {
+    cursor: pointer;
+    text-decoration: none;
 }
 
 .centrer {
     position: absolute;
-    top: 160px;
     text-align: center;
     width: 100%;
 }
-
 
 .explication-difficulte {
     display: flex;
     justify-content: space-between;
     position: absolute;
-    bottom: 0;
+    bottom: 16%;
     left: 0;
     right: 0;
-    padding: 20px;
-    margin-bottom: 3%;
 }
 
 .text-container {
     z-index: 1;
     flex: 1;
-    min-width: 220px;
-    height: 200px;
+    width: 30%;
+    height: auto;
+    min-height: fit-content;
     background-color: #E3F6F5;
     padding-left: 10px;
     padding-right: 10px;
     border-radius: 20px;
-    margin-right: 100px;
-    margin-left: 100px;
+    margin-right: 20px; 
+    margin-left: 20px; 
     text-align: center;
-    overflow: hidden;
 }
 
 h3 {
     font-size: 25px;
+    margin-bottom: 10px; /* Ajouter un espacement sous le titre */
 }
 
 p {
     font-size: 17px;
-    margin-top: -5px;
+    margin: 0; /* Réinitialiser les marges du paragraphe */
+    padding: 10px; /* Ajouter un espacement interne pour le texte */
+    max-height: 100%; /* Empêcher le texte de déborder de la case */
+    overflow: auto; /* Ajouter une barre de défilement en cas de débordement */
 }
 
 .title {
-    font-size: 80px;
+    font-size: 60px;
+    color: black;
+    font-weight: bold;
     display: none;
     text-align: center;
+    z-index: 2;
+    position: relative;
 }
 
 .bouton:hover {
     background-color: #272343;
     color: white;
-    cursor: default;
+    cursor: pointer;
 }
 
 @media screen and (max-width: 1000px) {
     .text-container {
-        margin: 0;
-        height: 300px;
-        width: 300px;
-        max-width: 300px;
+        display: none;
     }
-
-    .centrer {
-        top: 20%;
+    .bouton {
+        min-width: fit-content;
+        min-height: fit-content;
+        margin-top: 0%;
+        height: 100px;
+        width: 500px;
+        font-size: 50px;
+        cursor: pointer;
+    }
+    .container-btn {
+        width: 100%;
+        height: 80%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
     }
 
     h3 {
@@ -126,6 +155,7 @@ p {
 
     p {
         font-size: 22px;
+        padding: 20px; /* Ajuster l'espacement interne pour le texte */
     }
 
     .title {

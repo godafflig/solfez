@@ -4,6 +4,7 @@ import (
 	"database/sql"
 	"fmt"
 	"log"
+	"net/http"
 	"strconv"
 
 	"golang.org/x/crypto/bcrypt"
@@ -25,14 +26,24 @@ func CreateUser(db *sql.DB, username string, password string, email string) {
 	}
 }
 
-// delete one user from the database
-func DeleteUser(db *sql.DB, email string) {
+// delete one user from both database
+func DeleteUser(db *sql.DB, email string, w http.ResponseWriter, r *http.Request) {
 	query := `
 	DELETE FROM users WHERE email = ?`
 	_, err := db.Exec(query, email)
 	if err != nil {
-		log.Fatal(err)
+		fmt.Println(err)
 	}
+
+	query2 := `
+	DELETE FROM scores WHERE user_id = ?`
+	_, err = db.Exec(query2, SessionData.Id)
+	if err != nil {
+		fmt.Println(err)
+	}
+
+	ClearDatas()
+	http.Redirect(w, r, "/", http.StatusSeeOther)
 }
 
 // check if one user exists in the database
@@ -157,6 +168,25 @@ func GetScore(db *sql.DB, email string) int {
 	return scoreInt
 }
 
+// get the account creation date from the database 'users'
+func GetCreationDate(db *sql.DB) string {
+	query := `
+	SELECT created_at FROM users WHERE user_id = ?`
+	rows, err := db.Query(query, SessionData.Id)
+	if err != nil {
+		fmt.Println("1: ", err)
+	}
+	defer rows.Close()
+	var creationDate string
+	for rows.Next() {
+		err := rows.Scan(&creationDate)
+		if err != nil {
+			fmt.Println("2: ", err)
+		}
+	}
+	return creationDate
+}
+
 // update one score from the database 'users' based on the email
 func UpdateScore(db *sql.DB, email string, score int) {
 	query := `
@@ -167,10 +197,28 @@ func UpdateScore(db *sql.DB, email string, score int) {
 	}
 }
 
+// update the username in the database 'users'
+func UpdateUsername(db *sql.DB, email string, username string) {
+	query := `
+	UPDATE users SET username = ? WHERE email = ?`
+	_, err := db.Exec(query, username, email)
+	if err != nil {
+		fmt.Println(err)
+	}
+	SessionData.Username = username
+}
+
+// update password in the database 'users'
 func UpdateUserPassword(db *sql.DB, email string, password string) {
+	//hash des mdp
+	hashedPassword, err := bcrypt.GenerateFromPassword([]byte(password), bcrypt.DefaultCost)
+	if err != nil {
+		log.Fatal(err)
+	}
+
 	query := `
 	UPDATE users SET password = ? WHERE email = ?`
-	_, err := db.Exec(query, password, email)
+	_, err = db.Exec(query, hashedPassword, email)
 	if err != nil {
 		fmt.Println(err)
 	}

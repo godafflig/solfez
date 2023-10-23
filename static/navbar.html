@@ -4,26 +4,62 @@
 
 <nav id="nav">
   <ul>
-    <li><a href="/accueil">Accueil</a></li>
+    <li>
+      <img
+        src="../static/images/logo.png"
+        style="
+          width: 40px;
+          height: 40px;
+          border-radius: 80%;
+        "
+      />
+    </li>
+
+    <li><a href="/">Accueil</a></li>
     <li><a href="/classement">Classement</a></li>
     <li><a href="/difficulte">Jouer</a></li>
+
     <li>
-      <a href="/profile"
-        ><img class="menu-images" src="../static/images/user.png" />
+      {{if .IsLogged}}
+      <a href="/profile">
+        <img
+          class="menu-images"
+          src="{{.ProfilePic}}"
+          style="border-radius: 80%"
+        />
       </a>
+      {{else}}
+      <a href="/profile">
+        <img class="menu-images" src="../static/images/user.png" />
+      </a>
+      {{end}}
+    </li>
+
+    <li>
+      <form
+        action="/logout"
+        onSubmit="if(!confirm('Es-tu sûr.e de vouloir te déconnecter ?')){return false;}"
+      >
+        <button type="submit" class="logout-btn">
+          <img class="menu-images" src="../static/images/logout.png" />
+        </button>
+      </form>
     </li>
   </ul>
   <div id="icons"></div>
 </nav>
-<script>const links = document.querySelectorAll('nav li')
+<script>
+  const links = document.querySelectorAll("nav li");
 
-    icons.addEventListener("click", () => {
-        nav.classList.toggle("active");
-    })
-    
-    links.forEach((links) => {
-        links.addEventListener("click", () => { nav.classList.remove('active'); })
-    })
+  icons.addEventListener("click", () => {
+    nav.classList.toggle("active");
+  });
+
+  links.forEach((links) => {
+    links.addEventListener("click", () => {
+      nav.classList.remove("active");
+    });
+  });
 </script>
 
 {{end}}

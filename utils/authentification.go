@@ -8,11 +8,8 @@ import (
 // setting up session
 func Login(email string, password string, w http.ResponseWriter, r *http.Request) {
 
-	if !EmailExists(GetDB(), email) {
-		SessionData.Error = "Email incorrect."
-		http.Redirect(w, r, "/login", http.StatusSeeOther)
-	} else if !UserExists(GetDB(), email, password) {
-		SessionData.Error = "Mot de passe incorrect."
+	if !EmailExists(GetDB(), email) || !UserExists(GetDB(), email, password) {
+		SessionData.Error = "Email ou mot de passe incorrect."
 		http.Redirect(w, r, "/login", http.StatusSeeOther)
 	} else {
 		SessionData.Id = GetId(GetDB(), email)
@@ -23,11 +20,14 @@ func Login(email string, password string, w http.ResponseWriter, r *http.Request
 		SessionData.Error = ""
 		SessionData.ProfilePic = GetProfilePicFromDb()
 		SessionData.HighestScore = GetScoreFromScoresTable()
+		SessionData.Statistics.TotalGamesPlayed = GetTotalGamesPlayed()
+		SessionData.Statistics.TotalGamesWon = GetTotalGamesWon()
+		SessionData.Statistics.TotalGamesLost = GetTotalGamesLost()
 
 		// redirect
-		tmpl, _ := template.New("name").ParseFiles("static/Accueil.html", "static/navbar.html")
+		tmpl, _ := template.New("name").ParseFiles("static/difficulte.html", "static/navbar.html")
 		tmpl.ExecuteTemplate(w, "base", SessionData)
-		template.Must(template.ParseFiles("static/Accueil.html")).Execute(w, SessionData)
+		template.Must(template.ParseFiles("static/difficulte.html")).Execute(w, SessionData)
 	}
 }
 
@@ -41,10 +41,10 @@ func Register(username string, email string, password string, passwordCheck stri
 		// 	http.Redirect(w, r, "/", http.StatusSeeOther)
 	} else if UsernameExists(GetDB(), username) {
 		SessionData.Error = "Le nom d'utilisateur existe déjà."
-		http.Redirect(w, r, "/", http.StatusSeeOther)
+		http.Redirect(w, r, "/register", http.StatusSeeOther)
 	} else if EmailExists(GetDB(), email) {
 		SessionData.Error = "L'email existe déjà."
-		http.Redirect(w, r, "/", http.StatusSeeOther)
+		http.Redirect(w, r, "/register", http.StatusSeeOther)
 	} else {
 		CreateUser(GetDB(), username, password, email)
 		SessionData.Id = GetId(GetDB(), email)
@@ -60,9 +60,9 @@ func Register(username string, email string, password string, passwordCheck stri
 		SessionData.Statistics.TotalGamesLost = 0
 
 		// redirect
-		tmpl, _ := template.New("name").ParseFiles("static/Accueil.html", "static/navbar.html")
+		tmpl, _ := template.New("name").ParseFiles("static/difficulte.html", "static/navbar.html")
 		tmpl.ExecuteTemplate(w, "base", SessionData)
-		template.Must(template.ParseFiles("static/Accueil.html")).Execute(w, SessionData)
+		template.Must(template.ParseFiles("static/difficulte.html")).Execute(w, SessionData)
 	}
 }
 
@@ -76,15 +76,7 @@ func Logout(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		panic(err)
 	}
-
-	SessionData.Id = 0
-	SessionData.Username = ""
-	SessionData.Email = ""
-	SessionData.IsLogged = false
-	SessionData.Error = ""
-	SessionData.GameData.Questions = []string{}
-	SessionData.GameData.CorrectAnswer = ""
-	SessionData.Score = 0
+	ClearDatas()
 	http.Redirect(w, r, "/", http.StatusSeeOther)
 }
 

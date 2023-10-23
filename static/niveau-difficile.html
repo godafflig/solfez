@@ -1,3 +1,142 @@
-niveau difficile
-<link href="../static/css/navbar.css" rel="stylesheet" />
+{{define "base"}}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>niveau-difficile</title>
+    <link rel="stylesheet" href="../static/css/nivdifficile.css" />
+    <link href="../static/css/navbar.css" rel="stylesheet" />
+    <link
+      rel="shortcut icon"
+      href="../static/images/Logo.png"
+      type="image/x-icon"
+    />
+    <script src="../static/js/timer.js"></script>
+  </head>
 
+  <body>
+    {{template "navbar" .}}
+
+    <div class="bdy">
+      <div class="container-info-jeu">
+        <div class="username">
+          <h3>Nom :</h3>
+          {{.Username}}
+        </div>
+        <div class="score">
+          <h3>Score :</h3>
+          {{.Score}}
+        </div>
+        <div class="niveau-facile">
+          <h3>Niveau actuel :</h3>
+          {{.GameData.CurrentLevel}}
+        </div>
+        <div>
+          <h3>Nombre de vies restantes :</h3>
+          {{.GameData.LifeLeft}}
+        </div>
+        <!-- <div class="vie"><img src="../static/images/" alt=""></div> classe vie pour plus tard -->
+        <div>
+          <h3>Temps restant :</h3>
+          <div id="timer">59</div>
+        </div>
+      </div>
+      <br />
+
+      <div class="piano">
+        <div id="piano">
+          <div id="ContainerPiano"></div>
+
+          <div id="4C" class="NoteDefault">
+            <div id="4CT" class="NoteDieseDefault"></div>
+          </div>
+
+          <div id="4D" class="NoteDefault">
+            <div id="4DT" class="NoteDieseDefault"></div>
+          </div>
+
+          <div id="4E" class="NoteDefault"></div>
+          <div id="4F" class="NoteDefault">
+            <div id="4FT" class="NoteDieseDefault"></div>
+          </div>
+
+          <div id="4G" class="NoteDefault">
+            <div id="4GT" class="NoteDieseDefault"></div>
+          </div>
+
+          <div id="4A" class="NoteDefault">
+            <div id="4AT" class="NoteDieseDefault"></div>
+          </div>
+
+          <div id="4B" class="NoteDefault"></div>
+          <div id="5C" class="NoteDefault">
+            <div id="5CT" class="NoteDieseDefault"></div>
+          </div>
+
+          <div id="5D" class="NoteDefault">
+            <div id="5DT" class="NoteDieseDefault"></div>
+          </div>
+
+          <div id="5E" class="NoteDefault"></div>
+          <div id="5F" class="NoteDefault">
+            <div id="5FT" class="NoteDieseDefault"></div>
+          </div>
+
+          <div id="5G" class="NoteDefault">
+            <div id="5GT" class="NoteDieseDefault"></div>
+          </div>
+
+          <div id="5A" class="NoteDefault">
+            <div id="5AT" class="NoteDieseDefault"></div>
+          </div>
+
+          <div id="5B" class="NoteDefault"></div>
+        </div>
+      </div>
+
+      <div class="submit-buttons">
+        <div class="titre">
+          <h2>Cliquez sur la note jouée puis validez !</h2>
+        </div>
+        <span class="error"
+          >{{.Error}} {{.GameData.PreviousCorrectAnswer}}</span
+        >
+        <form
+          id="myForm"
+          class="question"
+          action="/niveau-difficile"
+          method="POST"
+        >
+          <div style="text-align: center">
+            <input id="valider-btn" type="submit" value=" " />
+          </div>
+        </form>
+        <div id="audio-container">
+          <div id="audio-controls">
+            <div class="playsbtn">
+              <div class="small-text">Rejouer les notes individuellement :</div>
+            </div>
+          </div>
+          {{range .GameData.Questions}}
+          <audio
+            id="audio-element"
+            src="/static/assets/notes/{{.}}.mp3"
+            type="audio/mpeg"
+            controlsList="noplaybackrate nodownload nofullscreen"
+            controls
+            autoplay
+          ></audio>
+          {{end}}</br>
+          <a href="/niveau-moyen" style="margin-right: 5px;"><input class="bouton" type="button" value="Niveau précédent"/></a>
+        </div>
+      </div>
+      <br />
+      <br />
+    </div>
+    <script src="../static/js/audio.js"></script>
+    <script src="../static/js/script-niveau-difficile.js"></script>
+  </body>
+</html>
+{{end}}

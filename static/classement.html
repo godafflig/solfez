@@ -7,11 +7,12 @@
     <title>Classement</title>
     <link rel="stylesheet" href="../static/css/classement.css" />
     <link href="../static/css/navbar.css" rel="stylesheet" />
+    <link rel="shortcut icon" href="../static/images/Logo.png" type="image/x-icon">
   </head>
 
   <body>
     {{template "navbar" .}}
-    <script id="replace_with_navbar" src="./js/nav.js"></script>
+    <script id="replace_with_navbar" src="../static/js/nav.js"></script>
     <div class="container">
       <img
         src="../static/images/angle.png"
@@ -33,7 +34,7 @@
             <th class="titre">Meilleur score</th>
             <th class="titre">Classement</th>
           </tr>
-          {{range .Classement}}
+          {{range .ScoreboardData.Classement}}
           <tr class="interligne">
             <td>{{.Username}}</td>
             <td>{{.Score}}</td>

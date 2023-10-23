@@ -39,10 +39,8 @@ document.addEventListener("DOMContentLoaded", function () {
                 // Ajoutez la classe 'selected' au bouton radio coché
                 const selectedValue = this.value;
                 // Vous pouvez maintenant interagir avec la valeur sélectionnée
-                console.log("Bouton radio coché : " + selectedValue);
                 this.parentElement.classList.add("selected");
                 this.parentElement.classList.remove("btn-note");
-                console.log("selected color");
             }
         });
     });
